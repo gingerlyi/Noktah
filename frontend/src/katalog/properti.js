@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Keluarga muda yang mencari rumah pertama dengan KPR',
       'Investor yang mencari apartemen atau ruko untuk disewakan',
+      'Pekerja yang pindah kota dan mencari hunian dari jauh',
     ],
     tujuan: [
       'Pembeli bisa menyaring properti sesuai anggaran dan lokasi',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Pengunjung', 'Pencari rumah, apartemen, atau ruko', 'Tanpa akun', ['Mencari dan menyaring listing', 'Menghitung simulasi KPR', 'Menghubungi agen dan meminta survei', 'Menyimpan favorit di peramban'], ['Melihat listing yang belum tayang'], ['Beranda', 'Cari properti', 'Detail properti', 'Simulasi KPR', 'Agen', 'Kontak']],
       ['Agen', 'Agen properti Hunian Kita', 'Email dan kata sandi', ['Menambah dan mengubah listing miliknya', 'Menerima permintaan survei dan mengatur jadwal', 'Menandai listing terjual atau disewa'], ['Mengubah listing agen lain', 'Menayangkan listing tanpa pemeriksaan manajer'], ['Listing saya', 'Permintaan survei', 'Jadwal survei']],
-      ['Manajer kantor', 'Pemilik atau kepala kantor agen', 'Email dan kata sandi', ['Memeriksa dan menayangkan listing baru', 'Membagi permintaan survei ke agen', 'Melihat kinerja tiap agen', 'Membuat dan menonaktifkan akun agen'], [], ['Dashboard kantor', 'Persetujuan listing', 'Kinerja agen', 'Akun agen']],
+      ['Manajer kantor', 'Pemilik atau kepala kantor agen', 'Email dan kata sandi', ['Memeriksa dan menayangkan listing baru', 'Membagi permintaan survei ke agen', 'Melihat kinerja tiap agen', 'Membuat dan menonaktifkan akun agen'], ['Mengubah harga listing tanpa persetujuan pemilik properti', 'Menghapus riwayat permintaan survei'], ['Dashboard kantor', 'Persetujuan listing', 'Kinerja agen', 'Akun agen']],
     ],
     fitur: [
       ['Pencarian dan filter', 'Pengunjung', 'P0', 'Cari berdasarkan lokasi, jenis, rentang harga, jumlah kamar, dan luas tanah.', ['Semua filter bisa dipakai bersamaan dan tersimpan di alamat halaman', 'Hasil bisa diurutkan dari harga termurah atau listing terbaru']],

@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Wisatawan domestik yang berlibur 2–4 hari',
       'Rombongan keluarga dan sekolah',
+      'Wisatawan mancanegara yang mencari informasi dalam bahasa sederhana',
     ],
     tujuan: [
       'Wisatawan menyusun rencana perjalanan dalam 10 menit',
@@ -36,10 +37,10 @@ export default {
       'Panduan audio di dalam museum',
     ],
     peran: [
-      ['Wisatawan', 'Wisatawan domestik', 'Email atau akun Google; menjelajah bisa tanpa akun', ['Mencari destinasi dan menyusun rencana', 'Membeli tiket masuk', 'Melaporkan informasi yang salah'], [], ['Jelajahi', 'Rencana', 'Peta', 'Tiket', 'Profil', 'Detail destinasi']],
+      ['Wisatawan', 'Wisatawan domestik', 'Email atau akun Google; menjelajah bisa tanpa akun', ['Mencari destinasi dan menyusun rencana', 'Membeli tiket masuk', 'Melaporkan informasi yang salah'], ['Membatalkan tiket yang sudah dipindai di loket', 'Mengubah ulasan setelah 7 hari'], ['Jelajahi', 'Rencana', 'Peta', 'Tiket', 'Profil', 'Detail destinasi']],
       ['Petugas loket', 'Petugas di pintu destinasi mitra', 'Kode akses destinasi, mode petugas', ['Memindai tiket masuk', 'Melihat jumlah pengunjung hari ini'], ['Melihat data pembeli selain nama'], ['Pindai tiket masuk', 'Pengunjung hari ini']],
       ['Pengelola destinasi', 'Pengelola museum dan objek wisata mitra', 'Email dan kata sandi', ['Memperbarui jam buka, harga, dan foto', 'Mengatur kuota tiket harian', 'Melihat penjualan tiket'], ['Mengubah destinasi lain'], ['Profil destinasi', 'Kuota dan harga', 'Penjualan tiket'], 'web'],
-      ['Kurator', 'Tim kurasi Jelajah Jogja', 'Email kantor dan kata sandi', ['Memeriksa laporan informasi salah', 'Menyusun agenda budaya', 'Menambah destinasi'], [], ['Laporan pengguna', 'Agenda budaya', 'Kelola destinasi'], 'web'],
+      ['Kurator', 'Tim kurasi Jelajah Jogja', 'Email kantor dan kata sandi', ['Memeriksa laporan informasi salah', 'Menyusun agenda budaya', 'Menambah destinasi'], ['Mengubah harga tiket yang ditetapkan pengelola destinasi', 'Melihat data pembeli tiket'], ['Laporan pengguna', 'Agenda budaya', 'Kelola destinasi'], 'web'],
     ],
     fitur: [
       ['Daftar destinasi', 'Wisatawan', 'P0', 'Destinasi per kategori dengan foto, jam buka, harga tiket, dan jarak dari lokasi pengguna.', ['Destinasi yang sedang tutup ditandai', 'Jam buka dan harga punya tanggal pembaruan terakhir']],

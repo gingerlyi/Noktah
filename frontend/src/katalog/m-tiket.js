@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Penonton usia 18–40 tahun yang membeli tiket lewat ponsel',
       'Panitia pintu masuk yang memindai tiket',
+      'Penyelenggara acara kecil yang menjual tiket tanpa loket fisik',
     ],
     tujuan: [
       'Pembeli memilih kursi sendiri tanpa risiko kursi ganda',
@@ -38,7 +39,7 @@ export default {
     peran: [
       ['Penonton', 'Pembeli tiket', 'Nomor ponsel dan kode OTP', ['Mencari acara', 'Memilih kursi dan membayar', 'Menyimpan e-tiket', 'Mengirim tiket ke teman'], ['Melihat data penonton lain'], ['Acara', 'Tiket saya', 'Favorit', 'Akun', 'Detail acara', 'Pilih kursi', 'Pembayaran']],
       ['Panitia pintu', 'Petugas di pintu masuk', 'Kode akses acara dari penyelenggara', ['Memindai e-tiket', 'Melihat jumlah penonton yang sudah masuk'], ['Melihat data pembeli selain nama di tiket'], ['Pindai tiket', 'Rekap pintu']],
-      ['Penyelenggara', 'Gedung pertunjukan atau promotor', 'Email dan kata sandi', ['Membuat acara dan denah kursi', 'Mengatur kelas kursi dan harga', 'Membuat kode akses panitia pintu', 'Melihat penjualan dan pencairan'], [], ['Acara saya', 'Denah dan harga', 'Penjualan', 'Kode akses panitia'], 'web'],
+      ['Penyelenggara', 'Gedung pertunjukan atau promotor', 'Email dan kata sandi', ['Membuat acara dan denah kursi', 'Mengatur kelas kursi dan harga', 'Membuat kode akses panitia pintu', 'Melihat penjualan dan pencairan'], ['Mengubah denah kursi setelah tiket mulai terjual', 'Melihat data pembayaran penonton'], ['Acara saya', 'Denah dan harga', 'Penjualan', 'Kode akses panitia'], 'web'],
     ],
     fitur: [
       ['Daftar dan detail acara', 'Penonton', 'P0', 'Acara dengan poster, tanggal, tempat, harga per kelas kursi, dan sisa tiket.', ['Acara yang tiketnya habis ditandai dan tetap bisa dibuka', 'Acara bisa disaring per tanggal dan jenis pertunjukan']],

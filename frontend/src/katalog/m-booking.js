@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Komunitas futsal dan badminton usia 18–40 tahun',
       'Karyawan yang rutin bermain sepulang kerja',
+      'Pengelola lapangan yang ingin jadwal sewanya terisi penuh',
     ],
     tujuan: [
       'Pengguna menemukan lapangan kosong dalam satu layar',
@@ -38,7 +39,7 @@ export default {
     peran: [
       ['Pemain', 'Pemain yang menyewa lapangan', 'Nomor ponsel dan kode OTP', ['Mencari lapangan dan jam kosong', 'Memesan dan membayar', 'Mengubah atau membatalkan sesuai aturan', 'Membagi biaya dengan teman'], ['Melihat pemesanan pemain lain'], ['Beranda', 'Cari lapangan', 'Pesananku', 'Akun', 'Detail lapangan', 'Pilih jadwal', 'Pembayaran']],
       ['Pengelola lapangan', 'Pemilik atau penjaga GOR', 'Email dan kata sandi', ['Mengatur lapangan, harga per jam, dan jam operasional', 'Mencatat pemesanan pemain yang datang langsung', 'Memeriksa kode pemesanan', 'Melihat pendapatan'], ['Mengubah pemesanan yang sudah dibayar tanpa persetujuan pemain'], ['Jadwal lapangan', 'Lapangan dan harga', 'Pemesanan', 'Pendapatan'], 'web'],
-      ['Admin', 'Tim Lapangin', 'Email dan kata sandi', ['Memverifikasi tempat baru', 'Mencairkan pendapatan ke pengelola', 'Menangani komplain'], [], ['Verifikasi tempat', 'Pencairan', 'Komplain'], 'web'],
+      ['Admin', 'Tim Lapangin', 'Email dan kata sandi', ['Memverifikasi tempat baru', 'Mencairkan pendapatan ke pengelola', 'Menangani komplain'], ['Mengubah jadwal sewa yang sudah dibayar tanpa persetujuan pemain', 'Mencairkan pendapatan ke rekening selain milik pengelola terverifikasi'], ['Verifikasi tempat', 'Pencairan', 'Komplain'], 'web'],
     ],
     fitur: [
       ['Cari lapangan', 'Pemain', 'P0', 'Daftar lapangan menurut jenis olahraga, lokasi, dan tanggal.', ['Hasil bisa disaring menurut jenis olahraga dan tanggal', 'Tiap lapangan menampilkan harga per jam dan jarak dari pengguna']],

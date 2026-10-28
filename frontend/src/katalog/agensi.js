@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pemilik brand lokal dan UMKM yang sedang berkembang',
       'Manajer pemasaran perusahaan menengah',
+      'Startup yang butuh identitas merek dan materi peluncuran',
     ],
     tujuan: [
       'Menampilkan proses dan hasil, bukan hanya gambar akhir',

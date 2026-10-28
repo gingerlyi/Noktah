@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Orang tua dan wali murid usia 30–55 tahun',
       'Wali kelas dan staf tata usaha',
+      'Siswa SMP dan SMA yang melihat jadwal dan nilainya sendiri',
     ],
     tujuan: [
       'Orang tua tahu kehadiran anak setiap hari',

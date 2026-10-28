@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Developer web dan mobile usia 20–35 tahun',
       'Mahasiswa teknik informatika dan peserta bootcamp',
+      'Perusahaan teknologi yang mencari kesempatan menjadi sponsor dan merekrut',
     ],
     tujuan: [
       'Menjual 1.200 tiket sebelum hari acara',
@@ -40,7 +41,7 @@ export default {
       ['Pengunjung', 'Developer dan mahasiswa calon peserta', 'Tanpa akun', ['Melihat jadwal, pembicara, dan harga tiket', 'Membeli tiket'], ['Melihat data peserta lain'], ['Beranda', 'Jadwal', 'Pembicara', 'Tiket', 'Sponsor', 'FAQ']],
       ['Peserta', 'Pemegang tiket', 'Tautan masuk yang dikirim ke email setelah membeli', ['Melihat e-tiket berkode QR', 'Menyusun jadwal sesi pribadi', 'Mengubah nama di tiket sampai H-3'], ['Memindahkan tiket setelah H-3'], ['Tiket saya', 'Jadwal pribadi']],
       ['Panitia', 'Tim registrasi di pintu masuk', 'Email dan kata sandi', ['Memindai tiket di pintu masuk', 'Mencari peserta dan mencetak ulang tanda pengenal'], ['Mengubah harga tiket', 'Melihat laporan penjualan'], ['Registrasi', 'Cari peserta']],
-      ['Admin acara', 'Ketua panitia dan bendahara', 'Email dan kata sandi', ['Mengubah jadwal, sesi, dan pembicara', 'Membuat jenis tiket, kuota, dan kode diskon', 'Melihat penjualan dan mengekspor data peserta', 'Membuat akun panitia'], [], ['Dashboard penjualan', 'Kelola sesi', 'Tiket dan diskon', 'Data peserta']],
+      ['Admin acara', 'Ketua panitia dan bendahara', 'Email dan kata sandi', ['Mengubah jadwal, sesi, dan pembicara', 'Membuat jenis tiket, kuota, dan kode diskon', 'Melihat penjualan dan mengekspor data peserta', 'Membuat akun panitia'], ['Mengubah harga tiket yang sudah terjual', 'Menghapus data peserta yang sudah membayar'], ['Dashboard penjualan', 'Kelola sesi', 'Tiket dan diskon', 'Data peserta']],
     ],
     fitur: [
       ['Jadwal sesi', 'Pengunjung', 'P0', 'Jadwal per hari dengan jam, judul sesi, pembicara, dan ruang.', ['Jadwal bisa disaring per hari dan per jalur (web, mobile, data)', 'Perubahan jadwal oleh panitia langsung tampil tanpa menunggu rilis ulang']],

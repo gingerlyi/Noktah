@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Karyawan dapur dan pengantar katering yang bekerja bergiliran',
       'Kepala cabang dan bagian personalia',
+      'Pemilik usaha yang menghitung gaji dari data kehadiran',
     ],
     tujuan: [
       'Absensi tercatat akurat dari lokasi mana pun yang diizinkan',
@@ -38,7 +39,7 @@ export default {
     peran: [
       ['Karyawan', 'Karyawan dapur dan kantor', 'Nomor karyawan dan kata sandi, satu ponsel per akun', ['Absen masuk dan pulang', 'Mengajukan cuti, izin, dan lembur', 'Melihat jadwal shift dan slip gaji'], ['Absen dari luar area kerja', 'Melihat data karyawan lain'], ['Beranda', 'Riwayat', 'Pengajuan', 'Akun', 'Absen kamera', 'Slip gaji']],
       ['Atasan', 'Kepala dapur cabang dan supervisor', 'Akun karyawan yang diberi hak atasan', ['Menyetujui atau menolak pengajuan timnya', 'Melihat kehadiran tim hari ini', 'Mengatur jadwal shift tim'], ['Melihat slip gaji anggota tim'], ['Kehadiran tim', 'Persetujuan', 'Jadwal shift tim']],
-      ['HR', 'Staf HR kantor pusat', 'Email kantor dan kata sandi', ['Mengatur lokasi kerja dan radius absen', 'Mengunggah slip gaji bulanan', 'Mengekspor rekap kehadiran untuk penggajian', 'Mendaftarkan dan menonaktifkan karyawan', 'Mengirim pengumuman'], [], ['Rekap kehadiran', 'Data karyawan', 'Lokasi kerja', 'Unggah slip gaji'], 'web'],
+      ['HR', 'Staf HR kantor pusat', 'Email kantor dan kata sandi', ['Mengatur lokasi kerja dan radius absen', 'Mengunggah slip gaji bulanan', 'Mengekspor rekap kehadiran untuk penggajian', 'Mendaftarkan dan menonaktifkan karyawan', 'Mengirim pengumuman'], ['Mengubah jam absen karyawan tanpa catatan alasan', 'Melihat swafoto absen di luar keperluan pemeriksaan'], ['Rekap kehadiran', 'Data karyawan', 'Lokasi kerja', 'Unggah slip gaji'], 'web'],
     ],
     fitur: [
       ['Absen masuk dan pulang', 'Karyawan', 'P0', 'Absen dengan swafoto dan lokasi GPS di area yang diizinkan.', ['Absen ditolak bila lokasi di luar radius 100 m dari titik kerja', 'Swafoto dan koordinat tersimpan bersama waktu absen']],

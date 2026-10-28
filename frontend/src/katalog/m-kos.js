@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Mahasiswa baru dan orang tuanya yang mencari kos dari luar kota',
       'Karyawan muda yang mencari kos dekat kantor',
+      'Pemilik kos kecil yang ingin kamarnya mudah ditemukan penyewa',
     ],
     tujuan: [
       'Pencari kos bisa menyaring kos sesuai syarat utamanya',

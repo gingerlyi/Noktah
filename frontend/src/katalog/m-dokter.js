@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Orang tua usia 28–50 tahun yang mengurus kesehatan keluarganya',
       'Pasien penyakit kronis yang perlu kontrol rutin',
+      'Pekerja yang sulit izin kantor untuk berobat di jam kerja',
     ],
     tujuan: [
       'Keluhan ringan bisa ditangani tanpa datang ke klinik',

@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Kepala gudang dan staf admin distributor kecil',
       'Pemilik usaha yang ingin memantau stok dari jauh',
+      'Staf penjualan yang perlu tahu sisa stok sebelum menerima pesanan',
     ],
     tujuan: [
       'Satu sumber data stok yang selalu terbaru',
@@ -37,7 +38,7 @@ export default {
       'Aplikasi ponsel bawaan',
     ],
     peran: [
-      ['Admin gudang', 'Kepala gudang yang bertanggung jawab atas stok', 'Email dan kata sandi', ['Semua yang bisa dilakukan staf gudang', 'Mengelola data barang dan pemasok', 'Melihat nilai stok dan laporan', 'Mengatur akun staf dan batas stok minimum'], [], ['Ringkasan', 'Barang', 'Pemasok', 'Laporan', 'Pengaturan']],
+      ['Admin gudang', 'Kepala gudang yang bertanggung jawab atas stok', 'Email dan kata sandi', ['Semua yang bisa dilakukan staf gudang', 'Mengelola data barang dan pemasok', 'Melihat nilai stok dan laporan', 'Mengatur akun staf dan batas stok minimum'], ['Menghapus riwayat mutasi stok, hanya membuat koreksi', 'Mengubah harga jual yang ditetapkan pemilik'], ['Ringkasan', 'Barang', 'Pemasok', 'Laporan', 'Pengaturan']],
       ['Staf gudang', 'Petugas yang mencatat barang masuk dan keluar', 'Email dan kata sandi', ['Mencatat barang masuk dan keluar', 'Mencari barang dan melihat stok'], ['Melihat harga beli dan nilai stok', 'Membuka Pemasok, Laporan, dan Pengaturan'], ['Barang masuk', 'Barang keluar', 'Cari barang']],
       ['Pemilik', 'Pemilik usaha yang memantau dari jauh', 'Email dan kata sandi', ['Melihat ringkasan, nilai stok, dan laporan bulanan', 'Mengunduh laporan'], ['Mengubah data barang dan stok'], ['Laporan bulanan']],
     ],

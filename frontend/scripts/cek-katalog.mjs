@@ -1,5 +1,6 @@
-// Memastikan tiap PRD bawaan lengkap: isian wajib terisi, tiap peran punya alur, tiap kebutuhan P0 punya kriteria
-// penerimaan, tiap gaya punya design brief, dan dokumen yang dihasilkan lolos pemeriksa struktur tanpa catatan.
+// Memastikan tiap PRD bawaan lengkap: isian wajib terisi, minimal 3 target pengguna, tiap peran punya alur dan
+// daftar "tidak bisa", tiap kebutuhan P0 punya kriteria penerimaan, tiap gaya punya design brief yang kontrasnya
+// cukup, dan dokumen yang dihasilkan lolos pemeriksa struktur tanpa catatan.
 // Jalankan dari folder frontend: node scripts/cek-katalog.mjs
 import { BLOK, GAYA, T, TPL_IDS } from '../src/lib/catalog.js';
 import { NADA_STATUS, checkPrd, fromBuiltin, genMd, kontras } from '../src/lib/prd.js';
@@ -34,8 +35,10 @@ for (const id of TPL_IDS) {
   if (!GAYA[d.gaya]) p(`gaya "${d.gaya}" tidak dikenal`);
   if (!/^#[0-9a-f]{6}$/i.test(d.warna)) p(`warna "${d.warna}" bukan warna hex`);
   d.blok.forEach((b) => BLOK[b] || p(`blok "${b}" tidak dikenal`));
-  d.peran.forEach(([n, , , , , hal]) => {
+  if (d.audiens.length < 3) p(`baru ${d.audiens.length} kelompok target pengguna, minimal 3`);
+  d.peran.forEach(([n, , , , tidak, hal]) => {
     if (!hal?.length) p(`peran "${n}" belum punya halaman`);
+    if (!tidak?.length) p(`peran "${n}" belum punya daftar "tidak bisa"`);
     if (!d.alur.some((a) => a[1] === n)) p(`peran "${n}" belum punya alur`);
   });
   d.fitur.forEach(([n, , pr, , k]) => pr === 'P0' && !k?.length && p(`kebutuhan P0 "${n}" belum punya kriteria penerimaan`));

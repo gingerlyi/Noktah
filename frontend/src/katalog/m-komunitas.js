@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pelari pemula dan menengah usia 20–45 tahun',
       'Panitia dan kapten kelompok lari',
+      'Sponsor dan toko perlengkapan lari yang mendukung kegiatan komunitas',
     ],
     tujuan: [
       'Anggota bisa mendaftar kegiatan dengan satu ketukan',
@@ -38,7 +39,7 @@ export default {
     peran: [
       ['Anggota', 'Pelari pemula sampai rutin', 'Nomor ponsel dan kode OTP', ['Mendaftar kegiatan', 'Mencatat jarak lari', 'Melihat peringkat dan lencana'], ['Mendaftar kegiatan yang sudah penuh'], ['Beranda', 'Kegiatan', 'Peringkat', 'Profil', 'Detail kegiatan']],
       ['Kapten', 'Kapten kelompok kecepatan', 'Akun anggota yang diberi hak kapten', ['Melihat peserta kelompoknya', 'Menandai kehadiran di titik kumpul', 'Mendampingi anggota baru'], ['Membuat kegiatan baru'], ['Kelompok saya', 'Absen kegiatan']],
-      ['Pengurus', 'Pengurus komunitas', 'Akun anggota yang diberi hak pengurus', ['Membuat kegiatan, rute, dan kuota', 'Menunjuk kapten', 'Mengunggah galeri', 'Mengatur target bulanan'], [], ['Kelola kegiatan', 'Daftar anggota', 'Target bulanan']],
+      ['Pengurus', 'Pengurus komunitas', 'Akun anggota yang diberi hak pengurus', ['Membuat kegiatan, rute, dan kuota', 'Menunjuk kapten', 'Mengunggah galeri', 'Mengatur target bulanan'], ['Melihat lokasi anggota di luar kegiatan yang diikutinya', 'Mengubah catatan lari anggota'], ['Kelola kegiatan', 'Daftar anggota', 'Target bulanan']],
     ],
     fitur: [
       ['Daftar kegiatan', 'Anggota', 'P0', 'Kegiatan mingguan dengan rute, jarak, titik kumpul, dan kelompok kecepatan.', ['Anggota memilih kelompok kecepatan saat mendaftar', 'Kegiatan yang dibatalkan karena cuaca dikirim sebagai notifikasi']],

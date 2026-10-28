@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Sales lapangan yang mencatat kunjungan setiap hari',
       'Manajer penjualan yang memantau target tim',
+      'Pemilik usaha yang ingin melihat perkiraan penjualan bulan depan',
     ],
     tujuan: [
       'Semua prospek dan riwayat kontak tersimpan di satu tempat',
@@ -37,7 +38,7 @@ export default {
       'Aplikasi ponsel bawaan',
     ],
     peran: [
-      ['Manajer penjualan', 'Kepala tim penjualan', 'Email dan kata sandi', ['Melihat semua prospek dan tindak lanjut tim', 'Mengatur target per sales', 'Membagi prospek ke sales', 'Melihat dan mengunduh laporan'], [], ['Ringkasan', 'Semua prospek', 'Laporan', 'Target tim']],
+      ['Manajer penjualan', 'Kepala tim penjualan', 'Email dan kata sandi', ['Melihat semua prospek dan tindak lanjut tim', 'Mengatur target per sales', 'Membagi prospek ke sales', 'Melihat dan mengunduh laporan'], ['Menghapus catatan tindak lanjut yang ditulis sales', 'Mengubah nilai transaksi yang sudah ditandai menang tanpa catatan'], ['Ringkasan', 'Semua prospek', 'Laporan', 'Target tim']],
       ['Sales', 'Tenaga penjualan lapangan', 'Email dan kata sandi', ['Menambah dan mengubah prospek miliknya', 'Memindahkan tahapan', 'Mencatat aktivitas dan jadwal tindak lanjut'], ['Melihat prospek sales lain', 'Mengubah target'], ['Prospek saya', 'Tahapan', 'Tindak lanjut']],
       ['Admin', 'Admin sistem perusahaan', 'Email dan kata sandi', ['Membuat dan menonaktifkan akun', 'Mengimpor data dari lembar kerja', 'Mengatur daftar tahapan'], ['Mengubah prospek dan target'], ['Pengguna', 'Impor data', 'Pengaturan']],
     ],

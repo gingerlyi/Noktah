@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pemilik warung, kedai, dan toko kecil dengan 1–5 karyawan',
       'Kasir yang belum terbiasa dengan aplikasi',
+      'Pemilik usaha dengan dua cabang yang memantau penjualan dari rumah',
     ],
     tujuan: [
       'Transaksi tercatat dalam hitungan detik',
@@ -37,7 +38,7 @@ export default {
     ],
     peran: [
       ['Kasir', 'Kasir atau karyawan toko', 'PIN 4 digit di ponsel toko', ['Mencatat penjualan', 'Menerima pembayaran tunai dan QRIS', 'Mengirim atau mencetak struk', 'Menutup shift'], ['Mengubah harga dan stok', 'Melihat untung kotor', 'Membatalkan transaksi'], ['Kasir', 'Pembayaran', 'Struk', 'Riwayat shift']],
-      ['Pemilik', 'Pemilik usaha', 'Nomor ponsel dan kode OTP', ['Semua yang bisa dilakukan kasir', 'Mengelola produk, harga, dan stok', 'Melihat laporan dan untung kotor', 'Membuat akun kasir dan membatalkan transaksi'], [], ['Produk', 'Laporan', 'Akun', 'Karyawan']],
+      ['Pemilik', 'Pemilik usaha', 'Nomor ponsel dan kode OTP', ['Semua yang bisa dilakukan kasir', 'Mengelola produk, harga, dan stok', 'Melihat laporan dan untung kotor', 'Membuat akun kasir dan membatalkan transaksi'], ['Menghapus transaksi, hanya membatalkannya dengan alasan yang tercatat'], ['Produk', 'Laporan', 'Akun', 'Karyawan']],
       ['Akuntan', 'Pembukuan dari luar, misalnya konsultan pajak', 'Undangan email, lalu kata sandi di panel web', ['Melihat dan mengunduh laporan penjualan per bulan'], ['Mengubah transaksi, produk, atau harga'], ['Laporan pembukuan'], 'web'],
     ],
     fitur: [

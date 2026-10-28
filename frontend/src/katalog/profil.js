@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Keluarga muda yang berencana membangun rumah pertama',
       'Pemilik usaha yang butuh desain kafe, klinik, atau kantor kecil',
+      'Pengembang perumahan yang mencari mitra arsitek dan kontraktor',
     ],
     tujuan: [
       'Membangun kepercayaan lewat proyek nyata',

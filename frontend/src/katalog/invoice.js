@@ -38,7 +38,7 @@ export default {
       'Aplikasi mobile terpisah',
     ],
     peran: [
-      ['Pemilik usaha', 'Pemilik usaha jasa atau dagang', 'Email dan kata sandi, atau akun Google', ['Melihat piutang, faktur jatuh tempo, dan pembayaran masuk', 'Membuat dan mengirim faktur', 'Mengatur data usaha, rekening, dan pajak', 'Mengundang dan menonaktifkan staf keuangan'], [], ['Ringkasan', 'Faktur', 'Klien', 'Produk dan jasa', 'Laporan', 'Pengaturan usaha']],
+      ['Pemilik usaha', 'Pemilik usaha jasa atau dagang', 'Email dan kata sandi, atau akun Google', ['Melihat piutang, faktur jatuh tempo, dan pembayaran masuk', 'Membuat dan mengirim faktur', 'Mengatur data usaha, rekening, dan pajak', 'Mengundang dan menonaktifkan staf keuangan'], ['Mengubah faktur yang sudah dibayar, hanya membuat nota kredit', 'Menghapus nomor faktur sehingga urutannya terputus'], ['Ringkasan', 'Faktur', 'Klien', 'Produk dan jasa', 'Laporan', 'Pengaturan usaha']],
       ['Staf keuangan', 'Admin keuangan atau akuntan lepas', 'Undangan email dari pemilik, lalu kata sandi', ['Membuat faktur dan penawaran', 'Mencatat dan memeriksa pembayaran masuk', 'Mengirim pengingat ke klien', 'Mengekspor data untuk pembukuan'], ['Mengubah rekening penerima dan pengaturan pajak', 'Menghapus faktur yang sudah dibayar'], ['Daftar tagihan', 'Pembayaran masuk', 'Pengingat', 'Ekspor data']],
       ['Klien', 'Pelanggan yang menerima faktur', 'Tanpa akun, lewat tautan rahasia di email atau WhatsApp', ['Melihat dan mengunduh faktur', 'Membayar lewat virtual account atau QRIS', 'Mengunggah bukti transfer manual', 'Melihat riwayat faktur dari usaha yang sama'], ['Melihat faktur klien lain', 'Mengubah isi faktur'], ['Lihat faktur', 'Bayar faktur', 'Riwayat faktur']],
     ],

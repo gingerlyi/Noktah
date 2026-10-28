@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pengikut usia 18–35 tahun yang datang dari aplikasi media sosial di ponsel',
       'Brand yang ingin mengajak kerja sama',
+      'Penggemar yang ingin membeli produk digital atau mendukung kreator',
     ],
     tujuan: [
       'Pengikut menemukan tautan yang dicari dalam satu ketukan',
@@ -37,8 +38,8 @@ export default {
       'Aplikasi ponsel',
     ],
     peran: [
-      ['Pengikut', 'Pengikut media sosial kreator', 'Tanpa akun', ['Membuka tautan', 'Membeli produk digital', 'Berlangganan email', 'Mengirim tawaran kerja sama'], [], ['Halaman tautan', 'Produk', 'Kerja sama']],
-      ['Kreator', 'Ayu, pemilik halaman', 'Email dan kata sandi', ['Mengatur, menyematkan, dan menjadwalkan tautan', 'Menambah produk digital dan melihat pesanan', 'Melihat statistik klik', 'Mengatur warna halaman'], [], ['Dashboard kreator', 'Kelola tautan', 'Produk dan pesanan']],
+      ['Pengikut', 'Pengikut media sosial kreator', 'Tanpa akun', ['Membuka tautan', 'Membeli produk digital', 'Berlangganan email', 'Mengirim tawaran kerja sama'], ['Melihat daftar pelanggan email atau pembeli lain', 'Mengunduh produk digital tanpa membayar'], ['Halaman tautan', 'Produk', 'Kerja sama']],
+      ['Kreator', 'Ayu, pemilik halaman', 'Email dan kata sandi', ['Mengatur, menyematkan, dan menjadwalkan tautan', 'Menambah produk digital dan melihat pesanan', 'Melihat statistik klik', 'Mengatur warna halaman'], ['Melihat alamat email pengikut yang tidak berlangganan', 'Mengubah harga pesanan yang sudah dibayar'], ['Dashboard kreator', 'Kelola tautan', 'Produk dan pesanan']],
       ['Manajer kreator', 'Manajer yang mengurus kerja sama brand', 'Email dan kata sandi', ['Membaca dan menjawab tawaran kerja sama', 'Melihat statistik klik'], ['Melihat pendapatan produk', 'Mengubah tautan'], ['Kotak tawaran']],
     ],
     fitur: [

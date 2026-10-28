@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Karyawan dan mahasiswa usia 18–35 tahun yang memesan makan siang',
       'Keluarga yang memesan makan malam dari warung langganan',
+      'Pemilik warung yang ingin menerima pesanan antar tanpa komisi besar',
     ],
     tujuan: [
       'Pesanan selesai dibuat dalam kurang dari 2 menit',
@@ -39,7 +40,7 @@ export default {
       ['Pelanggan', 'Pemesan makanan', 'Nomor ponsel dan kode OTP', ['Mencari warung dan memesan', 'Membayar dan melacak kurir', 'Chat dengan kurir dan memberi rating'], ['Melihat pesanan pelanggan lain'], ['Beranda', 'Riwayat', 'Lacak pesanan', 'Akun', 'Menu warung', 'Keranjang', 'Pembayaran']],
       ['Kurir', 'Pengantar Antarin', 'Nomor ponsel dan kode OTP, mode kurir', ['Menerima atau menolak tawaran antar', 'Mengambil makanan dan mengantarnya', 'Chat dengan pelanggan', 'Melihat pendapatan harian'], ['Melihat pesanan yang tidak ditawarkan kepadanya'], ['Tawaran antar', 'Antaran aktif', 'Pendapatan']],
       ['Warung', 'Pemilik warung mitra', 'Nomor ponsel dan kode OTP, mode warung', ['Menerima pesanan masuk', 'Menandai makanan siap diambil', 'Membuka dan menutup warung', 'Mengubah menu dan harga'], ['Melihat data pelanggan selain nama dan catatan pesanan'], ['Pesanan warung', 'Menu saya', 'Rekap penjualan']],
-      ['Admin', 'Tim operasional Antarin', 'Email dan kata sandi', ['Mendaftarkan warung dan kurir baru', 'Memantau pesanan yang terlambat', 'Menangani komplain'], [], ['Pantau pesanan', 'Mitra warung', 'Data kurir', 'Komplain'], 'web'],
+      ['Admin', 'Tim operasional Antarin', 'Email dan kata sandi', ['Mendaftarkan warung dan kurir baru', 'Memantau pesanan yang terlambat', 'Menangani komplain'], ['Mengubah isi pesanan pelanggan', 'Melihat lokasi kurir yang sedang tidak bertugas'], ['Pantau pesanan', 'Mitra warung', 'Data kurir', 'Komplain'], 'web'],
     ],
     fitur: [
       ['Daftar warung terdekat', 'Pelanggan', 'P0', 'Daftar warung berdasarkan lokasi pengguna, dengan jarak, rating, dan jam buka.', ['Warung diurutkan dari yang terdekat memakai lokasi ponsel', 'Warung yang sedang tutup ditandai dan tidak bisa dipesan']],

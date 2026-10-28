@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pembaca buku usia 18–35 tahun',
       'Guru dan mahasiswa yang mencari rekomendasi bacaan',
+      'Penerbit dan toko buku independen yang mencari ulasan untuk koleksinya',
     ],
     tujuan: [
       'Membuat tulisan lama mudah ditemukan',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Pembaca', 'Pengunjung yang membaca artikel', 'Tanpa akun', ['Membaca, mencari, dan membagikan artikel', 'Berlangganan kabar lewat email', 'Menulis komentar dengan nama dan email'], ['Melihat artikel yang belum terbit'], ['Beranda', 'Artikel', 'Kategori', 'Tentang', 'Berlangganan']],
       ['Penulis', 'Kontributor tetap dan penulis tamu', 'Email dan kata sandi', ['Menulis dan menyimpan draf', 'Mengajukan draf untuk ditinjau', 'Melihat jumlah pembaca tulisannya sendiri'], ['Menerbitkan tanpa persetujuan editor', 'Mengubah tulisan penulis lain'], ['Tulisan saya', 'Editor tulisan']],
-      ['Editor', 'Pemimpin redaksi Ruang Baca', 'Email dan kata sandi', ['Meninjau, menyunting, menjadwalkan, dan menerbitkan tulisan', 'Mengelola kategori dan akun penulis', 'Memoderasi komentar', 'Mengirim kabar email ke pelanggan'], [], ['Meja redaksi', 'Komentar', 'Pelanggan email', 'Penulis']],
+      ['Editor', 'Pemimpin redaksi Ruang Baca', 'Email dan kata sandi', ['Meninjau, menyunting, menjadwalkan, dan menerbitkan tulisan', 'Mengelola kategori dan akun penulis', 'Memoderasi komentar', 'Mengirim kabar email ke pelanggan'], ['Menerbitkan tulisan atas nama penulis tanpa menyimpan riwayat suntingannya', 'Melihat kata sandi penulis atau pelanggan'], ['Meja redaksi', 'Komentar', 'Pelanggan email', 'Penulis']],
     ],
     fitur: [
       ['Daftar dan halaman artikel', 'Pembaca', 'P0', 'Daftar terbaru dengan paginasi dan halaman baca yang nyaman.', ['Daftar menampilkan 10 artikel per halaman, yang terbaru di atas', 'Halaman artikel menampilkan judul, tanggal, penulis, dan perkiraan waktu baca']],

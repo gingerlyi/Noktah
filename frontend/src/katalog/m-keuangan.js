@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Karyawan muda usia 22–35 tahun yang baru mulai mengatur keuangan',
       'Pasangan muda yang mengelola anggaran rumah tangga',
+      'Pekerja lepas dengan penghasilan yang tidak tetap tiap bulan',
     ],
     tujuan: [
       'Mencatat satu transaksi dalam kurang dari 10 detik',
@@ -36,7 +37,7 @@ export default {
       'Lebih dari satu dompet bersama per akun',
     ],
     peran: [
-      ['Pemilik akun', 'Pengguna yang mencatat keuangannya', 'Email atau akun Google, lalu PIN', ['Mencatat transaksi dan mengatur anggaran', 'Membuat dompet bersama dan mengundang anggota', 'Mengekspor laporan'], [], ['Ringkasan', 'Transaksi', 'Anggaran', 'Laporan', 'Tambah transaksi', 'Akun']],
+      ['Pemilik akun', 'Pengguna yang mencatat keuangannya', 'Email atau akun Google, lalu PIN', ['Mencatat transaksi dan mengatur anggaran', 'Membuat dompet bersama dan mengundang anggota', 'Mengekspor laporan'], ['Melihat transaksi pribadi anggota di luar dompet bersama', 'Menghapus anggota dari dompet bersama tanpa memberi tahu anggota itu'], ['Ringkasan', 'Transaksi', 'Anggaran', 'Laporan', 'Tambah transaksi', 'Akun']],
       ['Anggota dompet bersama', 'Pasangan atau anggota keluarga yang diundang', 'Tautan undangan, lalu email atau akun Google', ['Mencatat transaksi di dompet bersama', 'Melihat sisa anggaran dompet bersama'], ['Melihat dompet pribadi pemilik akun', 'Mengubah anggaran atau menghapus dompet bersama'], ['Dompet bersama', 'Catat ke dompet bersama']],
       ['Tim dukungan', 'Staf Dompetku', 'Email kantor dan verifikasi dua langkah', ['Membantu pemulihan akun', 'Mengelola kategori bawaan', 'Mengirim pengumuman di aplikasi'], ['Melihat isi transaksi pengguna'], ['Permintaan bantuan', 'Kategori bawaan', 'Pengumuman'], 'web'],
     ],

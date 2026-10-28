@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pemilik warung dan toko kelontong usia 25–50 tahun yang memakai ponsel Android',
       'Pengelola UMKM kuliner dengan 1–5 karyawan',
+      'Pemilik toko yang selama ini mencatat penjualan di buku tulis',
     ],
     tujuan: [
       'Menjelaskan manfaat produk dalam satu kali gulir',

@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pekerja muda usia 23–38 tahun yang berlibur sendiri atau berdua',
       'Kelompok teman kantor yang mencari trip singkat 3–5 hari',
+      'Keluarga kecil yang mencari trip dengan pemandu yang terpercaya',
     ],
     tujuan: [
       'Peserta bisa melihat jadwal dan sisa kursi kapan saja',
@@ -40,7 +41,7 @@ export default {
       ['Calon peserta', 'Pencari trip yang melihat-lihat paket', 'Tanpa akun', ['Melihat paket, jadwal, dan sisa kursi', 'Memesan dan membayar uang muka', 'Masuk daftar tunggu'], ['Melihat data peserta lain'], ['Beranda', 'Paket trip', 'Detail paket', 'Jadwal', 'Pesan', 'Galeri']],
       ['Peserta', 'Pemesan yang sudah membayar uang muka', 'Tautan di email dan nomor pemesanan', ['Melunasi pembayaran', 'Mengisi data anggota rombongan', 'Melihat rencana perjalanan dan kontak pemandu', 'Memberi ulasan setelah trip'], ['Memindahkan kursi ke keberangkatan lain tanpa persetujuan admin'], ['Pesanan saya', 'Data rombongan']],
       ['Pemandu', 'Pemandu trip di lapangan', 'Email dan kata sandi', ['Melihat daftar peserta keberangkatannya', 'Menandai kehadiran di titik kumpul', 'Mengirim kabar ke semua peserta'], ['Melihat pembayaran'], ['Trip saya', 'Absen peserta']],
-      ['Admin', 'Tim operasional Jelajah Timur', 'Email dan kata sandi', ['Membuat paket dan jadwal keberangkatan', 'Mengatur kuota dan harga', 'Mengonfirmasi pembayaran', 'Menugaskan pemandu'], [], ['Dashboard operasional', 'Kelola paket', 'Keberangkatan', 'Pembayaran']],
+      ['Admin', 'Tim operasional Jelajah Timur', 'Email dan kata sandi', ['Membuat paket dan jadwal keberangkatan', 'Mengatur kuota dan harga', 'Mengonfirmasi pembayaran', 'Menugaskan pemandu'], ['Mengubah harga keberangkatan untuk peserta yang sudah membayar uang muka', 'Menghapus keberangkatan yang sudah berisi peserta'], ['Dashboard operasional', 'Kelola paket', 'Keberangkatan', 'Pembayaran']],
     ],
     fitur: [
       ['Daftar paket', 'Calon peserta', 'P0', 'Paket dengan foto, durasi, titik kumpul, harga, dan yang sudah termasuk.', ['Setiap paket menampilkan apa yang termasuk dan tidak termasuk', 'Paket yang belum punya jadwal ditandai "segera dibuka"']],

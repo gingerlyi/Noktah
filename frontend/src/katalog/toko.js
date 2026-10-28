@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Penikmat kopi rumahan usia 22–40 tahun di kota besar',
       'Pemilik kedai kopi kecil yang membeli 1–5 kg per bulan',
+      'Pembeli hadiah yang mencari kopi kemasan untuk kantor atau acara',
     ],
     tujuan: [
       'Pembeli bisa memesan dan membayar sendiri tanpa bantuan admin',

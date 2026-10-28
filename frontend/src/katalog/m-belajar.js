@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pelajar dan mahasiswa yang ingin memperbaiki bahasa Inggris',
       'Karyawan yang butuh bahasa Inggris untuk pekerjaan',
+      'Calon pekerja migran dan pelamar beasiswa yang menyiapkan tes bahasa',
     ],
     tujuan: [
       'Pengguna menyelesaikan satu pelajaran setiap hari',
@@ -36,9 +37,9 @@ export default {
       'Forum komunitas',
     ],
     peran: [
-      ['Pelajar', 'Pelajar bahasa Inggris', 'Email atau akun Google', ['Mengerjakan pelajaran dan latihan', 'Melihat progres dan peringkat', 'Bergabung ke kelas guru dengan kode'], [], ['Belajar', 'Latihan', 'Peringkat', 'Profil', 'Pelajaran']],
+      ['Pelajar', 'Pelajar bahasa Inggris', 'Email atau akun Google', ['Mengerjakan pelajaran dan latihan', 'Melihat progres dan peringkat', 'Bergabung ke kelas guru dengan kode'], ['Melihat jawaban dan nilai pelajar lain', 'Membuka unit berikutnya sebelum unit sekarang selesai'], ['Belajar', 'Latihan', 'Peringkat', 'Profil', 'Pelajaran']],
       ['Guru', 'Guru bahasa Inggris di sekolah atau tempat les', 'Email dan kata sandi, mode guru di aplikasi', ['Membuat kelas dan membagikan kode', 'Memberi tugas unit tertentu', 'Melihat progres tiap murid'], ['Melihat murid di luar kelasnya'], ['Kelas saya', 'Tugas kelas', 'Progres murid']],
-      ['Penyusun materi', 'Tim konten Kosa', 'Email kantor dan kata sandi', ['Menulis unit, pelajaran, dan soal', 'Mengunggah audio pengucapan', 'Menerbitkan unit baru'], [], ['Kelola unit', 'Bank soal', 'Audio'], 'web'],
+      ['Penyusun materi', 'Tim konten Kosa', 'Email kantor dan kata sandi', ['Menulis unit, pelajaran, dan soal', 'Mengunggah audio pengucapan', 'Menerbitkan unit baru'], ['Melihat progres pelajar satu per satu', 'Mengubah unit yang sedang dikerjakan pelajar tanpa membuat versi baru'], ['Kelola unit', 'Bank soal', 'Audio'], 'web'],
     ],
     fitur: [
       ['Peta pelajaran', 'Pelajar', 'P0', 'Daftar unit dan pelajaran yang terbuka berurutan.', ['Pelajaran berikutnya terbuka setelah pelajaran sebelumnya selesai', 'Pelajaran yang sudah selesai bisa diulang kapan saja']],

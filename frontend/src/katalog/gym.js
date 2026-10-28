@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pekerja usia 22–40 tahun yang berolahraga sebelum atau sesudah kerja',
       'Pemula yang ingin olahraga dengan bimbingan pelatih',
+      'Peserta program penurunan berat badan yang butuh jadwal rutin',
     ],
     tujuan: [
       'Anggota bisa memesan tempat di kelas sendiri',
@@ -40,7 +41,7 @@ export default {
       ['Pengunjung', 'Calon anggota', 'Tanpa akun', ['Melihat jadwal, pelatih, dan paket', 'Memesan kelas percobaan gratis'], ['Memesan kelas berbayar tanpa akun'], ['Beranda', 'Jadwal kelas', 'Pelatih', 'Keanggotaan']],
       ['Anggota', 'Anggota yang membeli paket', 'Nomor ponsel dan kode OTP', ['Memesan dan membatalkan kelas', 'Melihat sisa kuota dan riwayat kelas', 'Memperpanjang paket'], ['Membatalkan kurang dari 2 jam sebelum kelas'], ['Akun', 'Kelas saya']],
       ['Pelatih', 'Pelatih yang mengajar kelas', 'Email dan kata sandi', ['Melihat daftar peserta kelasnya', 'Menandai kehadiran'], ['Mengubah jadwal dan kuota'], ['Kelas yang saya ajar', 'Absen kelas']],
-      ['Manajer studio', 'Pengelola Ritme Fitness', 'Email dan kata sandi', ['Membuat jadwal kelas dan kuota', 'Mengelola paket dan harga', 'Melihat anggota aktif dan pendapatan', 'Membuat akun pelatih'], [], ['Dashboard studio', 'Kelola jadwal', 'Data anggota', 'Paket dan harga']],
+      ['Manajer studio', 'Pengelola Ritme Fitness', 'Email dan kata sandi', ['Membuat jadwal kelas dan kuota', 'Mengelola paket dan harga', 'Melihat anggota aktif dan pendapatan', 'Membuat akun pelatih'], ['Memperpanjang paket anggota tanpa pembayaran tercatat', 'Mengubah absensi kelas yang sudah ditutup pelatih'], ['Dashboard studio', 'Kelola jadwal', 'Data anggota', 'Paket dan harga']],
     ],
     fitur: [
       ['Jadwal kelas mingguan', 'Pengunjung', 'P0', 'Kelas per hari dengan jam, pelatih, tingkat kesulitan, dan sisa tempat.', ['Jadwal bisa disaring per jenis kelas', 'Kelas yang penuh menampilkan tombol daftar tunggu']],

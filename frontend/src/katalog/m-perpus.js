@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pelajar dan mahasiswa yang mencari buku pelajaran dan bacaan',
       'Pekerja yang membaca saat perjalanan',
+      'Guru dan pustakawan sekolah yang merekomendasikan bacaan untuk murid',
     ],
     tujuan: [
       'Anggota bisa meminjam buku tanpa datang ke perpustakaan',
@@ -38,7 +39,7 @@ export default {
     peran: [
       ['Anggota', 'Anggota perpustakaan digital', 'Nomor anggota dan kata sandi', ['Mencari, meminjam, dan membaca buku', 'Masuk antrean', 'Mengikuti klub baca'], ['Meminjam lebih dari 3 buku sekaligus'], ['Beranda', 'Jelajahi', 'Pinjaman', 'Profil', 'Detail buku', 'Pembaca']],
       ['Moderator klub baca', 'Relawan pemandu diskusi', 'Akun anggota yang diberi hak moderator', ['Membuat jadwal diskusi', 'Menyembunyikan komentar yang tidak pantas'], ['Mengubah koleksi buku'], ['Klub baca', 'Jadwal diskusi']],
-      ['Pustakawan', 'Pustakawan pengelola koleksi', 'Email dan kata sandi', ['Menambah buku dan jumlah salinan lisensi', 'Mendaftarkan dan menonaktifkan anggota', 'Menyusun koleksi pilihan', 'Melihat statistik peminjaman'], [], ['Koleksi buku', 'Anggota perpustakaan', 'Statistik peminjaman'], 'web'],
+      ['Pustakawan', 'Pustakawan pengelola koleksi', 'Email dan kata sandi', ['Menambah buku dan jumlah salinan lisensi', 'Mendaftarkan dan menonaktifkan anggota', 'Menyusun koleksi pilihan', 'Melihat statistik peminjaman'], ['Melihat buku yang sedang dibaca anggota tertentu', 'Meminjamkan lebih banyak salinan dari jumlah lisensi'], ['Koleksi buku', 'Anggota perpustakaan', 'Statistik peminjaman'], 'web'],
     ],
     fitur: [
       ['Katalog dan pencarian buku', 'Anggota', 'P0', 'Cari judul, penulis, atau topik dengan filter kategori.', ['Setiap buku menampilkan jumlah salinan dan berapa yang sedang dipinjam', 'Buku yang sedang habis menampilkan perkiraan waktu tunggu']],

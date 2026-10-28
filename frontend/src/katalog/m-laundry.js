@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pekerja dan keluarga sibuk di perumahan',
       'Mahasiswa dan penghuni kos',
+      'Pemilik kos dan penginapan kecil yang mencuci seprai dan handuk rutin',
     ],
     tujuan: [
       'Pelanggan memesan penjemputan dalam 1 menit',

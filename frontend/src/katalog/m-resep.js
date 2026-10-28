@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Ibu dan bapak rumah tangga usia 25–45 tahun',
       'Anak kos dan pekerja muda yang baru belajar memasak',
+      'Pengusaha katering rumahan yang menghitung bahan untuk banyak porsi',
     ],
     tujuan: [
       'Pengguna menemukan resep dari bahan yang dimiliki',
@@ -36,9 +37,9 @@ export default {
       'Rencana diet dan hitung kalori',
     ],
     peran: [
-      ['Pemasak', 'Pengguna yang mencari resep', 'Email atau akun Google; mencari bisa tanpa akun', ['Mencari resep dari bahan', 'Memasak dengan mode masak', 'Menyimpan koleksi dan daftar belanja', 'Mengunggah foto hasil masakan'], [], ['Beranda', 'Cari', 'Koleksi', 'Belanja', 'Profil', 'Detail resep', 'Mode masak']],
+      ['Pemasak', 'Pengguna yang mencari resep', 'Email atau akun Google; mencari bisa tanpa akun', ['Mencari resep dari bahan', 'Memasak dengan mode masak', 'Menyimpan koleksi dan daftar belanja', 'Mengunggah foto hasil masakan'], ['Mengubah resep milik kontributor', 'Melihat koleksi pribadi pemasak lain'], ['Beranda', 'Cari', 'Koleksi', 'Belanja', 'Profil', 'Detail resep', 'Mode masak']],
       ['Kontributor resep', 'Juru masak rumahan yang membagikan resep', 'Akun Dapurku dengan profil kontributor', ['Mengirim resep dengan foto tiap langkah', 'Melihat berapa kali resepnya dimasak dan disimpan'], ['Menerbitkan resep tanpa ditinjau'], ['Resep saya', 'Tulis resep']],
-      ['Kurator', 'Tim dapur uji Dapurku', 'Email kantor dan kata sandi', ['Meninjau dan menyunting resep kiriman', 'Menguji takaran', 'Memilih resep pilihan minggu ini', 'Menyembunyikan foto hasil masakan yang tidak pantas'], [], ['Antrean tinjauan', 'Resep pilihan', 'Moderasi foto'], 'web'],
+      ['Kurator', 'Tim dapur uji Dapurku', 'Email kantor dan kata sandi', ['Meninjau dan menyunting resep kiriman', 'Menguji takaran', 'Memilih resep pilihan minggu ini', 'Menyembunyikan foto hasil masakan yang tidak pantas'], ['Menerbitkan resep yang belum diuji takarannya', 'Mengubah nama kontributor pada resep kiriman'], ['Antrean tinjauan', 'Resep pilihan', 'Moderasi foto'], 'web'],
     ],
     fitur: [
       ['Cari resep dari bahan', 'Pemasak', 'P0', 'Pengguna memilih bahan yang ada, lalu muncul resep yang bisa dibuat.', ['Hasil diurutkan dari resep yang bahannya paling lengkap', 'Bahan yang kurang ditandai di tiap kartu resep']],

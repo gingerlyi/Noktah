@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Orang tua usia 28–45 tahun yang mengatur jadwal keluarga',
       'Karyawan yang hanya sempat datang sore atau akhir pekan',
+      'Pasien baru yang membandingkan klinik dari ulasan dan tarifnya',
     ],
     tujuan: [
       'Pasien bisa memesan jadwal kapan saja',
@@ -40,7 +41,7 @@ export default {
       ['Pasien', 'Pasien dan keluarga yang memesan jadwal', 'Tanpa akun, cukup nomor WhatsApp', ['Melihat layanan, dokter, dan jam kosong', 'Membuat reservasi', 'Mengubah atau membatalkan reservasi lewat tautan di WhatsApp'], ['Melihat jadwal pasien lain'], ['Beranda', 'Layanan', 'Dokter', 'Reservasi', 'Kontak']],
       ['Resepsionis', 'Staf meja depan klinik', 'Email dan kata sandi', ['Melihat dan mengubah jadwal harian', 'Mencatat pasien yang datang tanpa reservasi', 'Menandai pasien hadir, selesai, atau tidak datang'], ['Mengubah jam praktik dokter', 'Mengubah harga layanan'], ['Jadwal hari ini', 'Kalender', 'Pasien']],
       ['Dokter', 'Dokter gigi yang praktik di klinik', 'Email dan kata sandi', ['Melihat jadwal dan keluhan pasiennya sendiri', 'Menandai tindakan selesai'], ['Melihat jadwal dokter lain'], ['Jadwal saya']],
-      ['Admin klinik', 'Pemilik klinik', 'Email dan kata sandi', ['Mengatur jam praktik dan hari libur', 'Mengubah layanan dan harga', 'Membuat dan menonaktifkan akun resepsionis dan dokter', 'Melihat laporan kunjungan'], [], ['Jam praktik', 'Layanan dan harga', 'Akun staf', 'Laporan']],
+      ['Admin klinik', 'Pemilik klinik', 'Email dan kata sandi', ['Mengatur jam praktik dan hari libur', 'Mengubah layanan dan harga', 'Membuat dan menonaktifkan akun resepsionis dan dokter', 'Melihat laporan kunjungan'], ['Membaca catatan tindakan yang ditulis dokter', 'Menghapus riwayat booking pasien'], ['Jam praktik', 'Layanan dan harga', 'Akun staf', 'Laporan']],
     ],
     fitur: [
       ['Pilih layanan dan jadwal', 'Pasien', 'P0', 'Pasien memilih layanan, dokter, tanggal, dan jam yang masih kosong.', ['Hanya jam yang masih kosong yang bisa dipilih', 'Dua pasien tidak bisa memesan jam dan dokter yang sama']],

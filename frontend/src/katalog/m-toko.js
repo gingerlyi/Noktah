@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Ibu rumah tangga dan pekerja usia 25–45 tahun di kota besar',
       'Pemilik warung makan kecil yang belanja bahan tiap hari',
+      'Orang tua lanjut usia yang dibantu anaknya berbelanja kebutuhan bulanan',
     ],
     tujuan: [
       'Pembeli bisa memesan bahan dapur dalam kurang dari 3 menit',
@@ -38,7 +39,7 @@ export default {
     peran: [
       ['Pembeli', 'Pembeli di aplikasi', 'Nomor ponsel dan kode OTP', ['Mencari produk dan berbelanja', 'Membayar dan melacak pesanan', 'Memesan ulang dan memberi ulasan'], ['Melihat pesanan pembeli lain'], ['Beranda', 'Kategori', 'Pesanan', 'Akun', 'Detail produk', 'Keranjang', 'Pembayaran']],
       ['Kurir', 'Kurir Pasar Segar', 'Nomor ponsel dan kode OTP, mode kurir di aplikasi yang sama', ['Melihat pesanan yang ditugaskan', 'Mengubah status diambil, diantar, dan diterima', 'Mengunggah foto bukti terima'], ['Melihat pesanan kurir lain', 'Mengubah isi pesanan'], ['Tugas antar', 'Detail antar', 'Riwayat antar']],
-      ['Admin toko', 'Staf gudang dan admin Pasar Segar', 'Email dan kata sandi', ['Mengubah produk, harga, dan stok harian', 'Mengemas pesanan dan menugaskan kurir', 'Mengatur jam antar dan ongkos kirim', 'Melihat laporan penjualan'], [], ['Pesanan masuk', 'Produk dan stok', 'Kurir', 'Laporan penjualan'], 'web'],
+      ['Admin toko', 'Staf gudang dan admin Pasar Segar', 'Email dan kata sandi', ['Mengubah produk, harga, dan stok harian', 'Mengemas pesanan dan menugaskan kurir', 'Mengatur jam antar dan ongkos kirim', 'Melihat laporan penjualan'], ['Mengubah harga pesanan yang sudah dibayar', 'Melihat data kartu pembayaran pembeli'], ['Pesanan masuk', 'Produk dan stok', 'Kurir', 'Laporan penjualan'], 'web'],
     ],
     fitur: [
       ['Daftar dan masuk dengan nomor ponsel', 'Pembeli, Kurir', 'P0', 'Masuk memakai kode OTP yang dikirim lewat SMS atau WhatsApp.', ['Kode OTP 6 digit berlaku 5 menit dan bisa dikirim ulang setelah 60 detik', 'Pengguna tetap masuk setelah aplikasi ditutup dan dibuka lagi']],

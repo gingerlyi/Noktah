@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pengendara motor harian usia 18–45 tahun',
       'Pemilik usaha dengan beberapa motor operasional, misalnya kurir',
+      'Pemilik motor baru yang ingin servis berkala sesuai buku panduan',
     ],
     tujuan: [
       'Pelanggan bisa memilih jam servis sendiri',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Pelanggan', 'Pemilik motor', 'Tanpa akun; nomor polisi dan nomor WhatsApp', ['Melihat layanan dan tarif', 'Booking servis', 'Mengecek status dan riwayat servis motornya'], ['Melihat data motor orang lain'], ['Beranda', 'Layanan dan tarif', 'Booking', 'Cek status', 'Lokasi']],
       ['Mekanik', 'Mekanik yang bertugas hari itu', 'PIN di tablet bengkel', ['Melihat antrean servis', 'Mengubah status menjadi dikerjakan atau selesai', 'Mencatat suku cadang yang dipakai'], ['Mengubah tarif', 'Melihat laporan pendapatan'], ['Antrean servis', 'Kartu kerja']],
-      ['Admin bengkel', 'Kepala bengkel dan kasir', 'Email dan kata sandi', ['Mengatur jam buka dan kuota booking', 'Membagi pekerjaan ke mekanik', 'Menerima pembayaran dan mengirim nota', 'Melihat laporan harian'], [], ['Dashboard harian', 'Booking masuk', 'Tarif dan jam buka', 'Laporan']],
+      ['Admin bengkel', 'Kepala bengkel dan kasir', 'Email dan kata sandi', ['Mengatur jam buka dan kuota booking', 'Membagi pekerjaan ke mekanik', 'Menerima pembayaran dan mengirim nota', 'Melihat laporan harian'], ['Mengubah nota yang sudah dibayar, hanya membuat nota koreksi', 'Menandai servis selesai tanpa catatan mekanik'], ['Dashboard harian', 'Booking masuk', 'Tarif dan jam buka', 'Laporan']],
     ],
     fitur: [
       ['Daftar layanan dan tarif', 'Pelanggan', 'P0', 'Servis rutin, ganti oli, rem, kelistrikan, dan lainnya dengan harga dan perkiraan waktu.', ['Setiap layanan menampilkan harga jasa dan perkiraan lama pengerjaan', 'Harga suku cadang ditulis sebagai kisaran']],

@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Keluarga dan kerabat dari berbagai usia, termasuk yang jarang memakai internet',
       'Teman kantor dan kuliah yang menerima tautan lewat WhatsApp',
+      'Orang tua mempelai yang ingin memastikan semua kerabat menerima undangan',
     ],
     tujuan: [
       'Tamu tahu waktu dan lokasi acara dalam sekali buka',
@@ -38,7 +39,7 @@ export default {
     ],
     peran: [
       ['Tamu', 'Keluarga, teman, dan rekan kerja yang menerima tautan', 'Tautan pribadi dari mempelai, tanpa akun', ['Membuka undangan dengan namanya sendiri', 'Mengirim dan mengubah konfirmasi kehadiran', 'Menulis ucapan dan membaca ucapan tamu lain', 'Menyalin nomor rekening amplop digital'], ['Melihat daftar tamu dan konfirmasi tamu lain'], ['Sampul', 'Mempelai', 'Acara', 'Galeri', 'Konfirmasi', 'Ucapan']],
-      ['Mempelai', 'Nadia dan Rizky, pemilik undangan', 'Email dan kata sandi', ['Mengubah teks, foto, acara, rekening, dan musik', 'Mengunggah daftar tamu dan mengirim tautan pribadi lewat WhatsApp', 'Melihat dan mengunduh rekap konfirmasi', 'Menyembunyikan ucapan yang tidak pantas'], [], ['Ringkasan', 'Daftar tamu', 'Konfirmasi masuk', 'Atur undangan']],
+      ['Mempelai', 'Nadia dan Rizky, pemilik undangan', 'Email dan kata sandi', ['Mengubah teks, foto, acara, rekening, dan musik', 'Mengunggah daftar tamu dan mengirim tautan pribadi lewat WhatsApp', 'Melihat dan mengunduh rekap konfirmasi', 'Menyembunyikan ucapan yang tidak pantas'], ['Mengubah isi ucapan tamu, hanya menyembunyikannya', 'Melihat nama pengirim amplop bila tamu memilih anonim'], ['Ringkasan', 'Daftar tamu', 'Konfirmasi masuk', 'Atur undangan']],
       ['Penerima tamu', 'Keluarga yang menjaga meja tamu di hari H', 'Kode akses dari mempelai', ['Mencari nama tamu atau memindai kode QR dari undangan', 'Menandai tamu datang beserta jumlah orang'], ['Mengubah isi undangan', 'Membaca ucapan dan melihat rekening'], ['Buku tamu hari H']],
     ],
     fitur: [

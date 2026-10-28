@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Karyawan dan profesional usia 25–45 tahun yang rutin berdonasi',
       'Alumni dan komunitas yang ingin menggalang dana bersama',
+      'Penerima manfaat dan pendamping lapangan yang ingin melihat penyaluran dana',
     ],
     tujuan: [
       'Donatur bisa berdonasi dalam kurang dari 2 menit',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Donatur', 'Siapa pun yang ingin berdonasi', 'Tanpa akun; email dipakai untuk bukti donasi', ['Membaca kampanye dan laporan penyaluran', 'Berdonasi dengan nama atau tanpa nama', 'Memilih donasi rutin bulanan'], ['Melihat data donatur lain'], ['Beranda', 'Kampanye', 'Detail kampanye', 'Laporan', 'Tentang kami', 'Kontak']],
       ['Pengelola program', 'Relawan dan staf lapangan yayasan', 'Email dan kata sandi', ['Membuat dan memperbarui kampanye', 'Mencatat penyaluran beserta foto', 'Menulis kabar terbaru kampanye'], ['Mengubah data donasi', 'Menayangkan kampanye atau laporan tanpa persetujuan bendahara'], ['Kampanye saya', 'Catat penyaluran', 'Kabar terbaru']],
-      ['Bendahara', 'Bendahara yayasan', 'Email dan kata sandi dengan verifikasi dua langkah', ['Menyetujui kampanye dan laporan penyaluran sebelum tayang', 'Mencocokkan donasi transfer dengan mutasi rekening', 'Mengunduh rekap donasi'], [], ['Dashboard keuangan', 'Rekonsiliasi', 'Rekap donasi']],
+      ['Bendahara', 'Bendahara yayasan', 'Email dan kata sandi dengan verifikasi dua langkah', ['Menyetujui kampanye dan laporan penyaluran sebelum tayang', 'Mencocokkan donasi transfer dengan mutasi rekening', 'Mengunduh rekap donasi'], ['Mengubah jumlah donasi yang sudah tercatat, hanya membuat koreksi beralasan', 'Menayangkan kampanye tanpa data penerima manfaat'], ['Dashboard keuangan', 'Rekonsiliasi', 'Rekap donasi']],
     ],
     fitur: [
       ['Daftar dan detail kampanye', 'Donatur', 'P0', 'Kampanye dengan cerita, foto, target dana, dana terkumpul, dan sisa hari.', ['Progres dana diperbarui otomatis setelah pembayaran berhasil', 'Kampanye yang sudah mencapai target tetap bisa menerima donasi dengan keterangan "target tercapai"']],

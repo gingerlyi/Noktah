@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Calon pengantin usia 24–33 tahun yang merencanakan pernikahan 6–12 bulan ke depan',
       'Wedding organizer yang mencari fotografer rekanan',
+      'Keluarga dan perusahaan yang butuh foto acara, wisuda, atau produk',
     ],
     tujuan: [
       'Menampilkan karya terbaik dalam ukuran besar',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Calon klien', 'Pasangan yang akan menikah', 'Tanpa akun', ['Melihat album dan paket', 'Mengecek tanggal kosong', 'Mengirim permintaan jadwal'], ['Melihat album pribadi klien'], ['Beranda', 'Karya', 'Paket', 'Jadwal', 'Tentang', 'Kontak']],
       ['Klien', 'Pasangan yang sudah memesan', 'Tautan pribadi dan kata sandi album', ['Melihat jadwal dan sisa pembayaran', 'Memilih foto favorit untuk album cetak', 'Mengunduh foto dalam resolusi penuh'], ['Melihat album klien lain'], ['Pesanan saya', 'Galeri pribadi']],
-      ['Fotografer', 'Dira dan asistennya', 'Email dan kata sandi', ['Menerima atau menolak permintaan jadwal', 'Menandai tanggal terpesan', 'Mengunggah hasil foto ke galeri pribadi klien', 'Mencatat pembayaran'], [], ['Kalender', 'Permintaan masuk', 'Klien', 'Kelola album']],
+      ['Fotografer', 'Dira dan asistennya', 'Email dan kata sandi', ['Menerima atau menolak permintaan jadwal', 'Menandai tanggal terpesan', 'Mengunggah hasil foto ke galeri pribadi klien', 'Mencatat pembayaran'], ['Menunjukkan galeri pribadi klien kepada calon klien tanpa izin', 'Menghapus galeri klien sebelum masa simpan habis'], ['Kalender', 'Permintaan masuk', 'Klien', 'Kelola album']],
     ],
     fitur: [
       ['Galeri karya', 'Calon klien', 'P0', 'Album per acara dengan foto besar yang bisa diperbesar.', ['Foto dimuat bertahap dan memakai ukuran yang sesuai layar', 'Foto bisa digeser dengan jari di ponsel']],

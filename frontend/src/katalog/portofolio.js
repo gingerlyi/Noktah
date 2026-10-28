@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pendiri startup dan manajer produk yang mencari desainer lepas',
       'Perekrut dari perusahaan teknologi',
+      'Agensi desain yang mencari desainer kontrak untuk proyek jangka pendek',
     ],
     tujuan: [
       'Menampilkan empat sampai enam studi kasus terbaik',
@@ -37,7 +38,7 @@ export default {
     ],
     peran: [
       ['Pengunjung', 'Calon klien dan perekrut', 'Tanpa akun', ['Melihat karya dan studi kasus', 'Mengunduh CV', 'Mengirim pesan lewat formulir kontak'], ['Melihat pesan dari pengunjung lain'], ['Beranda', 'Karya', 'Studi kasus', 'Tentang', 'Kontak']],
-      ['Pemilik', 'Raka sendiri, satu-satunya pengelola situs', 'Email dan kata sandi dengan verifikasi dua langkah', ['Menambah, mengubah, dan mengurutkan proyek serta studi kasus', 'Mengganti berkas CV', 'Membaca dan menandai pesan masuk', 'Melihat jumlah kunjungan per studi kasus'], [], ['Kotak masuk', 'Kelola proyek', 'Statistik']],
+      ['Pemilik', 'Raka sendiri, satu-satunya pengelola situs', 'Email dan kata sandi dengan verifikasi dua langkah', ['Menambah, mengubah, dan mengurutkan proyek serta studi kasus', 'Mengganti berkas CV', 'Membaca dan menandai pesan masuk', 'Melihat jumlah kunjungan per studi kasus'], ['Melihat identitas pengunjung yang hanya membaca tanpa mengirim pesan'], ['Kotak masuk', 'Kelola proyek', 'Statistik']],
     ],
     fitur: [
       ['Galeri proyek', 'Pengunjung', 'P0', 'Kisi proyek dengan gambar sampul, judul, dan peran.', ['Tiap proyek menampilkan gambar sampul, judul, dan peran', 'Mengklik proyek membuka halaman studi kasusnya']],

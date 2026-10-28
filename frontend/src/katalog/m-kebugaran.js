@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pekerja kantoran usia 22–40 tahun yang jarang bergerak',
       'Pemula yang ingin olahraga di rumah tanpa alat',
+      'Orang yang baru pulih dari cedera ringan dan ingin mulai bergerak pelan',
     ],
     tujuan: [
       'Pengguna menandai kebiasaan setiap hari',
@@ -36,9 +37,9 @@ export default {
       'Pembayaran langsung ke pelatih di aplikasi',
     ],
     peran: [
-      ['Pengguna', 'Orang yang ingin rutin bergerak', 'Email atau akun Google', ['Mencatat kebiasaan', 'Mengikuti latihan terpandu', 'Melihat statistik', 'Mengikuti program dari pelatih'], [], ['Hari ini', 'Latihan', 'Statistik', 'Profil', 'Pemutar latihan']],
+      ['Pengguna', 'Orang yang ingin rutin bergerak', 'Email atau akun Google', ['Mencatat kebiasaan', 'Mengikuti latihan terpandu', 'Melihat statistik', 'Mengikuti program dari pelatih'], ['Melihat statistik pengguna lain', 'Mengikuti program pelatih tanpa bergabung lebih dulu'], ['Hari ini', 'Latihan', 'Statistik', 'Profil', 'Pemutar latihan']],
       ['Pelatih', 'Pelatih pribadi yang membimbing klien', 'Email dan kata sandi, mode pelatih', ['Membuat program latihan mingguan', 'Mengundang klien', 'Melihat catatan latihan klien yang sudah setuju berbagi'], ['Melihat data klien yang belum menyetujui'], ['Klien saya', 'Program latihan', 'Catatan klien']],
-      ['Admin konten', 'Tim konten Rutin', 'Email kantor dan kata sandi', ['Menambah video dan gambar gerakan', 'Menyusun latihan bawaan', 'Memverifikasi akun pelatih'], [], ['Kelola latihan', 'Verifikasi pelatih'], 'web'],
+      ['Admin konten', 'Tim konten Rutin', 'Email kantor dan kata sandi', ['Menambah video dan gambar gerakan', 'Menyusun latihan bawaan', 'Memverifikasi akun pelatih'], ['Melihat catatan kebiasaan pengguna', 'Mengubah program yang dibuat pelatih'], ['Kelola latihan', 'Verifikasi pelatih'], 'web'],
     ],
     fitur: [
       ['Daftar kebiasaan harian', 'Pengguna', 'P0', 'Kebiasaan buatan pengguna yang ditandai selesai tiap hari.', ['Kebiasaan bisa ditambah, diubah, dan dihapus', 'Tanda selesai bisa dibatalkan pada hari yang sama']],

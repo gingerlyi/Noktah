@@ -39,7 +39,7 @@ export default {
     ],
     peran: [
       ['Sales', 'Sales lapangan distributor', 'Nomor karyawan dan kata sandi, satu ponsel per akun', ['Melihat rute kunjungan hari ini', 'Check-in dan check-out di toko dengan lokasi dan foto', 'Mencatat pesanan dengan harga dan promo terbaru', 'Mencatat stok rak dan foto pajangan', 'Melihat pencapaian target'], ['Check-in di luar radius 100 m dari toko', 'Memberi diskon di atas batas tanpa persetujuan'], ['Rute hari ini', 'Kunjungan toko', 'Pesanan', 'Target saya', 'Daftar toko']],
-      ['Supervisor', 'Supervisor area dan manajer penjualan', 'Email kantor, kata sandi, dan kode OTP', ['Menyusun rute kunjungan mingguan', 'Menyetujui diskon khusus dari sales', 'Memantau kunjungan sales hari ini', 'Membaca laporan penjualan per sales, area, dan produk', 'Mengatur harga, promo, dan target'], [], ['Pantau lapangan', 'Rencana rute', 'Persetujuan diskon', 'Laporan penjualan', 'Harga dan promo'], 'web'],
+      ['Supervisor', 'Supervisor area dan manajer penjualan', 'Email kantor, kata sandi, dan kode OTP', ['Menyusun rute kunjungan mingguan', 'Menyetujui diskon khusus dari sales', 'Memantau kunjungan sales hari ini', 'Membaca laporan penjualan per sales, area, dan produk', 'Mengatur harga, promo, dan target'], ['Mengubah pesanan yang sudah dikirim ke gudang', 'Mengisi kunjungan atas nama sales'], ['Pantau lapangan', 'Rencana rute', 'Persetujuan diskon', 'Laporan penjualan', 'Harga dan promo'], 'web'],
     ],
     fitur: [
       ['Rute kunjungan harian', 'Sales', 'P0', 'Daftar toko yang harus dikunjungi hari ini, diurutkan menurut rute, dengan pesanan terakhir setiap toko.', ['Rute yang diubah supervisor langsung tampil di ponsel sales', 'Toko yang belum dikunjungi sampai pukul 16.00 ditandai']],

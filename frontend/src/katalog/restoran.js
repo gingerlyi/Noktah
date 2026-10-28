@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Keluarga yang mencari tempat makan bersama di akhir pekan',
       'Karyawan kantor sekitar yang memesan makan siang atau nasi kotak',
+      'Wisatawan yang mencari tempat makan lokal dari ponsel',
     ],
     tujuan: [
       'Pengunjung bisa melihat menu dan harga terbaru tanpa bertanya',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Pengunjung', 'Calon pelanggan dari Google Maps atau Instagram', 'Tanpa akun', ['Melihat menu, harga, dan jam buka', 'Mengirim reservasi meja', 'Memesan antar dan nasi kotak lewat WhatsApp'], ['Melihat reservasi orang lain'], ['Beranda', 'Menu', 'Reservasi', 'Nasi kotak', 'Lokasi']],
       ['Kasir', 'Kasir yang bertugas di restoran', 'PIN 6 digit di tablet kasir', ['Menerima, menolak, atau mengubah jam reservasi', 'Menandai menu habis untuk hari ini', 'Mencatat pesanan nasi kotak dari WhatsApp'], ['Mengubah harga menu', 'Melihat laporan bulanan'], ['Reservasi hari ini', 'Menu habis', 'Pesanan nasi kotak']],
-      ['Pemilik', 'Pemilik Dapur Ranah', 'Email dan kata sandi', ['Semua yang bisa dilakukan kasir', 'Mengubah menu, foto, dan harga', 'Mengatur jam buka dan hari libur', 'Melihat laporan reservasi dan nasi kotak', 'Membuat akun kasir'], [], ['Dashboard pemilik', 'Kelola menu', 'Jam buka', 'Laporan', 'Akun kasir']],
+      ['Pemilik', 'Pemilik Dapur Ranah', 'Email dan kata sandi', ['Semua yang bisa dilakukan kasir', 'Mengubah menu, foto, dan harga', 'Mengatur jam buka dan hari libur', 'Melihat laporan reservasi dan nasi kotak', 'Membuat akun kasir'], ['Menghapus reservasi yang sudah dibayar uang mukanya tanpa mengembalikan dana'], ['Dashboard pemilik', 'Kelola menu', 'Jam buka', 'Laporan', 'Akun kasir']],
     ],
     fitur: [
       ['Menu dengan harga', 'Pengunjung', 'P0', 'Daftar menu per kategori dengan foto, keterangan singkat, dan harga yang bisa diubah pemilik.', ['Menu dikelompokkan per kategori, misalnya lauk, sayur, dan minuman', 'Menu yang sedang habis ditandai "habis hari ini"']],

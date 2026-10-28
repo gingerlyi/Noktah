@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Mahasiswa dan lulusan baru yang ingin bekerja sebagai developer',
       'Karyawan yang ingin pindah karier ke bidang teknologi',
+      'Guru SMK dan dosen yang mencari materi pendamping untuk muridnya',
     ],
     tujuan: [
       'Memberi jalur belajar yang berurutan',
@@ -40,7 +41,7 @@ export default {
       ['Pengunjung', 'Calon peserta yang melihat-lihat kelas', 'Tanpa akun', ['Melihat katalog, silabus, dan harga', 'Menonton materi pratinjau gratis'], ['Membuka materi berbayar'], ['Beranda', 'Kelas', 'Detail kelas', 'Harga']],
       ['Peserta', 'Pelajar yang sudah mendaftar', 'Email dan kata sandi, atau akun Google', ['Membeli kelas', 'Menonton materi dan mengerjakan kuis kelas yang dibeli', 'Melihat progres dan mengunduh sertifikat'], ['Membuka kelas yang belum dibeli'], ['Kelas saya', 'Belajar', 'Akun']],
       ['Pengajar', 'Mentor yang membuat materi kelas', 'Email dan kata sandi', ['Mengunggah video dan menyusun silabus kelasnya', 'Membuat kuis', 'Melihat jumlah peserta dan nilai kuis kelasnya'], ['Mengubah harga kelas', 'Melihat data pembayaran'], ['Kelas yang saya ajar', 'Editor materi']],
-      ['Admin', 'Tim operasional Kelas Kode', 'Email dan kata sandi', ['Memeriksa dan menerbitkan kelas', 'Mengatur harga dan kupon', 'Memeriksa pembayaran', 'Membuat akun pengajar'], [], ['Dashboard admin', 'Pembayaran', 'Kelola kelas', 'Pengguna']],
+      ['Admin', 'Tim operasional Kelas Kode', 'Email dan kata sandi', ['Memeriksa dan menerbitkan kelas', 'Mengatur harga dan kupon', 'Memeriksa pembayaran', 'Membuat akun pengajar'], ['Mengubah isi video dan materi tanpa persetujuan pengajarnya', 'Melihat jawaban kuis peserta satu per satu'], ['Dashboard admin', 'Pembayaran', 'Kelola kelas', 'Pengguna']],
     ],
     fitur: [
       ['Katalog kelas', 'Pengunjung', 'P0', 'Daftar kelas dengan tingkat, jumlah materi, dan durasi.', ['Tiap kelas menampilkan tingkat, jumlah materi, dan durasi']],

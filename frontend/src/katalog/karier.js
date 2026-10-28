@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pencari kerja usia 18–35 tahun lulusan SMA, SMK, dan D3',
       'Pemilik usaha kecil yang merekrut 1–10 orang sekaligus',
+      'Lulusan baru dari luar kota yang mencari kerja di kota ini',
     ],
     tujuan: [
       'Pencari kerja menemukan lowongan sesuai lokasi dan keahlian',
@@ -40,7 +41,7 @@ export default {
       ['Pengunjung', 'Pencari kerja yang belum masuk', 'Tanpa akun', ['Mencari dan membaca lowongan', 'Melihat profil perusahaan', 'Melaporkan lowongan yang mencurigakan'], ['Melamar sebelum membuat profil'], ['Beranda', 'Cari lowongan', 'Detail lowongan', 'Profil perusahaan']],
       ['Pelamar', 'Pencari kerja yang sudah membuat profil', 'Nomor WhatsApp dan kode OTP', ['Mengisi profil dan CV sekali', 'Melamar dengan satu klik', 'Melihat status lamaran', 'Mengatur notifikasi lowongan'], ['Melihat data pelamar lain'], ['Profil pelamar', 'Lamaran saya']],
       ['Pemberi kerja', 'Pemilik usaha atau staf HR', 'Email dan kata sandi', ['Memasang dan menutup lowongan', 'Melihat pelamar dan mengubah status lamaran', 'Mengubah profil perusahaan'], ['Melihat pelamar lowongan perusahaan lain'], ['Pasang lowongan', 'Dashboard pemberi kerja', 'Pelamar']],
-      ['Admin', 'Moderator Loker Kita', 'Email dan kata sandi', ['Memeriksa lowongan sebelum tayang', 'Menindaklanjuti laporan lowongan mencurigakan', 'Memverifikasi perusahaan'], [], ['Antrean moderasi', 'Laporan lowongan', 'Verifikasi perusahaan']],
+      ['Admin', 'Moderator Loker Kita', 'Email dan kata sandi', ['Memeriksa lowongan sebelum tayang', 'Menindaklanjuti laporan lowongan mencurigakan', 'Memverifikasi perusahaan'], ['Membaca CV pelamar pada lowongan perusahaan lain', 'Mengubah isi lowongan, hanya menolak dengan alasan'], ['Antrean moderasi', 'Laporan lowongan', 'Verifikasi perusahaan']],
     ],
     fitur: [
       ['Pencarian lowongan', 'Pengunjung', 'P0', 'Cari berdasarkan posisi, kecamatan, jenis kerja, dan kisaran gaji.', ['Filter bisa dipakai bersamaan dan hasil diurutkan dari yang terbaru', 'Lowongan yang sudah lewat batas waktu tidak tampil']],

@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pasangan dan keluarga kecil yang berlibur ke Bali',
       'Tamu mancanegara yang mencari penginapan tenang di Ubud',
+      'Pekerja jarak jauh yang mencari penginapan tenang untuk tinggal mingguan',
     ],
     tujuan: [
       'Menaikkan porsi pemesanan langsung',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Tamu', 'Wisatawan domestik dan mancanegara', 'Tanpa akun; tautan pemesanan dikirim ke email', ['Melihat villa, fasilitas, dan harga', 'Memesan dan membayar', 'Mengubah tanggal atau membatalkan sesuai kebijakan lewat tautan di email'], ['Melihat pemesanan tamu lain'], ['Beranda', 'Villa', 'Fasilitas', 'Galeri', 'Pesan', 'Kontak', 'Pemesanan saya']],
       ['Resepsionis', 'Staf front office villa', 'Email dan kata sandi', ['Melihat kedatangan dan kepulangan hari ini', 'Check-in dan check-out tamu', 'Mencatat pemesanan dari telepon atau WhatsApp'], ['Mengubah tarif', 'Membuat kode promo'], ['Kedatangan hari ini', 'Kalender villa', 'Pemesanan']],
-      ['Pemilik', 'Pemilik villa', 'Email dan kata sandi', ['Mengatur tarif per musim dan menutup tanggal', 'Membuat kode promo', 'Melihat okupansi dan pendapatan', 'Membuat akun resepsionis'], [], ['Dashboard pemilik', 'Tarif dan ketersediaan', 'Kode promo', 'Laporan']],
+      ['Pemilik', 'Pemilik villa', 'Email dan kata sandi', ['Mengatur tarif per musim dan menutup tanggal', 'Membuat kode promo', 'Melihat okupansi dan pendapatan', 'Membuat akun resepsionis'], ['Mengubah tarif pesanan yang sudah dibayar', 'Melihat nomor kartu pembayaran tamu'], ['Dashboard pemilik', 'Tarif dan ketersediaan', 'Kode promo', 'Laporan']],
     ],
     fitur: [
       ['Pilihan villa', 'Tamu', 'P0', 'Tiap tipe villa dengan foto, luas, kapasitas, fasilitas, dan harga per malam.', ['Harga menyesuaikan tanggal, termasuk tarif akhir pekan dan musim liburan', 'Tipe villa yang penuh pada tanggal pilihan ditandai "penuh"']],

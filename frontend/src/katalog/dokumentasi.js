@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Pemilik warung dan UMKM yang baru memakai Catatku',
       'Karyawan yang diberi akses mencatat penjualan',
+      'Tim dukungan pelanggan yang menautkan artikel saat menjawab pertanyaan',
     ],
     tujuan: [
       'Pengguna menemukan jawaban sendiri dalam kurang dari 2 menit',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Pengguna', 'Pengguna aplikasi Catatku yang butuh bantuan', 'Tanpa akun; formulir bantuan memakai email', ['Mencari dan membaca artikel', 'Menilai artikel membantu atau tidak', 'Mengirim formulir bantuan dengan lampiran'], ['Melihat permintaan bantuan orang lain'], ['Beranda', 'Topik', 'Artikel', 'Hasil pencarian', 'Hubungi kami']],
       ['Penulis bantuan', 'Anggota tim dukungan', 'Email kantor dan kata sandi', ['Menulis dan memperbarui artikel', 'Melihat artikel yang dinilai tidak membantu', 'Menjawab permintaan bantuan'], ['Menghapus artikel yang sudah terbit', 'Menerbitkan artikel baru tanpa tinjauan'], ['Artikel saya', 'Editor artikel', 'Permintaan bantuan']],
-      ['Kepala dukungan', 'Kepala tim dukungan', 'Email kantor dan kata sandi', ['Meninjau dan menerbitkan artikel', 'Mengatur topik', 'Melihat kata pencarian yang tidak menemukan hasil', 'Membagi permintaan bantuan ke anggota tim'], [], ['Dashboard bantuan', 'Kelola topik', 'Kata pencarian']],
+      ['Kepala dukungan', 'Kepala tim dukungan', 'Email kantor dan kata sandi', ['Meninjau dan menerbitkan artikel', 'Mengatur topik', 'Melihat kata pencarian yang tidak menemukan hasil', 'Membagi permintaan bantuan ke anggota tim'], ['Melihat data akun pelanggan di luar isi permintaan bantuan', 'Menghapus artikel lama, hanya mengarsipkan dan mengalihkannya'], ['Dashboard bantuan', 'Kelola topik', 'Kata pencarian']],
     ],
     fitur: [
       ['Pencarian artikel', 'Pengguna', 'P0', 'Pencarian judul dan isi dengan saran saat mengetik.', ['Saran muncul setelah 3 huruf diketik', 'Pencarian tanpa hasil menampilkan tautan ke formulir bantuan']],

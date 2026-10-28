@@ -19,6 +19,7 @@ export default {
     audiens: [
       'Pekerja dan mahasiswa usia 20–35 tahun yang sering cemas atau sulit tidur',
       'Pemula yang belum pernah bermeditasi',
+      'Pekerja shift malam yang butuh rutinitas tidur yang lebih teratur',
     ],
     tujuan: [
       'Pengguna menyelesaikan sesi pertama dalam 5 menit setelah memasang aplikasi',
@@ -36,7 +37,7 @@ export default {
       'Integrasi jam tangan pintar',
     ],
     peran: [
-      ['Pengguna', 'Orang yang ingin tidur dan bernapas lebih tenang', 'Email, akun Google, atau akun Apple', ['Mendengar sesi', 'Menulis jurnal suasana hati', 'Mengunduh sesi', 'Berlangganan'], [], ['Hari ini', 'Jelajahi', 'Jurnal', 'Profil', 'Pemutar']],
+      ['Pengguna', 'Orang yang ingin tidur dan bernapas lebih tenang', 'Email, akun Google, atau akun Apple', ['Mendengar sesi', 'Menulis jurnal suasana hati', 'Mengunduh sesi', 'Berlangganan'], ['Membuka sesi khusus pelanggan tanpa berlangganan', 'Melihat jurnal pengguna lain'], ['Hari ini', 'Jelajahi', 'Jurnal', 'Profil', 'Pemutar']],
       ['Pemandu', 'Pemandu meditasi yang merekam sesi', 'Email dan kata sandi', ['Mengunggah rekaman sesi', 'Menulis deskripsi dan tema', 'Melihat jumlah pendengar sesinya'], ['Membaca jurnal pengguna'], ['Sesi saya', 'Unggah sesi'], 'web'],
       ['Admin konten', 'Tim konten Tenang', 'Email kantor dan kata sandi', ['Meninjau dan menerbitkan sesi', 'Menyusun koleksi dan tema harian', 'Mengatur harga langganan'], ['Membaca jurnal pengguna'], ['Tinjau sesi', 'Koleksi', 'Langganan'], 'web'],
     ],

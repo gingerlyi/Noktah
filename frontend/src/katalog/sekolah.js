@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Orang tua usia 28–40 tahun yang mencari SD untuk anaknya',
       'Wali murid yang ingin mengikuti berita dan kegiatan sekolah',
+      'Alumni yang ingin tetap terhubung dan ikut kegiatan sekolah',
     ],
     tujuan: [
       'Orang tua mendapat gambaran lengkap tentang sekolah',
@@ -40,7 +41,7 @@ export default {
       ['Pengunjung', 'Calon orang tua murid', 'Tanpa akun', ['Melihat profil, program, berita, dan galeri', 'Membaca alur, syarat, dan biaya PPDB'], ['Melihat data pendaftar'], ['Beranda', 'Profil', 'Program', 'Berita', 'Galeri', 'PPDB', 'Kontak']],
       ['Pendaftar', 'Orang tua yang mendaftarkan anak', 'Nomor WhatsApp dan kode OTP', ['Mengisi formulir dan mengunggah dokumen', 'Melihat status pendaftaran dan jadwal observasi', 'Mengunduh bukti pendaftaran'], ['Mengubah data setelah dinyatakan lengkap', 'Melihat data pendaftar lain'], ['Formulir pendaftaran', 'Status pendaftaran']],
       ['Panitia PPDB', 'Guru dan staf tata usaha yang ditugaskan', 'Email dan kata sandi', ['Memeriksa dokumen dan menandai lengkap atau kurang', 'Menjadwalkan observasi anak', 'Mengumumkan hasil per gelombang'], ['Mengubah biaya dan kuota'], ['Daftar pendaftar', 'Jadwal observasi', 'Pengumuman hasil']],
-      ['Admin sekolah', 'Kepala tata usaha', 'Email dan kata sandi', ['Mengatur gelombang, kuota, dan biaya PPDB', 'Menerbitkan berita dan album galeri', 'Membuat akun panitia'], [], ['Dashboard PPDB', 'Berita dan galeri', 'Pengaturan PPDB']],
+      ['Admin sekolah', 'Kepala tata usaha', 'Email dan kata sandi', ['Mengatur gelombang, kuota, dan biaya PPDB', 'Menerbitkan berita dan album galeri', 'Membuat akun panitia'], ['Mengubah hasil seleksi yang sudah diumumkan', 'Mengunduh dokumen pendaftar di luar keperluan PPDB'], ['Dashboard PPDB', 'Berita dan galeri', 'Pengaturan PPDB']],
     ],
     fitur: [
       ['Profil dan program sekolah', 'Pengunjung', 'P0', 'Visi, kurikulum, ekstrakurikuler, fasilitas, dan profil guru.', ['Setiap program punya foto dan penjelasan singkat', 'Profil guru menampilkan nama, foto, dan mata pelajaran']],

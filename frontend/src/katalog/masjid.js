@@ -20,6 +20,7 @@ export default {
     audiens: [
       'Jamaah dan warga perumahan dari berbagai usia',
       'Donatur dari luar perumahan yang ingin berinfak',
+      'Pengurus remaja masjid yang mengatur kegiatan dan pengumuman',
     ],
     tujuan: [
       'Jamaah tahu jadwal salat dan kajian setiap hari',
@@ -39,7 +40,7 @@ export default {
     peran: [
       ['Jamaah', 'Warga perumahan dan jamaah masjid', 'Tanpa akun', ['Melihat jadwal salat dan kajian', 'Berinfak online', 'Membaca laporan kas dan pengumuman', 'Mengajukan peminjaman aula'], ['Melihat data pemberi infak'], ['Beranda', 'Jadwal salat', 'Kajian', 'Infak', 'Laporan kas', 'Kontak']],
       ['Pengurus', 'Takmir yang mengurus kegiatan', 'Email dan kata sandi', ['Menambah kajian dan pengumuman', 'Mengunggah foto kegiatan', 'Menyetujui peminjaman aula'], ['Mencatat transaksi kas'], ['Kelola kajian', 'Pengumuman', 'Peminjaman aula']],
-      ['Bendahara', 'Bendahara masjid', 'Email dan kata sandi', ['Mencatat pemasukan dan pengeluaran kas', 'Mencocokkan infak online', 'Menerbitkan laporan kas mingguan'], [], ['Kas masjid', 'Infak masuk', 'Laporan mingguan']],
+      ['Bendahara', 'Bendahara masjid', 'Email dan kata sandi', ['Mencatat pemasukan dan pengeluaran kas', 'Mencocokkan infak online', 'Menerbitkan laporan kas mingguan'], ['Menghapus transaksi kas, hanya membuat koreksi beralasan', 'Menerbitkan laporan tanpa saldo awal dan akhir'], ['Kas masjid', 'Infak masuk', 'Laporan mingguan']],
     ],
     fitur: [
       ['Jadwal salat harian', 'Jamaah', 'P0', 'Waktu salat lima waktu untuk lokasi masjid, dengan penanda salat berikutnya.', ['Jadwal dihitung otomatis untuk koordinat masjid', 'Waktu salat berikutnya ditandai berbeda']],
