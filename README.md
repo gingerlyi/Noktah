@@ -179,7 +179,7 @@ Contoh untuk VPS Ubuntu 22.04/24.04 (minimal 1 GB RAM) dengan domain sendiri, me
    ```
 7. Buka `https://noktah.contoh.id`, lalu masuk sebagai admin di `/admin/masuk`.
 
-**Memperbarui:** salin file yang baru (jangan timpa `.env`), lalu `sudo docker compose up -d --build`. Migrasi database berjalan sendiri.
+**Memperbarui:** dari laptop (PowerShell, di folder project) jalankan `.\deploy.ps1 -Server user@alamat-server`. Skrip mengemas project tanpa `node_modules`, `dist`, dan `.env`, mengunggahnya, lalu menjalankan `docker compose up -d --build` di server. `.env` dan data database di server tidak tersentuh, dan migrasi database berjalan sendiri.
 
 **Cadangan harian** (crontab root, `sudo crontab -e`):
 ```
