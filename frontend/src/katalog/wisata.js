@@ -59,6 +59,7 @@ export default {
       ['Memesan open trip Labuan Bajo', 'Calon peserta', ['Membuka Paket trip dan memilih Labuan Bajo 3H2M', 'Memilih tanggal yang masih ada kursinya', 'Mengisi data pemesan dan jumlah peserta', 'Membayar uang muka 30%', 'Menerima email berisi nomor pemesanan']],
       ['Melunasi dan melengkapi data', 'Peserta', ['Membuka Pesanan saya dari tautan di email', 'Mengisi data tiap anggota rombongan', 'Melunasi pembayaran sebelum H-14', 'Mengunduh rencana perjalanan']],
       ['Memimpin keberangkatan', 'Pemandu', ['Membuka Trip saya di pagi keberangkatan', 'Membuka Absen peserta di titik kumpul', 'Menandai peserta yang sudah tiba', 'Mengirim kabar ke peserta yang belum datang']],
+      ['Membuka jadwal keberangkatan baru', 'Admin', ['Membuka Keberangkatan dan memilih paket Labuan Bajo', 'Menambah tanggal keberangkatan dengan kuota 12 peserta dan harganya', 'Menugaskan pemandu untuk keberangkatan itu', 'Mengonfirmasi pembayaran uang muka yang masuk di halaman Pembayaran']],
     ],
     data: [
       'Paket: nama, durasi, titik kumpul, harga, sudah termasuk, rencana per hari, foto',

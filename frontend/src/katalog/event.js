@@ -60,6 +60,7 @@ export default {
       ['Membeli tiket reguler', 'Pengunjung', ['Membaca jadwal dan profil pembicara', 'Memilih tiket Reguler di halaman Tiket', 'Mengisi data peserta dan kode diskon komunitas', 'Membayar lewat QRIS', 'Menerima e-tiket di email']],
       ['Hadir di hari pertama', 'Peserta', ['Membuka Tiket saya dari tautan di email', 'Menunjukkan kode QR di pintu masuk', 'Menerima tanda pengenal', 'Membuka Jadwal pribadi untuk sesi berikutnya']],
       ['Registrasi peserta pagi hari', 'Panitia', ['Masuk ke halaman Registrasi dengan akun panitia', 'Memindai kode QR peserta', 'Mencetak tanda pengenal', 'Mencari nama peserta yang lupa membawa tiket']],
+      ['Membuka penjualan tiket early bird', 'Admin acara', ['Membuka Tiket dan diskon lalu membuat jenis tiket Early bird', 'Mengisi harga, kuota 200 tiket, dan masa jual dua minggu', 'Membuat kode diskon untuk kampus mitra dengan kuota 50 pemakaian', 'Memantau penjualan harian di Dashboard penjualan']],
     ],
     data: [
       'Sesi: judul, deskripsi, pembicara, hari, jam mulai, jam selesai, ruang',

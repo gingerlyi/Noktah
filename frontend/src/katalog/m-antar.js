@@ -59,6 +59,7 @@ export default {
       ['Memesan makan siang', 'Pelanggan', ['Membuka Beranda dan memilih warung terdekat', 'Menambah nasi goreng dengan catatan tidak pedas', 'Membayar lewat e-wallet', 'Melacak kurir di peta sampai tiba', 'Memberi rating warung dan kurir']],
       ['Menyiapkan pesanan', 'Warung', ['Mendengar bunyi pesanan baru di Pesanan warung', 'Menerima pesanan', 'Memasak lalu menandai siap diambil', 'Menyerahkan ke kurir yang datang']],
       ['Mengantar pesanan', 'Kurir', ['Menerima tawaran antar', 'Menuju warung dengan navigasi', 'Mengambil makanan dan menandai sudah diambil', 'Mengantar ke pelanggan dan menandai selesai']],
+      ['Menangani pesanan yang terlambat', 'Admin', ['Membuka Pantau pesanan dan menyaring pesanan terlambat', 'Menghubungi warung atau kurir lewat kontak yang tertera', 'Mengabari pelanggan perkiraan waktu yang baru', 'Mencatat penyelesaian di Komplain bila pelanggan mengajukan keluhan']],
     ],
     data: [
       'Pengguna: nama, nomor ponsel, peran (pelanggan, kurir, warung), alamat tersimpan',

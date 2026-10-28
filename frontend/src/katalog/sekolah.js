@@ -58,6 +58,7 @@ export default {
       ['Mendaftarkan anak di gelombang pertama', 'Pendaftar', ['Membaca alur dan biaya di halaman PPDB', 'Masuk dengan nomor WhatsApp', 'Mengisi data anak dan orang tua', 'Mengunggah akta kelahiran dan kartu keluarga', 'Menerima nomor pendaftaran dan memantau status']],
       ['Memeriksa dokumen pendaftar', 'Panitia PPDB', ['Membuka Daftar pendaftar dan menyaring status baru', 'Memeriksa dokumen satu per satu', 'Menandai lengkap, atau kurang dengan catatan', 'Membagi jadwal observasi untuk pendaftar yang lengkap']],
       ['Menerbitkan berita kegiatan', 'Admin sekolah', ['Membuka Berita dan galeri', 'Menulis berita dan mengunggah foto', 'Menerbitkan berita ke halaman Berita']],
+      ['Membandingkan sekolah sebelum PPDB', 'Pengunjung', ['Membuka Profil dan Program untuk membaca kurikulum dan ekstrakurikuler', 'Melihat galeri kegiatan dan tur sekolah virtual', 'Membaca syarat dokumen, biaya, dan tanggal penting di halaman PPDB', 'Menghubungi sekolah lewat halaman Kontak bila ada pertanyaan']],
     ],
     data: [
       'Pendaftar: nomor pendaftaran, nama anak, tanggal lahir, nama orang tua, nomor WhatsApp, gelombang, status (baru, lengkap, kurang, observasi, diterima, cadangan), catatan',

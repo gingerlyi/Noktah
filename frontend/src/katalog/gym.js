@@ -58,6 +58,7 @@ export default {
       ['Ikut kelas percobaan', 'Pengunjung', ['Melihat Jadwal kelas dan memilih yoga pagi', 'Mengisi nama dan nomor ponsel untuk kelas percobaan', 'Menerima pengingat 2 jam sebelum kelas', 'Datang ke kelas dan memilih paket di halaman Keanggotaan']],
       ['Memesan kelas minggu depan', 'Anggota', ['Masuk dengan nomor ponsel', 'Membuka Jadwal kelas dan memilih HIIT hari Senin', 'Memesan tempat dan melihat sisa kuota berkurang', 'Membatalkan bila berhalangan, paling lambat 2 jam sebelum kelas']],
       ['Mengajar dan mengabsen', 'Pelatih', ['Membuka Kelas yang saya ajar', 'Melihat daftar peserta kelas berikutnya', 'Menandai peserta yang hadir setelah kelas dimulai']],
+      ['Menyusun jadwal kelas minggu depan', 'Manajer studio', ['Membuka Kelola jadwal dan menyalin jadwal minggu ini', 'Mengganti pelatih kelas yang cuti', 'Menambah kuota kelas yang selalu penuh', 'Memeriksa paket anggota yang akan habis di Data anggota']],
     ],
     data: [
       'Kelas: nama, tingkat, deskripsi',

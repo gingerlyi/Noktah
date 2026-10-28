@@ -57,6 +57,7 @@ export default {
       ['Liburan dua hari di Jogja', 'Wisatawan', ['Menjelajahi destinasi budaya di sekitar Kraton', 'Menyusun rencana hari pertama berisi tiga destinasi', 'Membeli tiket masuk Taman Sari', 'Mengikuti rute dari Peta']],
       ['Membuka loket pagi', 'Petugas loket', ['Memasukkan kode akses destinasi', 'Memindai tiket pengunjung', 'Melihat jumlah pengunjung hari ini']],
       ['Menutup penjualan saat upacara adat', 'Pengelola destinasi', ['Membuka Kuota dan harga', 'Memilih tanggal upacara', 'Menutup penjualan tiket di tanggal itu', 'Menulis pengumuman di profil destinasi']],
+      ['Memperbarui jam buka dari laporan pengguna', 'Kurator', ['Membuka Laporan pengguna dan memilih laporan jam buka yang berubah', 'Memastikan jam buka terbaru ke pengelola destinasi', 'Memperbarui data destinasi di Kelola destinasi', 'Menandai laporan selesai']],
     ],
     data: [
       'Pengguna: nama, email',

@@ -59,6 +59,7 @@ export default {
       ['Memesan jadwal scaling', 'Pasien', ['Membuka halaman Reservasi', 'Memilih layanan scaling, dokter, tanggal, dan jam yang kosong', 'Mengisi nama, nomor WhatsApp, dan keluhan singkat', 'Menerima konfirmasi lewat WhatsApp berisi jadwal dan alamat', 'Menerima pengingat sehari sebelum jadwal']],
       ['Menyambut pasien di meja depan', 'Resepsionis', ['Membuka Jadwal hari ini', 'Mencari nama pasien yang datang', 'Menandai pasien hadir', 'Mencatat pasien yang datang tanpa reservasi di jam yang kosong']],
       ['Menutup jadwal saat dokter cuti', 'Admin klinik', ['Membuka Jam praktik', 'Memilih dokter dan tanggal cuti', 'Menutup semua jam di tanggal itu', 'Menghubungi pasien yang terlanjur memesan dari daftar yang muncul']],
+      ['Menyiapkan tindakan hari ini', 'Dokter', ['Membuka Jadwal saya sebelum praktik dimulai', 'Membaca keluhan singkat tiap pasien dan layanan yang dipesan', 'Memeriksa pasien sesuai urutan jadwal', 'Menandai tindakan selesai sehingga resepsionis bisa memproses pembayaran']],
     ],
     data: [
       'Layanan: nama, durasi, harga',

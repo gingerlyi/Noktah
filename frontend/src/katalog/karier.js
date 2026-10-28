@@ -58,6 +58,7 @@ export default {
       ['Melamar kerja sebagai barista', 'Pelamar', ['Mencari "barista" di Semarang Tengah', 'Membaca syarat dan gaji di Detail lowongan', 'Masuk dengan nomor WhatsApp dan melengkapi profil', 'Menekan "Lamar" dan melihat lamarannya di Lamaran saya']],
       ['Merekrut kasir baru', 'Pemberi kerja', ['Membuka Pasang lowongan dan mengisi posisi, gaji, dan syarat', 'Menunggu lowongan diperiksa admin', 'Membuka daftar Pelamar dan membaca profil', 'Memanggil wawancara dua pelamar terbaik']],
       ['Memeriksa lowongan baru', 'Admin', ['Membuka Antrean moderasi', 'Membaca isi lowongan dan profil perusahaan', 'Menayangkan lowongan atau menolaknya dengan alasan']],
+      ['Mencari lowongan dekat rumah', 'Pengunjung', ['Mengetik posisi \'kasir\' di Cari lowongan', 'Menyaring kecamatan dan kisaran gaji', 'Membuka detail lowongan dan profil perusahaannya', 'Masuk atau mendaftar akun untuk melamar']],
     ],
     data: [
       'Lowongan: posisi, perusahaan, kecamatan, jenis kerja, gaji minimum, gaji maksimum, deskripsi, syarat, batas lamaran, status (menunggu, tayang, ditolak, ditutup)',

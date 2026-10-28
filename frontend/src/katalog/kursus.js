@@ -60,6 +60,7 @@ export default {
       ['Membeli kelas pertama', 'Pengunjung', ['Membuka Kelas dan memilih tingkat pemula', 'Menonton materi pratinjau gratis di Detail kelas', 'Mendaftar dengan akun Google', 'Membayar lewat QRIS', 'Diarahkan ke halaman Belajar untuk materi pertama']],
       ['Belajar sampai dapat sertifikat', 'Peserta', ['Membuka Kelas saya dan menekan "Lanjutkan"', 'Menonton materi dan menandai selesai', 'Mengerjakan kuis di akhir bab', 'Mengunduh sertifikat setelah semua materi selesai']],
       ['Menyiapkan kelas baru', 'Pengajar', ['Membuat kelas di Kelas yang saya ajar', 'Mengunggah video dan menyusun bab di Editor materi', 'Membuat kuis untuk tiap bab', 'Mengajukan kelas ke admin untuk diperiksa dan diberi harga']],
+      ['Menerbitkan kelas baru dari pengajar', 'Admin', ['Membuka Kelola kelas dan memilih kelas berstatus Diajukan', 'Memeriksa video, materi, dan kuis tiap bab', 'Mengisi harga dan membuat kupon peluncuran', 'Menerbitkan kelas lalu memastikan kelas tampil di katalog']],
     ],
     data: [
       'Kelas: judul, deskripsi, tingkat, harga, pengajar, status (draf, diajukan, terbit)',
