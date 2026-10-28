@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { api } from '../lib/api.js';
 import { libraryItems, useApp } from '../lib/app.jsx';
 import { BLOK, GAYA, PLATFORM, T } from '../lib/catalog.js';
-import { alurAktif, checkPrd, fiturAktif, fromTemplate, genMd, halamanPeran, isMobile, lines, namaPeran, peranAktif } from '../lib/prd.js';
+import { alurAktif, briefDesain, checkPrd, fiturAktif, fromTemplate, genMd, halamanPeran, isMobile, lines, namaPeran, peranAktif, rasio } from '../lib/prd.js';
 import { bentukPeran, mockHTML } from '../lib/mock.js';
 import { ResultPanel, checkSummary, useCopyPrd } from '../components/Editor.jsx';
 import { Library } from '../components/Library.jsx';
@@ -34,7 +34,8 @@ export default function LibraryPage() {
 // Ringkasan isi PRD dan penjelasan desainnya, di atas dokumen pada halaman detail.
 function PrdInfo({ state }) {
   const t = T[state.tpl];
-  const g = GAYA[state.gaya] || GAYA.bersih;
+  const b = briefDesain(state);
+  const g = b.g;
   const mobile = t.platform === 'mobile';
   const unit = mobile ? 'layar' : 'halaman';
   const roles = peranAktif(state);
@@ -117,7 +118,7 @@ function PrdInfo({ state }) {
         </dl>
       </div>
       <div className="sheet info-card">
-        <h2>Desain dan kecocokan</h2>
+        <h2>Design brief</h2>
         <div className="info-style">
           <GayaSwatch gaya={state.gaya} big />
           <div>
@@ -126,7 +127,46 @@ function PrdInfo({ state }) {
           </div>
           <span className="info-color" style={{ '--c': state.warna }} title={'Warna merek ' + state.warna} />
         </div>
-        {t.desain && <p>{t.desain}</p>}
+        {b.kesan && <p>{b.kesan}</p>}
+        <dl className="info-list">
+          <div>
+            <dt>Warna</dt>
+            <dd>
+              <ul className="info-pal">
+                <li>
+                  <i style={{ '--c': state.warna }} />
+                  Merek {state.warna}
+                </li>
+                <li>
+                  <i style={{ '--c': g.latar }} />
+                  Latar {g.latar}
+                </li>
+                <li>
+                  <i style={{ '--c': g.teks }} />
+                  Teks {g.teks}
+                </li>
+              </ul>
+              Teks {b.diAtas.nama} di tombol: kontras {rasio(b.diAtas.k)}. Warna merek sebagai teks: {rasio(b.teks)}
+              {b.teks < 4.5 ? ', jadi tautan memakai versi yang lebih ' + (b.latarGelap ? 'terang.' : 'gelap.') : '.'}
+            </dd>
+          </div>
+          <div>
+            <dt>Huruf</dt>
+            <dd>{g.huruf}</dd>
+          </div>
+          <div>
+            <dt>Gambar dan ikon</dt>
+            <dd>{g.gambar}</dd>
+          </div>
+          <div>
+            <dt>Hindari</dt>
+            <dd>{g.hindari}</dd>
+          </div>
+          <div>
+            <dt>Nada bahasa</dt>
+            <dd>{g.nada}</dd>
+          </div>
+        </dl>
         {t.cocok && (
           <>
             <h3>PRD ini cocok untuk</h3>

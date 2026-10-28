@@ -130,7 +130,7 @@ export const SECTIONS=[
  {n:10,t:'Susunan halaman utama',tm:'Susunan layar utama',d:'Urutan bagian di halaman pertama, ditambah isi halaman pertama peran lain.'},
  {n:11,t:'Model data',d:'Entitas dan atributnya, satu entitas per butir.'},
  {n:12,t:'Kebutuhan non-fungsional',d:'Satu butir per kebutuhan dengan ID NFR.'},
- {n:13,t:'Desain',d:'Gaya, warna merek, teks tombol utama, dan nada bahasa.'},
+ {n:13,t:'Desain',d:'Design brief: kesan yang dituju, gaya visual, huruf, gambar, hal yang dihindari, warna beserta kontrasnya, tombol utama, dan nada bahasa.'},
  {n:14,t:'Teknologi',d:'Stack yang dipakai dan cara hak akses diperiksa.'},
  {n:15,t:'Tahapan pengerjaan',d:'Daftar bernomor: tahap, waktu, dan hasilnya.'},
  {n:16,t:'Kriteria selesai',d:'Daftar periksa yang harus terpenuhi sebelum rilis.'},
@@ -179,6 +179,19 @@ function isiPanel(p){
   if(p.daftar)bag.push(`daftar "${p.daftar.judul}"`);
   if(p.acts?.length)bag.push('aktivitas terbaru');
   return bag.join('; ');
+}
+// Kontras dua warna hex menurut WCAG 2.1: 4.5 berarti 4,5:1.
+const lum=h=>{const [r,g,b]=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*r+.7152*g+.0722*b};
+export const kontras=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+// Dibulatkan ke bawah supaya 4,49:1 tidak tertulis 4,5:1.
+export const rasio=k=>(Math.floor(k*10)/10).toFixed(1).replace('.',',')+':1';
+// Design brief untuk bagian Desain di dokumen dan kartu desain di halaman detail. "kesan" hanya diisi bila PRD
+// masih memakai gaya bawaannya, karena alasan desain di katalog ditulis untuk gaya itu.
+export function briefDesain(s){
+  const t=T[s.tpl],g=GAYA[s.gaya]||GAYA.bersih;
+  const putih=kontras(s.warna,'#ffffff'),hitam=kontras(s.warna,'#14171f');
+  return {g,kesan:s.asal===s.tpl&&s.gaya===t.d.gaya?t.desain||'':'',latarGelap:lum(g.latar)<.2,teks:kontras(s.warna,g.latar),
+    diAtas:putih>=hitam?{nama:'putih',hex:'#ffffff',k:putih}:{nama:'hitam',hex:'#14171f',k:hitam}};
 }
 
 export function genMd(s){
@@ -265,7 +278,13 @@ export function genMd(s){
   o.push(H(11),L('data').length?L('data').map(x=>{const i=x.indexOf(':');return i>0?`- **${x.slice(0,i).trim()}:** ${x.slice(i+1).trim()}`:'- '+x}).join('\n'):'- '+KOSONG,'');
   const on=s.nfr.filter(n=>n.on).map(n=>nfrs.find(x=>x[0]===n.id)).filter(Boolean);
   o.push(H(12),on.length?on.map((r,i)=>`- **NFR-${pad(i+1)} ${r[1]}:** ${r[2]}`).join('\n'):'- '+KOSONG,'');
-  o.push(H(13),`- **Gaya:** ${g.nama}. ${g.ciri}`,`- **Huruf:** ${g.huruf}`,`- **Warna merek:** \`${s.warna}\``,`- **Tombol utama:** "${one(s.cta)||KOSONG}"`,`- **Nada bahasa:** ${g.nada}`,`- **Gaya ini cocok untuk:** ${g.cocok}`,'');
+  const b=briefDesain(s);
+  o.push(H(13),...(b.kesan?['### Kesan yang dituju',b.kesan,'']:[]),
+    '### Gaya visual',`- **Gaya:** ${g.nama}. ${g.ciri}`,`- **Huruf:** ${g.huruf}`,`- **Gambar dan ikon:** ${g.gambar}`,`- **Hindari:** ${g.hindari}`,'',
+    '### Warna',`- **Warna merek:** \`${s.warna}\` untuk tombol utama, tautan, dan penanda yang aktif`,`- **Latar dan teks:** latar \`${g.latar}\`, teks \`${g.teks}\``,
+    `- **Teks di atas warna merek:** ${b.diAtas.nama} \`${b.diAtas.hex}\`, kontras ${rasio(b.diAtas.k)}${b.diAtas.k>=4.5?'':b.diAtas.k>=3?'. Di bawah 4,5:1, jadi teks tombol dibuat tebal minimal 19 px':`. Terlalu rendah untuk teks, jadi warna merek untuk tombol perlu ${b.latarGelap?'diterangkan':'digelapkan'}`}`,
+    `- **Warna merek sebagai teks:** kontras ${rasio(b.teks)} di atas latar${b.teks>=4.5?', cukup untuk tautan dan teks biasa':`, terlalu rendah untuk teks biasa. Pakai untuk tombol, ikon, dan judul besar, dan buat tautan dengan versi yang lebih ${b.latarGelap?'terang':'gelap'}`}`,'',
+    '### Tombol dan bahasa',`- **Tombol utama:** "${one(s.cta)||KOSONG}"`,`- **Nada bahasa:** ${g.nada}`,'');
   o.push(H(14),`- **Stack:** ${one(s.stack)}`,
     `- **Masuk dan hak akses:** Tiap peran masuk dengan cara yang ditulis di bagian ${NO['Peran dan hak akses']}. Hak akses diperiksa di server pada setiap permintaan, bukan hanya dengan menyembunyikan tombol atau menu.`,'');
   const cnt=p=>feats.filter(f=>f.p===p).length;

@@ -35,7 +35,7 @@ export function buatPrompt(s, alat = 'lovable') {
       `Tugas fase ini: siapkan fondasi ${mobile ? 'aplikasi mobile' : 'website'} "${nama}" tanpa membangun fitur dulu.`,
       `## Produk\n${one(s.deskripsi)}`,
       `## Teknologi\n${s.stack || 'Bebas, pilih yang paling sesuai.'}`,
-      `## Tampilan\n- Gaya: ${g.nama}. ${g.ciri}\n- Huruf: ${g.huruf}\n- Warna merek: ${s.warna}\n- Nada bahasa: ${g.nada}\n- Bahasa antarmuka: Indonesia`,
+      `## Tampilan\n- Gaya: ${g.nama}. ${g.ciri}\n- Huruf: ${g.huruf}\n- Warna: merek ${s.warna}, latar ${g.latar}, teks ${g.teks}\n- Gambar dan ikon: ${g.gambar}\n- Hindari: ${g.hindari}\n- Nada bahasa: ${g.nada}\n- Bahasa antarmuka: Indonesia`,
       `## Peran dan cara masuk\n${daftar(roles.map((r) => `${one(r.n)}: ${one(r.m) || 'tanpa akun'}`))}`,
       lines(s.data).length ? `## Data utama\n${daftar(lines(s.data))}` : '',
       '## Yang harus selesai',
