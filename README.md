@@ -243,8 +243,8 @@ Dokumen dengan struktur lama `rancang-prd/v1` dikenali dan pengguna diminta memb
 Tiap PRD bawaan punya isi lengkap untuk 18 bagian, contoh nama usaha, warna merek, gaya desain, dan contoh isi tampilan untuk tiap peran. Di aplikasi, tiap PRD menjelaskan dirinya di tiga tempat:
 
 - **Kartu perpustakaan:** ringkasan, baris "Cocok untuk" berisi dua jenis usaha pertama, platform, gaya desain, dan jumlah peran.
-- **Halaman detail:** panel **Isi PRD ini** (peran beserta halamannya, alur utama, kebutuhan fungsional beserta yang wajib, susunan halaman utama, entitas data, dan bagian lainnya) dan panel **Desain dan kecocokan** (ciri gaya, warna merek, alasan desainnya, daftar jenis usaha yang cocok, dan tautan ke PRD lain bergaya sama). Tab pratinjau punya pilihan peran, sehingga halaman pertama tiap peran bisa dilihat: halaman publik, panel kerja dengan menu samping, atau layar aplikasi.
-- **Dokumen PRD:** bagian 13 (Desain) memuat gaya, ciri, huruf, warna, tombol utama, nada bahasa, dan jenis usaha yang cocok dengan gaya itu. Bagian 10 menulis judul yang tampil di halaman bila berbeda dari nama bagiannya, misalnya `Testimoni (judul: "Ucapan dan doa")` pada undangan, supaya AI tahu maksudnya.
+- **Halaman detail:** panel **Isi PRD ini** (peran beserta halamannya, alur utama, kebutuhan fungsional beserta yang wajib, susunan halaman utama, entitas data, dan bagian lainnya) dan panel **Design brief** (ciri gaya, alasan desainnya, palet warna merek, latar, dan teks beserta kontrasnya, huruf, gambar dan ikon, hal yang dihindari, nada bahasa, daftar jenis usaha yang cocok, dan tautan ke PRD lain bergaya sama). Tab pratinjau punya pilihan peran, sehingga halaman pertama tiap peran bisa dilihat: halaman publik, panel kerja dengan menu samping, atau layar aplikasi.
+- **Dokumen PRD:** bagian 13 (Desain) adalah design brief: kesan yang dituju, gaya visual, huruf, gambar dan ikon, hal yang dihindari, warna merek, latar, dan teks, kontras WCAG untuk teks tombol dan untuk warna merek sebagai teks (beserta saran bila kurang dari 4,5:1), tombol utama, dan nada bahasa. Data tiap gaya ada di `GAYA` pada `src/lib/catalog.js`. Bagian 10 menulis judul yang tampil di halaman bila berbeda dari nama bagiannya, misalnya `Testimoni (judul: "Ucapan dan doa")` pada undangan, supaya AI tahu maksudnya.
 
 Perpustakaan bisa disaring per platform, gaya desain, dan kategori, serta dicari dengan nama, jenis usaha, atau nama peran. Hasil pencarian yang kata utuhnya ada di nama PRD tampil paling atas, jadi "kos" mendahulukan aplikasi cari kos daripada PRD yang hanya memuat kata "kosong". Filter juga bisa dibuka lewat alamat, misalnya `/perpustakaan?gaya=elegan` atau `/perpustakaan?platform=mobile&kategori=Kesehatan`. Landing page menampilkan 8 PRD pilihan (`UNGGULAN` di `catalog.js`), contoh PRD yang dilihat dari sisi tiap perannya, dan galeri 14 gaya yang masing-masing membuka perpustakaan dengan gaya itu.
 
@@ -331,7 +331,7 @@ Ada dua cara:
   1. Buat berkas baru di `frontend/src/katalog/`, satu berkas per PRD. Cara termudah adalah menyalin PRD yang paling mirip, misalnya `klinik.js` untuk website dengan beberapa peran atau `m-ojek.js` untuk aplikasi mobile dengan panel web. Format lengkapnya dijelaskan di bagian atas `katalog/index.js`.
   2. Impor berkas itu di `katalog/index.js` dan tambahkan ke daftar `PRD`. Urutan di daftar itu menjadi urutan di perpustakaan.
   3. Daftarkan id-nya di `builtinTemplates` pada `backend/internal/api/admin.go`, lalu periksa kecocokannya dengan `node scripts/cek-id-bawaan.mjs` dari folder `frontend`.
-  4. Buka PRD itu di aplikasi dan pastikan lencananya "Sesuai struktur" tanpa saran. Hal yang sering terlewat: nama halaman harus berbeda antarperan, setiap peran dipakai di minimal satu alur atau kebutuhan fungsional, dan kebutuhan P0 punya kriteria penerimaan.
+  4. Jalankan `node scripts/cek-katalog.mjs` dari folder `frontend`. Skrip ini gagal bila ada isian wajib yang kosong, peran tanpa halaman atau alur, kebutuhan P0 tanpa kriteria penerimaan, atau catatan dari pemeriksa struktur. Hal yang sering terlewat: nama halaman harus berbeda antarperan, setiap peran dipakai di minimal satu alur atau kebutuhan fungsional, dan kebutuhan P0 punya kriteria penerimaan.
   5. Bila ingin PRD itu tampil di landing page, tambahkan id-nya ke `UNGGULAN` di `frontend/src/lib/catalog.js`.
 
 Saat dibangun untuk situs biasa, seluruh katalog dijadikan satu berkas JavaScript tersendiri (`katalog-*.js`) di samping berkas aplikasi dan pustaka React, sehingga peramban bisa menyimpannya terpisah. Pengaturannya ada di `frontend/vite.config.js`.
@@ -352,6 +352,7 @@ rancang-prd/
 │       └── store/            semua query PostgreSQL dan migrasi (migrations/*.sql)
 └── frontend/
     ├── scripts/cek-id-bawaan.mjs  memastikan daftar PRD bawaan di backend sama dengan katalog
+    ├── scripts/cek-katalog.mjs    memastikan tiap PRD bawaan lengkap
     └── src/
         ├── main.jsx          daftar rute
         ├── styles.css        seluruh gaya; token warna (--accent, --accent-2) ada di bagian atas
@@ -413,7 +414,7 @@ Sebelum dipakai di internet:
 
 ```bash
 cd backend && go test ./...
-cd frontend && node scripts/cek-id-bawaan.mjs
+cd frontend && node scripts/cek-id-bawaan.mjs && node scripts/cek-katalog.mjs
 ```
 
-Tes Go mencakup hash kata sandi, pemeriksaan isi PRD, pembatas laju, dan tabel hak peran. Skrip kedua memastikan daftar PRD bawaan di `admin.go` sama dengan katalog frontend, karena server memakai daftar itu untuk menerima PRD dasar saat admin menambah PRD dan saat admin menyembunyikan PRD bawaan.
+Tes Go mencakup hash kata sandi, pemeriksaan isi PRD, pembatas laju, dan tabel hak peran. `cek-katalog.mjs` memastikan tiap PRD bawaan lengkap dan dokumennya lolos pemeriksa struktur tanpa catatan. `cek-id-bawaan.mjs` memastikan daftar PRD bawaan di `admin.go` sama dengan katalog frontend, karena server memakai daftar itu untuk menerima PRD dasar saat admin menambah PRD dan saat admin menyembunyikan PRD bawaan.
