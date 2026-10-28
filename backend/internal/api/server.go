@@ -50,6 +50,7 @@ type Server struct {
 	log *slog.Logger
 
 	loginLimit    *limiter
+	loginIPLimit  *limiter
 	registerLimit *limiter
 	commentLimit  *limiter
 
@@ -63,6 +64,7 @@ func New(cfg config.Config, st *store.Store, log *slog.Logger) *Server {
 		st:            st,
 		log:           log,
 		loginLimit:    newLimiter(10, 15*time.Minute),
+		loginIPLimit:  newLimiter(60, 15*time.Minute),
 		registerLimit: newLimiter(20, time.Hour),
 		commentLimit:  newLimiter(8, 10*time.Minute),
 		touched:       map[string]time.Time{},
@@ -140,6 +142,9 @@ func (s *Server) securityHeaders(next http.Handler) http.Handler {
 		h.Set("X-Frame-Options", "DENY")
 		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
 		h.Set("Content-Security-Policy", csp)
+		if s.cfg.CookieSecure {
+			h.Set("Strict-Transport-Security", "max-age=31536000")
+		}
 		next.ServeHTTP(w, r)
 	})
 }

@@ -137,7 +137,9 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	email := strings.ToLower(strings.TrimSpace(in.Email))
-	if !s.loginLimit.allow(email + "|" + clientIP(r, s.cfg.TrustProxy)) {
+	// Batas per email dan IP menahan tebakan sandi satu akun; batas per IP menahan satu sandi dicoba ke banyak email.
+	ip := clientIP(r, s.cfg.TrustProxy)
+	if !s.loginLimit.allow(email+"|"+ip) || !s.loginIPLimit.allow(ip) {
 		writeErr(w, http.StatusTooManyRequests, "rate_limited", "Terlalu banyak percobaan masuk. Coba lagi dalam 15 menit.")
 		return
 	}

@@ -253,19 +253,24 @@ func (s *Store) ListPRDs(ctx context.Context, userID string) ([]PRD, error) {
 	return out, rows.Err()
 }
 
-func (s *Store) CountPRDs(ctx context.Context, userID string) (int, error) {
-	var n int
-	err := s.db.QueryRowContext(ctx, `SELECT count(*) FROM prds WHERE user_id = $1`, userID).Scan(&n)
-	return n, err
-}
-
-// CreatePRD menyimpan PRD baru dan mencatatnya untuk grafik dashboard.
-func (s *Store) CreatePRD(ctx context.Context, userID, name, templateKey string, state json.RawMessage) (PRD, error) {
+// CreatePRD menyimpan PRD baru dan mencatatnya untuk grafik dashboard. Mengembalikan ErrLimit bila pengguna
+// sudah punya limit PRD. Baris pengguna dikunci, supaya dua permintaan bersamaan tidak sama-sama lolos batas.
+func (s *Store) CreatePRD(ctx context.Context, userID, name, templateKey string, state json.RawMessage, limit int) (PRD, error) {
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return PRD{}, err
 	}
 	defer tx.Rollback()
+	var n int
+	if _, err := tx.ExecContext(ctx, `SELECT 1 FROM users WHERE id = $1 FOR UPDATE`, userID); err != nil {
+		return PRD{}, err
+	}
+	if err := tx.QueryRowContext(ctx, `SELECT count(*) FROM prds WHERE user_id = $1`, userID).Scan(&n); err != nil {
+		return PRD{}, err
+	}
+	if n >= limit {
+		return PRD{}, ErrLimit
+	}
 	p, err := scanPRD(tx.QueryRowContext(ctx,
 		`INSERT INTO prds (user_id, name, template_key, state) VALUES ($1, $2, $3, $4::jsonb) RETURNING `+prdCols,
 		userID, name, templateKey, string(state)))

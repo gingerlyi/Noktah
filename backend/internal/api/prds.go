@@ -87,20 +87,20 @@ func (s *Server) handleCreatePRD(w http.ResponseWriter, r *http.Request, u store
 		writeErr(w, http.StatusBadRequest, "invalid", "Isi PRD tidak valid.")
 		return
 	}
-	n, err := s.st.CountPRDs(r.Context(), u.ID)
-	if err != nil {
-		s.fail(w, r, err)
-		return
+	premium := u.Premium(time.Now())
+	limit := maxPRDsPerUser
+	if !premium {
+		limit = freePRDLimit
 	}
-	if n >= freePRDLimit && !u.Premium(time.Now()) {
+	p, err := s.st.CreatePRD(r.Context(), u.ID, name, key, in.State, limit)
+	if errors.Is(err, store.ErrLimit) && !premium {
 		writeErr(w, http.StatusForbidden, "premium", "Paket Gratis hanya bisa menyimpan 1 PRD. Upgrade ke Premium untuk menyimpan lebih banyak.")
 		return
 	}
-	if n >= maxPRDsPerUser {
+	if errors.Is(err, store.ErrLimit) {
 		writeErr(w, http.StatusConflict, "limit", "Jumlah PRD sudah mencapai batas 300. Hapus yang tidak dipakai dulu.")
 		return
 	}
-	p, err := s.st.CreatePRD(r.Context(), u.ID, name, key, in.State)
 	if err != nil {
 		s.fail(w, r, err)
 		return
