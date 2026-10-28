@@ -1,0 +1,39 @@
+# Menjalankan PostgreSQL dan aplikasi Noktah. Nilai diambil dari berkas .env (lihat .env.example).
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rancang
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Isi POSTGRES_PASSWORD di berkas .env}
+      POSTGRES_DB: rancangprd
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rancang -d rancangprd"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://rancang:${POSTGRES_PASSWORD}@db:5432/rancangprd?sslmode=disable
+      OWNER_EMAIL: ${OWNER_EMAIL:?Isi OWNER_EMAIL di berkas .env}
+      OWNER_PASSWORD: ${OWNER_PASSWORD:?Isi OWNER_PASSWORD di berkas .env}
+      OWNER_NAME: ${OWNER_NAME:-Pemilik}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      ALLOW_REGISTER: ${ALLOW_REGISTER:-true}
+      SESSION_DAYS: ${SESSION_DAYS:-30}
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Jakarta}
+      UPGRADE_URL: ${UPGRADE_URL:-}
+      TRUST_PROXY: ${TRUST_PROXY:-false}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+
+volumes:
+  dbdata:

@@ -1,0 +1,77 @@
+// Portofolio pribadi (website). Format entri dijelaskan di index.js.
+export default {
+  id: 'portofolio',
+  platform: 'web',
+  nama: 'Portofolio pribadi',
+  kategori: 'Portofolio',
+  ringkas: 'Memamerkan karya, menceritakan proses, dan memudahkan calon klien menghubungi.',
+  cocok: ['Desainer, developer, dan penulis lepas', 'Pelamar kerja di bidang kreatif', 'Konsultan perorangan'],
+  desain: 'Gaya risograf dengan dua warna tinta, titik halftone, dan bayangan bergeser memberi kesan kreatif yang hangat dan mudah diingat. Halaman dibuka dengan satu kalimat tentang apa yang dikerjakan, lalu langsung masuk ke karya.',
+  hero: 'intro',
+  d: {
+    nama: 'Raka Pradana',
+    tagline: 'Saya merapikan aplikasi yang rumit supaya mudah dipakai',
+    cta: 'Ajak kerja sama',
+    warna: '#0f766e',
+    gaya: 'halftone',
+    stack: 1,
+    deskripsi: 'Portofolio Raka Pradana, desainer produk lepas dengan pengalaman tujuh tahun di aplikasi keuangan dan logistik. Website ini menampilkan studi kasus pilihan dan cara menghubunginya.',
+    masalah: 'Karya tersebar di PDF dan tautan terpisah, sehingga calon klien sulit menilai kemampuan dan proses kerja dengan cepat.',
+    audiens: [
+      'Pendiri startup dan manajer produk yang mencari desainer lepas',
+      'Perekrut dari perusahaan teknologi',
+    ],
+    tujuan: [
+      'Menampilkan empat sampai enam studi kasus terbaik',
+      'Membuat calon klien mengirim pesan dalam satu kunjungan',
+      'Menunjukkan proses kerja, bukan hanya hasil akhir',
+    ],
+    metrik: [
+      'Minimal 8 pesan masuk dari formulir kontak per bulan',
+      'Separuh pengunjung membuka setidaknya satu studi kasus',
+      'Halaman depan dimuat di bawah 2 detik',
+    ],
+    luar: [
+      'Toko templat atau produk digital',
+      'Akun dan portal untuk klien',
+    ],
+    peran: [
+      ['Pengunjung', 'Calon klien dan perekrut', 'Tanpa akun', ['Melihat karya dan studi kasus', 'Mengunduh CV', 'Mengirim pesan lewat formulir kontak'], ['Melihat pesan dari pengunjung lain'], ['Beranda', 'Karya', 'Studi kasus', 'Tentang', 'Kontak']],
+      ['Pemilik', 'Raka sendiri, satu-satunya pengelola situs', 'Email dan kata sandi dengan verifikasi dua langkah', ['Menambah, mengubah, dan mengurutkan proyek serta studi kasus', 'Mengganti berkas CV', 'Membaca dan menandai pesan masuk', 'Melihat jumlah kunjungan per studi kasus'], [], ['Kotak masuk', 'Kelola proyek', 'Statistik']],
+    ],
+    fitur: [
+      ['Galeri proyek', 'Pengunjung', 'P0', 'Kisi proyek dengan gambar sampul, judul, dan peran.', ['Tiap proyek menampilkan gambar sampul, judul, dan peran', 'Mengklik proyek membuka halaman studi kasusnya']],
+      ['Halaman studi kasus', 'Pengunjung', 'P0', 'Masalah, proses, hasil, dan angka dampak untuk tiap proyek.', ['Tiap studi kasus punya bagian masalah, proses, dan hasil', 'Ada tautan ke proyek sebelumnya dan berikutnya']],
+      ['Tentang dan CV', 'Pengunjung', 'P0', 'Profil singkat, daftar pengalaman, dan tombol unduh CV dalam PDF.', ['Tombol unduh CV mengunduh berkas PDF']],
+      ['Formulir kontak', 'Pengunjung', 'P0', 'Nama, email, jenis proyek, dan pesan, terkirim ke email pemilik.', ['Pesan terkirim ke email pemilik', 'Pengirim melihat pesan sukses, dan kolom yang salah isi diberi keterangan']],
+      ['Kelola proyek dan studi kasus', 'Pemilik', 'P0', 'Tambah, ubah, urutkan, dan sembunyikan proyek beserta isi studi kasusnya.', ['Proyek berstatus draf tidak tampil untuk pengunjung', 'Urutan proyek di halaman Karya mengikuti urutan yang diatur pemilik']],
+      ['Kotak masuk pesan', 'Pemilik', 'P0', 'Pesan dari formulir kontak tersimpan di panel dan juga dikirim ke email pemilik.', ['Pesan baru ditandai belum dibaca', 'Pemilik bisa menandai pesan sudah dibalas atau mengarsipkannya']],
+      ['Filter kategori karya', 'Pengunjung', 'P1', 'Saring proyek berdasarkan jenis pekerjaan.'],
+      ['Mode gelap', 'Pengunjung', 'P2', 'Pengalih tema terang dan gelap.'],
+      ['Blog', 'Pengunjung', 'P2', 'Catatan proses dan pemikiran desain.'],
+      ['Statistik kunjungan', 'Pemilik', 'P2', 'Jumlah kunjungan per halaman, per studi kasus, dan jumlah unduhan CV.'],
+    ],
+    alur: [
+      ['Menghubungi untuk proyek baru', 'Pengunjung', ['Membuka Beranda dan membaca kalimat pembuka', 'Membuka satu studi kasus dari halaman Karya', 'Menekan "Ajak kerja sama"', 'Mengisi nama, email, jenis proyek, dan pesan', 'Melihat pesan sukses']],
+      ['Menambah studi kasus baru', 'Pemilik', ['Masuk ke panel', 'Membuka Kelola proyek dan menekan "Tambah proyek"', 'Mengisi masalah, proses, hasil, dan gambar', 'Menyimpan sebagai draf, memeriksa pratinjau, lalu menerbitkan']],
+      ['Membalas pesan calon klien', 'Pemilik', ['Membuka Kotak masuk', 'Membaca pesan yang belum dibaca', 'Membalas lewat email', 'Menandai pesan sudah dibalas']],
+    ],
+    data: [
+      'Proyek: judul, sampul, peran, kategori, tahun, isi studi kasus, status (draf, terbit), urutan',
+      'Pesan kontak: nama, email, jenis proyek, isi pesan, waktu kirim, status (baru, dibalas, arsip)',
+      'Berkas CV: berkas PDF, tanggal unggah',
+      'Pemilik: nama, email, kata sandi (hash), kunci verifikasi dua langkah',
+      'Kunjungan: halaman, tanggal, jumlah',
+    ],
+    blok: ['hero', 'galeri', 'tentang', 'layanan', 'testi', 'kontak'],
+  },
+  isi: {
+    peran: 'Desainer produk · Yogyakarta',
+    items: [['Aplikasi kasir Warungku', 'Riset dan UI'], ['Dasbor logistik Antarin', 'Sistem desain'], ['Situs Festival Kota Lama', 'Desain web'], ['Onboarding bank digital', 'UX']],
+    layanan: [['Audit UX', 'mulai Rp 6.000.000 · 1 minggu'], ['Desain aplikasi dari nol', 'mulai Rp 25.000.000 · 4–6 minggu'], ['Sistem desain', 'mulai Rp 18.000.000 · 3 minggu']],
+    testi: [['Raka memangkas alur pendaftaran kami dari sembilan langkah jadi empat.', 'Dimas', 'Kepala produk, Antarin'], ['Cara presentasinya membuat tim teknis langsung paham apa yang harus dibangun.', 'Laras', 'Pendiri, Warungku']],
+    panel: {
+      Pemilik: { kpi: [['Pesan baru', '3', 'minggu ini 8'], ['Kunjungan minggu ini', '1.940', '+18%'], ['Studi kasus terpopuler', 'Antarin', '612 kunjungan'], ['Unduhan CV', '41', 'bulan ini']], tabel: { judul: 'Pesan masuk', kolom: ['Nama', 'Jenis proyek', 'Diterima', 'Status'], rows: [['Dimas A.', 'Aplikasi logistik', 'Hari ini', 'Baru'], ['Laras P.', 'Audit UX', 'Kemarin', 'Dibalas'], ['Fajar N.', 'Sistem desain', '2 hari lalu', 'Dibalas'], ['Yuni K.', 'Desain web', '5 hari lalu', 'Arsip']] } },
+    },
+  },
+};
