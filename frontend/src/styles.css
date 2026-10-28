@@ -517,7 +517,7 @@ textarea{resize:vertical;min-height:84px;line-height:1.5}
 /* Editor */
 .ed-bar{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
 .ed-title{display:flex;align-items:baseline;gap:10px;min-width:0;margin-right:auto}
-.ed-title b{font:800 1.35rem/1.25 var(--f-display);letter-spacing:-.015em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ed-title h1{margin:0;font:800 1.35rem/1.25 var(--f-display);letter-spacing:-.015em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ed-status{font-size:.86rem;color:var(--muted)}
 .ed-status.err{color:var(--danger)}
 .pane-switch.seg{display:none}

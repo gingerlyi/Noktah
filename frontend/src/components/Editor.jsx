@@ -223,7 +223,7 @@ function Stage({ state, mobile, role }) {
           <i />
           <span className="frame-url">{slug(state) + (T[state.tpl].app ? '.app/' : '.id/') + path}</span>
         </div>
-        <div className="frame-view" ref={viewRef} dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="frame-view" ref={viewRef} aria-hidden="true" dangerouslySetInnerHTML={{ __html: html }} />
       </div>
       <p className="stage-note">
         Teks, harga, dan nama orang di pratinjau adalah contoh.{' '}
@@ -616,7 +616,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
         </Link>
         <div className="ed-title">
           <span className="step">{isLib ? 'PRD perpustakaan' : 'PRD'}</span>
-          <b>{title}</b>
+          <h1>{title}</h1>
         </div>
         <button type="button" className={'badge ' + sum.tone} onClick={showCheck} title="Buka hasil pemeriksaan struktur">
           {sum.label}
