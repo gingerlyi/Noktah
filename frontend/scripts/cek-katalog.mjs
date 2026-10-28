@@ -2,13 +2,28 @@
 // penerimaan, tiap gaya punya design brief, dan dokumen yang dihasilkan lolos pemeriksa struktur tanpa catatan.
 // Jalankan dari folder frontend: node scripts/cek-katalog.mjs
 import { BLOK, GAYA, T, TPL_IDS } from '../src/lib/catalog.js';
-import { checkPrd, fromBuiltin, genMd } from '../src/lib/prd.js';
+import { NADA_STATUS, checkPrd, fromBuiltin, genMd, kontras } from '../src/lib/prd.js';
 
 const salah = [];
 for (const [k, g] of Object.entries(GAYA)) {
   for (const f of ['nama', 'ciri', 'huruf', 'nada', 'gambar', 'hindari', 'cocok']) if (!g[f]) salah.push(`gaya ${k}: "${f}" kosong`);
   if (!/^#[0-9a-f]{6}$/i.test(g.latar) || !/^#[0-9a-f]{6}$/i.test(g.teks)) salah.push(`gaya ${k}: latar atau teks bukan warna hex`);
 }
+
+// Label status: teks berwarna di atas latar warna yang sama 12% harus kontras minimal 4,5:1 di latar tiap gaya.
+const hex = (n) => n.toString(16).padStart(2, '0');
+const campur = (a, b, k) => '#' + [1, 3, 5].map((i) => hex(Math.round(parseInt(a.slice(i, i + 2), 16) * k + parseInt(b.slice(i, i + 2), 16) * (1 - k)))).join('');
+for (const [k, g] of Object.entries(GAYA)) {
+  const gelap = kontras(g.latar, '#000000') < kontras(g.latar, '#ffffff');
+  for (const [n, , terang, warnaGelap] of NADA_STATUS) {
+    const w = gelap ? warnaGelap : terang, r = kontras(w, campur(w, g.latar, 0.12));
+    if (r < 4.5) salah.push(`gaya ${k}: label status ${n} ${w} hanya ${r.toFixed(2)}:1`);
+  }
+}
+
+// Urutan pola warna status: kata yang mengandung kata lain harus jatuh ke warna yang benar.
+for (const [v, n] of [['Tidak hadir', 'merah'], ['Belum dinilai', 'kuning'], ['Persiapan 82%', 'biru'], ['Siap antar', 'hijau'], ['Diverifikasi', 'hijau'], ['Perlu verifikasi', 'kuning'], ['Nonaktif', 'abu']])
+  if (NADA_STATUS.find((x) => x[4].test(v))[0] !== n) salah.push(`status "${v}" seharusnya ${n}`);
 
 for (const id of TPL_IDS) {
   const t = T[id], d = t.d, p = (m) => salah.push(`${id}: ${m}`);

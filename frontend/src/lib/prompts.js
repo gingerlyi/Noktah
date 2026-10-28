@@ -1,7 +1,7 @@
 // Paket prompt untuk AI builder: PRD dipecah menjadi fase kerja yang bisa ditempel satu per satu,
 // ditambah daftar periksa. Fase: fondasi, satu fase per peran (P0 lalu P1), lalu penyempurnaan (P2 dan NFR).
 import { GAYA, T, nfrFor } from './catalog.js';
-import { SEMUA, alurAktif, fiturAktif, halamanPeran, lines, peranAktif, slug } from './prd.js';
+import { SEMUA, alurAktif, fiturAktif, halamanPeran, lines, peranAktif, skalaHuruf, slug } from './prd.js';
 
 export const ALAT = {
   lovable: { nama: 'Lovable', buka: 'Kamu membangun aplikasi ini di Lovable.' },
@@ -35,7 +35,7 @@ export function buatPrompt(s, alat = 'lovable') {
       `Tugas fase ini: siapkan fondasi ${mobile ? 'aplikasi mobile' : 'website'} "${nama}" tanpa membangun fitur dulu.`,
       `## Produk\n${one(s.deskripsi)}`,
       `## Teknologi\n${s.stack || 'Bebas, pilih yang paling sesuai.'}`,
-      `## Tampilan\n- Gaya: ${g.nama}. ${g.ciri}\n- Huruf: ${g.huruf}\n- Warna: merek ${s.warna}, latar ${g.latar}, teks ${g.teks}\n- Gambar dan ikon: ${g.gambar}\n- Hindari: ${g.hindari}\n- Nada bahasa: ${g.nada}\n- Bahasa antarmuka: Indonesia`,
+      `## Tampilan\n- Gaya: ${g.nama}. ${g.ciri}\n- Huruf: ${g.huruf}\n- Warna: merek ${s.warna}, latar ${g.latar}, teks ${g.teks}\n- Gambar dan ikon: ${g.gambar}\n- Hindari: ${g.hindari}\n- Ukuran: huruf ${skalaHuruf(s).map(([n, px]) => `${n} ${px} px`).join(', ')}; sudut ${g.sudut} px, garis ${g.garis} px\n- Komponen, label status, dan keadaan kosong, memuat, dan galat: ikuti bagian Desain di PRD\n- Nada bahasa: ${g.nada}\n- Bahasa antarmuka: Indonesia`,
       `## Peran dan cara masuk\n${daftar(roles.map((r) => `${one(r.n)}: ${one(r.m) || 'tanpa akun'}`))}`,
       lines(s.data).length ? `## Data utama\n${daftar(lines(s.data))}` : '',
       '## Yang harus selesai',

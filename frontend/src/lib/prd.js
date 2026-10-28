@@ -193,6 +193,67 @@ export function briefDesain(s){
   return {g,kesan:s.asal===s.tpl&&s.gaya===t.d.gaya?t.desain||'':'',latarGelap:lum(g.latar)<.2,teks:kontras(s.warna,g.latar),
     diAtas:putih>=hitam?{nama:'putih',hex:'#ffffff',k:putih}:{nama:'hitam',hex:'#14171f',k:hitam}};
 }
+// Warna label status: [nama, arti, warna di latar terang, warna di latar gelap, pola]. Dicocokkan berurutan, jadi
+// "Tidak hadir" kena merah sebelum "hadir" kena hijau, dan "Belum dinilai" kena kuning sebelum "dinilai" kena hijau.
+export const NADA_STATUS=[
+  ['abu','tidak aktif atau diarsipkan','#374151','#a3a3a3',/arsip|ditutup|nonaktif|otomatis|kosong/i],
+  ['merah','gagal atau perlu tindakan segera','#991b1b','#f87171',/gagal|batal|ditolak|terlambat|tidak hadir|kurang|habis|berisiko|sengketa|mencurigakan|terlarang|tertinggal|keluar layar/i],
+  ['kuning','menunggu atau perlu ditinjau','#854d0e','#facc15',/menunggu|perlu|belum|antre|diajukan|draf|revisi|perbaikan|\bverifikasi|ditinjau|uang muka|\bbaru|diusulkan|observasi|cuti|istirahat|ditandai|prioritas|penuh/i],
+  ['hijau','selesai atau berhasil','#166534','#4ade80',/selesai|lunas|dibayar|hadir|diterima|disetujui|terbit|aktif|lengkap|tersedia|\bsiap|terantar|dikonfirmasi|diverifikasi|terjual|sesuai|cocok|wajar|praktik|tampil|datang|sudah|dijawab|dibalas|check-in|daring|bertugas|direkomendasikan|dinilai|diperbarui|dibuka/i],
+  ['biru','sedang berjalan','#1e40af','#60a5fa',/./],
+];
+// Label status PRD ini, dari kolom "Status" di contoh tabel tiap peran yang aktif, dikelompokkan per warna.
+export function statusPrd(s){
+  const nilai=new Set();
+  peranAktif(s).forEach(r=>{const t=panelPeran(s.tpl,r.id)?.tabel;const i=t?t.kolom.findIndex(k=>/^status$/i.test(k)):-1;if(i>=0)t.rows.forEach(x=>x[i]&&nilai.add(x[i]))});
+  return NADA_STATUS.map(([n,arti,terang,gelap,re])=>({n,arti,terang,gelap,label:[...nilai].filter(v=>NADA_STATUS.find(x=>x[4].test(v))[0]===n)})).filter(x=>x.label.length);
+}
+// Skala huruf design brief: [nama, px]. Aplikasi mobile memakai skala yang lebih kecil dari skala desktop gayanya.
+export function skalaHuruf(s){
+  const [h1,h2,h3,isi,kecil]=(GAYA[s.gaya]||GAYA.bersih).skala;
+  if(T[s.tpl].platform==='mobile')return [['judul layar',Math.min(32,Math.max(24,Math.round(h1*.5)))],['judul bagian',Math.max(18,Math.round(h2*.6))],['isi',Math.max(16,isi)],['keterangan',Math.max(12,kecil)]];
+  return [['judul halaman',h1],['judul bagian',h2],['subjudul',h3],['isi',isi],['keterangan',kecil]];
+}
+// Ukuran, komponen, dan keadaan layar untuk design brief, dari gaya dan isi PRD ini.
+function rincianDesain(s,b){
+  const t=T[s.tpl],g=b.g,mobile=t.platform==='mobile',unit=mobile?'layar':'halaman',roles=peranAktif(s);
+  const [h1,h2]=g.skala,kecilkan=x=>x.charAt(0).toLowerCase()+x.slice(1);
+  const huruf=skalaHuruf(s).map(([n,px])=>`${n} ${px} px`).join(', ');
+  const o=['### Ukuran dan jarak'];
+  if(mobile)o.push(`- **Skala huruf:** ${huruf}. Ukuran mengikuti pengaturan huruf di ponsel`,
+    '- **Jarak:** kelipatan 4 px; tepi layar 16 px, antarkartu 12 px, antarbagian 24 px; area sentuh minimal 44 × 44 pt');
+  else o.push(`- **Skala huruf:** ${huruf}. Tinggi baris isi 1,5, judul 1,1 sampai 1,2`,
+    `- **Di ponsel:** judul halaman ${Math.round(h1*.6)} px dan judul bagian ${Math.round(h2*.75)} px; ukuran lain tetap`,
+    `- **Jarak:** kelipatan 4 px; antarbagian ${g.jarak} px di desktop dan ${Math.round(g.jarak/2)} px di ponsel; lebar isi maksimal 1200 px dengan tepi 16 px di ponsel`);
+  o.push(`- **Sudut dan garis:** sudut ${g.sudut} px untuk kartu dan kolom isian${g.kapsul?', tombol berbentuk kapsul':''}; garis ${g.garis} px`,'');
+
+  o.push('### Komponen utama');
+  roles.forEach((r,i)=>{
+    const hp=halamanPeran(s,r.id).map(h=>one(h.n));if(!hp.length)return;
+    const nama=one(r.n);
+    if(mobile&&r.w!=='web')o.push(`- **Navigasi ${nama}:** navigasi bawah berisi ${hp.slice(0,4).join(', ')}${hp.length>4?`; ${unit} lain dibuka dari layar itu`:''}`);
+    else if(i===0&&!t.app)o.push(`- **Navigasi ${nama}:** bilah atas berisi logo, ${hp.slice(0,6).join(', ')}, dan tombol "${one(s.cta)}" di kanan. Di ponsel menu dilipat ke tombol menu`);
+    else o.push(`- **Navigasi ${nama}:** panel kerja dengan menu samping berisi ${hp.join(', ')}. Di ponsel menu samping dibuka dari tombol menu`);
+  });
+  o.push(`- **Tombol utama "${one(s.cta)||KOSONG}":** latar \`${s.warna}\`, teks ${b.diAtas.nama}, tinggi ${mobile?48:44} px, satu tombol utama per ${unit}. Tombol kedua bergaris warna merek`,
+    `- **Kartu:** garis ${g.garis} px, sudut ${g.sudut} px, ruang dalam 16 sampai 24 px`,
+    `- **Kolom isian:** label di atas kolom, tinggi ${mobile?48:44} px, petunjuk dan pesan galat di bawahnya, fokus ditandai garis warna merek 2 px`);
+  if(roles.some(r=>panelPeran(s.tpl,r.id)?.tabel))o.push('- **Tabel:** baris setinggi 48 px, judul kolom kecil dan tebal, angka rata kanan. Di ponsel tiap baris menjadi kartu');
+  const st=statusPrd(s);
+  if(st.length)o.push('- **Label status:** teks berwarna di atas latar warna yang sama dengan kepekatan 12%, selalu bertuliskan statusnya (bukan warna saja):',
+    ...st.map(x=>`  - ${x.n.charAt(0).toUpperCase()+x.n.slice(1)} \`${b.latarGelap?x.gelap:x.terang}\`, ${x.arti}: ${x.label.join(', ')}`));
+  o.push('');
+
+  o.push('### Keadaan layar');
+  // Halaman pertama website publik (peran utama di PRD website) selalu berisi, jadi tidak perlu keadaan kosong.
+  roles.forEach((r,i)=>{const h=halamanPeran(s,r.id)[0],aksi=lines(r.b)[0];if(h&&!(i===0&&!mobile&&!t.app))o.push(`- **Kosong, ${unit} "${one(h.n)}" (${one(r.n)}):** satu kalimat yang menjelaskan mengapa masih kosong${aksi?`, lalu tombol untuk ${kecilkan(one(aksi))}`:''}`)});
+  o.push('- **Memuat:** kerangka abu-abu seukuran kartu, daftar, atau tabel yang akan tampil, muncul bila lebih dari 300 ms. Tombol yang sedang diproses dinonaktifkan dan teksnya menjadi kata kerja yang sedang berjalan, misalnya "Menyimpan…"',
+    '- **Galat:** pesan yang menyebut apa yang gagal dan apa yang bisa dilakukan, tombol "Coba lagi", dan isian formulir tidak hilang. Galat isian ditulis di bawah kolomnya',
+    '- **Berhasil:** notifikasi singkat yang hilang sendiri setelah 4 detik. Aksi yang menghapus data bisa dibatalkan dari notifikasi itu');
+  if(mobile)o.push('- **Tanpa internet:** bilah "Tidak ada koneksi" di atas layar, data terakhir tetap tampil, dan perubahan dikirim saat koneksi kembali');
+  o.push('');
+  return o;
+}
 
 export function genMd(s){
   const t=T[s.tpl],mobile=t.platform==='mobile',L=k=>lines(s[k]);
@@ -284,7 +345,8 @@ export function genMd(s){
     '### Warna',`- **Warna merek:** \`${s.warna}\` untuk tombol utama, tautan, dan penanda yang aktif`,`- **Latar dan teks:** latar \`${g.latar}\`, teks \`${g.teks}\``,
     `- **Teks di atas warna merek:** ${b.diAtas.nama} \`${b.diAtas.hex}\`, kontras ${rasio(b.diAtas.k)}${b.diAtas.k>=4.5?'':b.diAtas.k>=3?'. Di bawah 4,5:1, jadi teks tombol dibuat tebal minimal 19 px':`. Terlalu rendah untuk teks, jadi warna merek untuk tombol perlu ${b.latarGelap?'diterangkan':'digelapkan'}`}`,
     `- **Warna merek sebagai teks:** kontras ${rasio(b.teks)} di atas latar${b.teks>=4.5?', cukup untuk tautan dan teks biasa':`, terlalu rendah untuk teks biasa. Pakai untuk tombol, ikon, dan judul besar, dan buat tautan dengan versi yang lebih ${b.latarGelap?'terang':'gelap'}`}`,'',
-    '### Tombol dan bahasa',`- **Tombol utama:** "${one(s.cta)||KOSONG}"`,`- **Nada bahasa:** ${g.nada}`,'');
+    ...rincianDesain(s,b),
+    '### Bahasa',`- **Nada bahasa:** ${g.nada}`,'- **Bahasa antarmuka:** Indonesia, dengan kata kerja yang jelas di tombol','');
   o.push(H(14),`- **Stack:** ${one(s.stack)}`,
     `- **Masuk dan hak akses:** Tiap peran masuk dengan cara yang ditulis di bagian ${NO['Peran dan hak akses']}. Hak akses diperiksa di server pada setiap permintaan, bukan hanya dengan menyembunyikan tombol atau menu.`,'');
   const cnt=p=>feats.filter(f=>f.p===p).length;

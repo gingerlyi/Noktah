@@ -1468,6 +1468,10 @@ button.badge{cursor:pointer}
 .info-pal{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--ink);font:500 .8rem/1.4 var(--f-mono)}
 .info-pal li{display:inline-flex;align-items:center;gap:6px}
 .info-pal i{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px var(--line)}
+.info-st{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.info-st li{--st:var(--t);padding:2px 9px;border-radius:999px;color:var(--st);background:color-mix(in srgb,var(--st) 14%,transparent);font-size:.8rem;font-weight:600}
+:root[data-theme="dark"] .info-st li{--st:var(--g)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .info-st li{--st:var(--g)}}
 .info-fit{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .info-roles{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .info-roles li{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--field)}

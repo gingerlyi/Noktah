@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { api } from '../lib/api.js';
 import { libraryItems, useApp } from '../lib/app.jsx';
 import { BLOK, GAYA, PLATFORM, T } from '../lib/catalog.js';
-import { alurAktif, briefDesain, checkPrd, fiturAktif, fromTemplate, genMd, halamanPeran, isMobile, lines, namaPeran, peranAktif, rasio } from '../lib/prd.js';
+import { alurAktif, briefDesain, checkPrd, fiturAktif, fromTemplate, genMd, halamanPeran, isMobile, lines, namaPeran, peranAktif, rasio, skalaHuruf, statusPrd } from '../lib/prd.js';
 import { bentukPeran, mockHTML } from '../lib/mock.js';
 import { ResultPanel, checkSummary, useCopyPrd } from '../components/Editor.jsx';
 import { Library } from '../components/Library.jsx';
@@ -35,6 +35,7 @@ export default function LibraryPage() {
 function PrdInfo({ state }) {
   const t = T[state.tpl];
   const b = briefDesain(state);
+  const status = statusPrd(state);
   const g = b.g;
   const mobile = t.platform === 'mobile';
   const unit = mobile ? 'layar' : 'halaman';
@@ -162,6 +163,29 @@ function PrdInfo({ state }) {
             <dt>Hindari</dt>
             <dd>{g.hindari}</dd>
           </div>
+          <div>
+            <dt>Ukuran</dt>
+            <dd>
+              Huruf {skalaHuruf(state).map(([n, px]) => `${n} ${px}`).join(', ')} px. Sudut {g.sudut} px, garis {g.garis} px
+              {g.kapsul ? ', tombol kapsul' : ''}.
+            </dd>
+          </div>
+          {status.length > 0 && (
+            <div>
+              <dt>Label status</dt>
+              <dd>
+                <ul className="info-st">
+                  {status.flatMap((x) =>
+                    x.label.map((l) => (
+                      <li key={l} style={{ '--t': x.terang, '--g': x.gelap }} title={x.arti}>
+                        {l}
+                      </li>
+                    )),
+                  )}
+                </ul>
+              </dd>
+            </div>
+          )}
           <div>
             <dt>Nada bahasa</dt>
             <dd>{g.nada}</dd>
