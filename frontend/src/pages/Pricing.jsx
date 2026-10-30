@@ -26,11 +26,20 @@ const PREMIUM = [
 ];
 const tanggal = (iso) => new Date(iso).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
+const NOTE = 'm-0 text-[.92rem] text-muted';
+const PLAN = 'sheet flex flex-col items-start gap-3 p-[clamp(22px,3vw,34px)]';
+const HARGA_H2 = 'm-0 font-display text-[clamp(2rem,4vw,2.8rem)]/none font-medium';
+
 function Daftar({ items }) {
   return (
-    <ul className="plan-list">
+    <ul className="mt-1.5 mb-2.5 flex flex-1 list-none flex-col gap-2.25 p-0">
       {items.map((t) => (
-        <li key={t}>{t}</li>
+        <li
+          key={t}
+          className="relative pl-5.5 before:absolute before:top-[.5em] before:left-0.5 before:size-2 before:bg-ink before:[clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)] before:content-['']"
+        >
+          {t}
+        </li>
       ))}
     </ul>
   );
@@ -49,7 +58,7 @@ export default function Pricing() {
     );
   } else if (user.premium) {
     aksi = (
-      <p className="plan-note">
+      <p className={NOTE}>
         Premium aktif{user.premiumUntil ? ` sampai ${tanggal(user.premiumUntil)}` : ''}.
       </p>
     );
@@ -60,7 +69,7 @@ export default function Pricing() {
       </a>
     );
   } else {
-    aksi = <p className="plan-note">Hubungi admin untuk mengaktifkan Premium di akun {user.email}.</p>;
+    aksi = <p className={NOTE}>Hubungi admin untuk mengaktifkan Premium di akun {user.email}.</p>;
   }
 
   return (
@@ -71,25 +80,27 @@ export default function Pricing() {
           <p>Mulai gratis. Upgrade saat kamu butuh lebih dari satu PRD tersimpan.</p>
         </div>
       </div>
-      <div className="plans">
-        <section className="plan sheet" aria-labelledby="p-gratis">
+      <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
+        <section className={PLAN} aria-labelledby="p-gratis">
           <span className="step">Gratis</span>
-          <h2 id="p-gratis">Rp 0</h2>
+          <h2 id="p-gratis" className={HARGA_H2}>
+            Rp 0
+          </h2>
           <p className="hint">Untuk mencoba dan menyusun satu PRD.</p>
           <Daftar items={GRATIS} />
           {user ? (
-            <p className="plan-note">{user.premium ? 'Termasuk di paketmu.' : 'Paketmu saat ini.'}</p>
+            <p className={NOTE}>{user.premium ? 'Termasuk di paketmu.' : 'Paketmu saat ini.'}</p>
           ) : (
             <Link className="btn quiet big" to="/daftar">
               Buat akun gratis
             </Link>
           )}
         </section>
-        <section className="plan plan-pro sheet" aria-labelledby="p-premium">
+        <section className={PLAN + ' border-ink'} aria-labelledby="p-premium">
           <span className="step">Premium</span>
-          <h2 id="p-premium">
+          <h2 id="p-premium" className={HARGA_H2}>
             {HARGA.bulan}
-            <small> / bulan</small>
+            <small className="font-mono text-base/normal font-normal text-muted"> / bulan</small>
           </h2>
           <p className="hint">
             atau {HARGA.tahun} / tahun ({HARGA.hemat}). Untuk freelancer, agensi, dan pemilik usaha dengan beberapa proyek.
@@ -98,9 +109,11 @@ export default function Pricing() {
           {aksi}
         </section>
       </div>
-      <section className="sheet plan-faq" aria-labelledby="h-faq">
-        <h2 id="h-faq">Tanya jawab</h2>
-        <dl>
+      <section className="sheet p-[clamp(22px,3vw,34px)]" aria-labelledby="h-faq">
+        <h2 id="h-faq" className="mt-0 mb-3 font-display text-[1.5rem]/[1.2] font-medium">
+          Tanya jawab
+        </h2>
+        <dl className="[&_dd]:mx-0 [&_dd]:mt-1 [&_dd]:mb-0 [&_dd]:text-muted [&_dt]:mt-3.5 [&_dt]:font-semibold">
           <dt>Bagaimana cara membayar?</dt>
           <dd>Tekan Upgrade ke Premium dan ikuti petunjuknya. Setelah pembayaran diterima, admin mengaktifkan Premium di akunmu.</dd>
           <dt>Apa yang terjadi bila Premium berakhir?</dt>

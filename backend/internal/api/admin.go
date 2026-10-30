@@ -26,6 +26,13 @@ var builtinTemplates = map[string]bool{
 	"m-ojek": true, "m-kurir": true, "m-warga": true, "m-posyandu": true, "m-sales": true,
 	"m-galon": true, "m-jualbeli": true, "m-tani": true, "m-jemput": true, "m-nikah": true,
 	"m-arisan": true, "m-esports": true,
+	"apotek": true, "kafe": true, "coworking": true, "lesprivat": true, "percetakan": true,
+	"umrah": true, "pengaduan": true, "banksampah": true, "hukum": true, "petshop": true, "renovasi": true,
+	"podcast": true, "lari": true, "lelang": true, "aset": true, "busantar": true,
+	"m-apotek": true, "m-servis": true, "m-parkir": true,
+	"m-daycare": true, "m-sampah": true, "m-donor": true, "m-kajian": true,
+	"m-bengkel": true, "m-pasar": true, "m-hewan": true, "m-sewamotor": true, "m-ternak": true,
+	"m-ngaji": true, "m-kopi": true, "m-relawan": true, "m-kampus": true,
 }
 
 func (s *Server) handleStats(w http.ResponseWriter, r *http.Request, u store.User) {

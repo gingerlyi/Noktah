@@ -9,10 +9,12 @@ import { GAYA, PLATFORM, UNGGULAN, WARNA } from '../lib/catalog.js';
 import { checkPrd, fiturAktif, fromTemplate, genMd, halamanAktif, peranAktif } from '../lib/prd.js';
 import { skor } from '../components/Library.jsx';
 import { downloadMd, useCopyPrd } from '../components/Editor.jsx';
-import { MockThumb } from '../components/ui.jsx';
+import { GayaSwatch, MockThumb } from '../components/ui.jsx';
 
 const SIMPAN = 'rprd-wizard';
 const LANGKAH = ['Usaha', 'Nama', 'Peran', 'Tampilan', 'Hasil'];
+const Q = 'mt-1.5 mb-0 font-display text-[clamp(1.2rem,2vw,1.5rem)]/[1.25] font-medium';
+const TIGA = 'grid max-[861px]:grid-cols-1';
 const ABAIKAN = new Set(['dan', 'yang', 'untuk', 'dengan', 'saya', 'kami', 'usaha', 'website', 'aplikasi', 'sistem', 'online', 'bisnis']);
 const low = (x) => String(x || '').toLowerCase();
 
@@ -114,7 +116,7 @@ export default function Wizard() {
   };
 
   return (
-    <main className="view tight wz">
+    <main className="view tight [&_a]:text-ink">
       <div className="view-head">
         <div>
           <h1>Buat PRD dari usahamu</h1>
@@ -127,19 +129,29 @@ export default function Wizard() {
         )}
       </div>
 
-      <ol className="wz-steps" aria-label="Langkah">
+      <ol
+        className="m-0 flex list-none flex-wrap gap-x-4.5 gap-y-1.5 p-0 font-mono text-[.8rem]/none font-medium tracking-[.06em] text-muted uppercase"
+        aria-label="Langkah"
+      >
         {LANGKAH.map((l, i) => (
-          <li key={l} aria-current={i === d.step ? 'step' : undefined} className={i < d.step ? 'is-done' : ''}>
-            <span>{i + 1}</span>
+          <li key={l} aria-current={i === d.step ? 'step' : undefined} className="group flex items-center gap-2 aria-[current]:text-ink">
+            <span
+              className={
+                'grid size-6 place-items-center border group-aria-[current]:border-ink group-aria-[current]:bg-ink group-aria-[current]:text-paper ' +
+                (i < d.step ? 'border-ink text-ink' : 'border-line')
+              }
+            >
+              {i + 1}
+            </span>
             {l}
           </li>
         ))}
       </ol>
 
-      <section className="sheet wz-card">
+      <section className="sheet flex flex-col items-stretch gap-3.5 p-[clamp(20px,3vw,34px)] [&>.seg]:self-start [&>input[type=text]]:min-h-12.5 [&>input[type=text]]:text-[1.1rem]">
         {d.step === 0 && (
           <>
-            <label className="wz-q" htmlFor="wz-jenis">
+            <label className={Q} htmlFor="wz-jenis">
               Usaha apa yang mau kamu buatkan sistemnya?
             </label>
             <input
@@ -162,9 +174,15 @@ export default function Wizard() {
                 <p className="hint">
                   {cadangan ? 'Belum ada yang cocok persis. Pilih salah satu PRD populer ini, atau ubah kata kuncinya.' : 'PRD yang paling mirip dengan usahamu. Pilih satu sebagai dasar:'}
                 </p>
-                <div className="wz-picks">
+                <div className={TIGA + ' grid-cols-3 gap-3.5'}>
                   {pilihan.map((t) => (
-                    <button type="button" key={t.id} className="wz-pick" aria-pressed={d.tpl === t.id} onClick={() => pilih(t)}>
+                    <button
+                      type="button"
+                      key={t.id}
+                      className="flex cursor-pointer flex-col items-start gap-1.5 overflow-hidden border border-line bg-surface pb-3 text-left text-ink hover:border-ink aria-pressed:border-ink aria-pressed:outline-2 aria-pressed:-outline-offset-2 aria-pressed:outline-ink [&>.tpl-thumb]:w-full [&>.tpl-thumb]:self-stretch [&>b]:px-3 [&>span]:px-3 [&>span]:text-[.84rem] [&>span]:text-muted"
+                      aria-pressed={d.tpl === t.id}
+                      onClick={() => pilih(t)}
+                    >
                       <MockThumb state={t.state} className="tpl-thumb" lazy />
                       <b>{t.name}</b>
                       <span>{t.cocok.slice(0, 2).join(' · ')}</span>
@@ -178,11 +196,11 @@ export default function Wizard() {
 
         {d.step === 1 && (
           <>
-            <label className="wz-q" htmlFor="wz-nama">
+            <label className={Q} htmlFor="wz-nama">
               Apa nama usahamu?
             </label>
             <input id="wz-nama" type="text" autoFocus maxLength={80} placeholder={dasar?.state.nama} value={d.nama} onChange={(ev) => set({ nama: ev.target.value })} />
-            <label className="wz-q" htmlFor="wz-tag">
+            <label className={Q} htmlFor="wz-tag">
               Kalimat pembuka di halaman utama
             </label>
             <input id="wz-tag" type="text" maxLength={140} value={d.tagline} onChange={(ev) => set({ tagline: ev.target.value })} />
@@ -192,20 +210,21 @@ export default function Wizard() {
 
         {d.step === 2 && state && (
           <>
-            <p className="wz-q">Siapa saja yang akan memakai sistemnya?</p>
-            <div className="wz-roles">
+            <p className={Q}>Siapa saja yang akan memakai sistemnya?</p>
+            <div className={TIGA + ' grid-cols-2 gap-2.5'}>
               {state.peran.map((r) => {
                 const on = !d.peranOff.includes(r.id);
                 return (
-                  <label key={r.id} className="wz-role">
+                  <label key={r.id} className="flex cursor-pointer items-start gap-3 border border-line bg-field p-3.5 has-checked:border-ink">
                     <input
                       type="checkbox"
+                      className="mt-1 accent-ink"
                       checked={on}
                       onChange={() => set({ peranOff: on ? [...d.peranOff, r.id] : d.peranOff.filter((x) => x !== r.id) })}
                     />
                     <span>
                       <b>{r.n}</b>
-                      <small>{r.d}</small>
+                      <small className="block text-[.86rem] text-muted">{r.d}</small>
                     </span>
                   </label>
                 );
@@ -217,34 +236,39 @@ export default function Wizard() {
 
         {d.step === 3 && state && (
           <>
-            <p className="wz-q">Warna merek</p>
+            <p className={Q}>Warna merek</p>
             <div className="swatches">
               {WARNA.map((c) => (
                 <button type="button" key={c} className="sw" style={{ background: c }} aria-label={'Warna ' + c} aria-pressed={c === state.warna} onClick={() => set({ warna: c })} />
               ))}
               <input type="color" value={state.warna} aria-label="Warna lain" onChange={(ev) => set({ warna: ev.target.value })} />
             </div>
-            <p className="wz-q">Gaya desain</p>
-            <div className="wz-gaya">
+            <p className={Q}>Gaya desain</p>
+            <div className="flex max-h-60 flex-wrap gap-2 overflow-y-auto">
               {Object.entries(GAYA).map(([k, g]) => (
-                <button type="button" key={k} aria-pressed={k === state.gaya} title={g.ciri} onClick={() => set({ gaya: k })}>
-                  <i className="gy-swatch" data-gaya={k} aria-hidden="true">
-                    Aa
-                  </i>
+                <button
+                  type="button"
+                  key={k}
+                  className="flex cursor-pointer items-center gap-2 border border-line bg-surface py-1.5 pr-3 pl-1.5 text-[.88rem] text-ink aria-pressed:border-ink aria-pressed:outline aria-pressed:outline-ink"
+                  aria-pressed={k === state.gaya}
+                  title={g.ciri}
+                  onClick={() => set({ gaya: k })}
+                >
+                  <GayaSwatch gaya={k} />
                   {g.pendek}
                 </button>
               ))}
             </div>
-            <MockThumb state={state} className="tpl-thumb wz-preview" />
+            <MockThumb state={state} className="tpl-thumb max-w-155 border border-line" />
           </>
         )}
 
         {d.step === 4 && state && (
-          <div className="wz-result">
-            <MockThumb state={state} className="tpl-thumb wz-preview" />
-            <div className="wz-sum">
-              <p className="wz-q">PRD {state.nama} sudah jadi.</p>
-              <ul>
+          <div className={TIGA + ' grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start gap-7'}>
+            <MockThumb state={state} className="tpl-thumb border border-line" />
+            <div className="flex flex-col gap-3.5">
+              <p className={Q.replace('mt-1.5', 'mt-0')}>PRD {state.nama} sudah jadi.</p>
+              <ul className="m-0 flex flex-col gap-1.5 pl-4.5 text-muted">
                 <li>{peranAktif(state).length} peran: {peranAktif(state).map((r) => r.n).join(', ')}</li>
                 <li>{halamanAktif(state).length} halaman dan {fiturAktif(state).length} kebutuhan fungsional</li>
                 <li>
@@ -269,7 +293,7 @@ export default function Wizard() {
           </div>
         )}
 
-        <div className="row wz-nav">
+        <div className="row mt-1.5 justify-end border-t border-line pt-4">
           {d.step > 0 && (
             <button type="button" className="btn quiet" onClick={() => ke(d.step - 1)}>
               Kembali

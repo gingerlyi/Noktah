@@ -81,8 +81,10 @@ export default function Shared() {
 
       <ResultPanel state={data.state} text={text} issues={issues} tab={tab} onTab={setTab} />
 
-      <section className="sheet komentar" aria-labelledby="h-komentar">
-        <h2 id="h-komentar">Komentar ({data.comments.length})</h2>
+      <section className="sheet flex flex-col gap-3.5 p-[clamp(20px,3vw,30px)]" aria-labelledby="h-komentar">
+        <h2 id="h-komentar" className="m-0 font-display text-[1.4rem]/[1.2] font-medium">
+          Komentar ({data.comments.length})
+        </h2>
         {data.comments.length === 0 ? (
           <p className="hint">Belum ada komentar. Jadilah yang pertama memberi masukan.</p>
         ) : (
@@ -95,7 +97,7 @@ export default function Shared() {
             ))}
           </ol>
         )}
-        <form className="komentar-form" onSubmit={kirim}>
+        <form className="flex max-w-160 flex-col gap-3" onSubmit={kirim}>
           <div className="fld">
             <label htmlFor="k-nama">Nama</label>
             <input id="k-nama" type="text" required maxLength={60} value={form.name} onChange={(ev) => setForm({ ...form, name: ev.target.value })} />
@@ -105,7 +107,7 @@ export default function Shared() {
             <textarea id="k-isi" required maxLength={2000} rows={4} value={form.body} onChange={(ev) => setForm({ ...form, body: ev.target.value })} />
           </div>
           {/* Kolom jebakan untuk bot: tersembunyi dari pengunjung dan pembaca layar. */}
-          <input className="jebakan" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form.website} onChange={(ev) => setForm({ ...form, website: ev.target.value })} />
+          <input className="absolute -left-[9999px] size-px opacity-0" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form.website} onChange={(ev) => setForm({ ...form, website: ev.target.value })} />
           <div className="row">
             <button type="submit" className="btn" disabled={busy}>
               Kirim komentar

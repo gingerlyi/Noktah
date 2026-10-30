@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 // Mode biasa: permintaan /api diteruskan ke server Go di port 8080 saat pengembangan.
 // Mode demo ("npm run build:demo"): api.js diganti api.demo.js, sehingga aplikasi berjalan
@@ -8,7 +9,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const demo = mode === 'demo';
   return {
-    plugins: [react()],
+    plugins: [react(), tailwindcss()],
     resolve: demo
       ? {
           alias: [

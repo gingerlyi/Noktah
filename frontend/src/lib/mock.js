@@ -1,8 +1,8 @@
 // Maket website: mengubah isi PRD menjadi HTML pratinjau. Semua teks dari pengguna di-escape dengan e().
 // Isi contoh (foto, harga, daftar) diambil dari katalog lewat T[s.tpl].isi; nama, tagline, tombol,
 // warna, gaya, halaman, fitur, dan bagian yang dipilih mengikuti PRD.
-import {T} from './catalog.js';
-import {e,fiturPeran,halamanPeran,lines,panelPeran,peranAktif} from './prd.js';
+import {GAYA,T} from './catalog.js';
+import {e,fiturPeran,halamanPeran,kontras,lines,panelPeran,peranAktif} from './prd.js';
 
 // Angka KPI yang panjang (misalnya "Rp 12.450.000" atau "2.640 kotak") memakai huruf lebih kecil agar tetap satu baris.
 const kpiPanjang=v=>String(v).length>8?' class="long"':'';
@@ -11,11 +11,30 @@ const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const hex=a=>'#'+a.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
 const mix=(a,b,t)=>hex(rgb(a).map((v,i)=>v+(rgb(b)[i]-v)*t));
 function lum(h){const [r,g,b]=rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b}
+// Teks di atas warna aksen: putih atau hitam, mana yang kontrasnya lebih tinggi (sama dengan design brief).
 export function accentFor(s){
   let a=/^#[0-9a-f]{6}$/i.test(s.warna)?s.warna:'#2456e6';
-  if(s.gaya==='gelap'&&lum(a)<.16)a=mix(a,'#ffffff',.38);
-  return {a,on:lum(a)>.42?'#14171f':'#ffffff'};
+  const g=GAYA[s.gaya];
+  if((s.gaya==='gelap'||(g?.t&&lum(g.latar)<.2))&&lum(a)<.16)a=mix(a,'#ffffff',.38);
+  return {a,on:kontras(a,'#ffffff')>=kontras(a,'#14171f')?'#ffffff':'#14171f'};
 }
+
+// Atribut gaya untuk akar maket. Gaya dari data (katalog/gaya-*.js) membawa palet, huruf, sudut, dan garis sebagai
+// variabel CSS, serta ciri tambahan sebagai atribut data-* (lihat "Gaya dari data" di mock.css).
+// Dipakai sebagai teks di HTML maket dan sebagai objek di React (DesignBrief).
+export function gayaProps(s){
+  const {a,on}=accentFor(s),g=GAYA[s.gaya],t=g?.t;
+  const style={'--m-accent':a,'--m-on':on},data={'data-gaya':s.gaya};
+  if(t){
+    Object.assign(style,{'--m-bg':g.latar,'--m-surface':t.surface,'--m-fg':g.teks,'--m-muted':t.muted,'--m-line':t.line,'--m-r':g.sudut+'px','--m-bw':g.garis+'px','--f-display':t.fd,'--f-body':t.fb});
+    data['data-tok']='';
+    for(const k of ['bayang','pola','judul'])if(t[k])data['data-'+k]=t[k];
+    if(g.kapsul)data['data-kapsul']='';
+    if(lum(g.latar)<.2)data['data-gelap']='';
+  }
+  return {style,data};
+}
+const gayaAttr=s=>{const {style,data}=gayaProps(s);return Object.entries(data).map(([k,v])=>` ${k}="${e(v)}"`).join('')+` style="${e(Object.entries(style).map(([k,v])=>k+':'+v).join(';'))}"`};
 
 /* ---------- Maket website ---------- */
 /* Ilustrasi pengganti foto: dipilih dari kata di label foto (misalnya "Foto rendang"), atau dari kategori dan nama
@@ -123,7 +142,7 @@ const NAV_LEWAT=/^(detail|halaman (produk|toko|detail)|checkout|formulir|hasil p
 const safe=(fn,c)=>{try{return fn(c)}catch{return ''}};
 
 function webHTML(s,mobile){
-  const t=T[s.tpl],{a,on}=accentFor(s);
+  const t=T[s.tpl];
   tema=[t.kategori,s.jenis,s.nama].join(' ');
   nImg=0;
   const utama=peranAktif(s)[0];
@@ -148,7 +167,7 @@ function webHTML(s,mobile){
     const nav=menu.length>=2?menu:pages;
     inner=`<div class="m-nav">${logo}<div class="m-links">${nav.slice(0,6).map(p=>`<span>${e(p)}</span>`).join('')}</div>${tools?`<div class="m-tools">${tools}</div>`:''}<span class="m-btn">${e(s.cta)}</span><span class="m-burger"></span></div>${body||'<section class="m-sec"><p>Belum ada bagian yang dipilih.</p></section>'}<div class="m-foot"><span>© 2026 ${e(s.nama)}</span><span>${nav.slice(0,5).map(e).join(' · ')}</span></div>${has(/whatsapp/i)?'<div class="m-wa">WA</div>':''}`;
   }
-  return `<div class="mock${mobile?' is-mobile':''}" data-gaya="${e(s.gaya)}" style="--m-accent:${a};--m-on:${on}">${inner}</div>`;
+  return `<div class="mock${mobile?' is-mobile':''}"${gayaAttr(s)}>${inner}</div>`;
 }
 
 /* ---------- Maket aplikasi mobile ----------
@@ -188,7 +207,7 @@ const A={
  'a-status':c=>{const st=c.i.status;return `<div class="a-card"><div class="a-h">${e(st.judul)}</div><div class="a-steps">${st.langkah.map((l,k)=>`<span class="${k<st.aktif?'done':k===st.aktif?'on':''}"><i></i>${e(l)}</span>`).join('')}</div><small class="a-note">${e(st.ket)}</small></div>`},
 };
 function appHTML(s){
-  const t=T[s.tpl],{a,on}=accentFor(s);
+  const t=T[s.tpl];
   tema=[t.kategori,s.jenis,s.nama].join(' ');
   nImg=0;
   const utama=peranAktif(s)[0];
@@ -196,7 +215,7 @@ function appHTML(s){
   const c={s,i:t.isi};
   const body=s.blok.filter(b=>b.on&&A[b.id]).map(b=>safe(A[b.id],c)).join('');
   const tabs=pages.slice(0,4);
-  return `<div class="mock is-mobile is-app" data-gaya="${e(s.gaya)}" style="--m-accent:${a};--m-on:${on}"><div class="a-screen"><div class="a-status"><span>9.41</span><span>5G ▮▮▮</span></div><div class="a-body">${body||'<p>Belum ada bagian yang dipilih.</p>'}</div>${tabs.length?`<div class="a-tabs">${tabs.map((p,k)=>`<span class="${k?'':'on'}"><i></i>${e(p)}</span>`).join('')}</div>`:''}</div></div>`;
+  return `<div class="mock is-mobile is-app"${gayaAttr(s)}><div class="a-screen"><div class="a-status"><span>9.41</span><span>5G ▮▮▮</span></div><div class="a-body">${body||'<p>Belum ada bagian yang dipilih.</p>'}</div>${tabs.length?`<div class="a-tabs">${tabs.map((p,k)=>`<span class="${k?'':'on'}"><i></i>${e(p)}</span>`).join('')}</div>`:''}</div></div>`;
 }
 
 /* ---------- Pratinjau peran lain ----------
@@ -220,17 +239,15 @@ function panelBody(s,role,p){
   return h;
 }
 function panelHTML(s,role,mobile){
-  const {a,on}=accentFor(s);
   tema=[T[s.tpl].kategori,s.jenis,s.nama].join(' ');
   nImg=0;
   const pages=halamanPeran(s,role.id).map(p=>p.n);
   const p=panelPeran(s.tpl,role.id);
   const logo=`<div class="m-logo" title="${e(s.nama)}"><i>${e((s.nama.trim()[0]||'W').toUpperCase())}</i><span>${e(s.nama)}</span></div>`;
   const inisial=e((role.n.trim()[0]||'P').toUpperCase());
-  return `<div class="mock is-panel${mobile?' is-mobile':''}" data-gaya="${e(s.gaya)}" style="--m-accent:${a};--m-on:${on}"><div class="m-app"><aside class="m-side">${logo}<span class="m-role">${e(role.n)}</span>${pages.map((x,i)=>`<a class="${i?'':'on'}">${e(x)}</a>`).join('')}</aside><div class="m-main"><div class="m-top"><span class="m-burger" style="margin:0 6px 0 0"></span><b>${e(pages[0]||role.n)}</b><span class="m-rolepill">${e(role.n)}</span><span class="m-ava-sm">${inisial}</span></div>${panelBody(s,role,p)}</div></div></div>`;
+  return `<div class="mock is-panel${mobile?' is-mobile':''}"${gayaAttr(s)}><div class="m-app"><aside class="m-side">${logo}<span class="m-role">${e(role.n)}</span>${pages.map((x,i)=>`<a class="${i?'':'on'}">${e(x)}</a>`).join('')}</aside><div class="m-main"><div class="m-top"><span class="m-burger" style="margin:0 6px 0 0"></span><b>${e(pages[0]||role.n)}</b><span class="m-rolepill">${e(role.n)}</span><span class="m-ava-sm">${inisial}</span></div>${panelBody(s,role,p)}</div></div></div>`;
 }
 function appRoleHTML(s,role){
-  const {a,on}=accentFor(s);
   tema=[T[s.tpl].kategori,s.jenis,s.nama].join(' ');
   nImg=0;
   const tabs=halamanPeran(s,role.id).slice(0,4).map(p=>p.n);
@@ -242,7 +259,7 @@ function appRoleHTML(s,role){
     const fs=fiturPeran(s,role.id).slice(0,5);
     body+=`<div class="a-h">Yang dikerjakan ${e(role.n.toLowerCase())}</div><div class="a-list">${fs.map(f=>`<div><span class="a-dot"></span><div><b>${e(f.n)}</b><small>${e(f.d)}</small></div><em>${e(f.p)}</em></div>`).join('')}</div>`;
   }
-  return `<div class="mock is-mobile is-app" data-gaya="${e(s.gaya)}" style="--m-accent:${a};--m-on:${on}"><div class="a-screen"><div class="a-status"><span>9.41</span><span>5G ▮▮▮</span></div><div class="a-body">${body}</div>${tabs.length?`<div class="a-tabs">${tabs.map((x,k)=>`<span class="${k?'':'on'}"><i></i>${e(x)}</span>`).join('')}</div>`:''}</div></div>`;
+  return `<div class="mock is-mobile is-app"${gayaAttr(s)}><div class="a-screen"><div class="a-status"><span>9.41</span><span>5G ▮▮▮</span></div><div class="a-body">${body}</div>${tabs.length?`<div class="a-tabs">${tabs.map((x,k)=>`<span class="${k?'':'on'}"><i></i>${e(x)}</span>`).join('')}</div>`:''}</div></div>`;
 }
 // Bentuk pratinjau untuk sebuah peran: 'situs' (halaman utama website), 'app' (layar aplikasi), atau 'panel' (panel web).
 export function bentukPeran(s,roleId){
@@ -264,6 +281,5 @@ export function mockHTML(s,mobile,roleId){
 /* Gambar kecil untuk kartu perpustakaan, selalu selebar 1120 px. Aplikasi mobile digambar sebagai poster berisi ponsel. */
 export function thumbHTML(s){
   if(T[s.tpl].platform!=='mobile')return webHTML(s,false);
-  const {a,on}=accentFor(s);
-  return `<div class="mock-poster" data-gaya="${e(s.gaya)}" style="--m-accent:${a};--m-on:${on}"><div class="mp-text"><span>Aplikasi mobile</span><b>${e(s.nama)}</b><p>${e(s.tagline)}</p></div><div class="mp-phone">${appHTML(s)}</div></div>`;
+  return `<div class="mock-poster"${gayaAttr(s)}><div class="mp-text"><span>Aplikasi mobile</span><b>${e(s.nama)}</b><p>${e(s.tagline)}</p></div><div class="mp-phone">${appHTML(s)}</div></div>`;
 }

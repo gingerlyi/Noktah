@@ -1,0 +1,949 @@
+/* Tailwind CSS. Tampilan situs ditulis sebagai kelas utilitas di JSX; yang dipakai di banyak halaman menjadi
+   komponen di bawah (.btn, .sheet, ...). Lapisan dari bawah ke atas: tema, aturan dasar elemen, komponen,
+   tampilan maket PRD (mock.css), lalu utilitas, jadi kelas di JSX selalu menang. Preflight Tailwind tidak
+   dipakai; aturan dasarnya ada di @layer base. */
+@layer theme, base, components, mock, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import './mock.css' layer(mock);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Titik henti situs. max-md berarti lebar <= 760 px, md berarti >= 761 px, dan seterusnya. */
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-hp: 561px;
+  --breakpoint-sm: 601px;
+  --breakpoint-md: 761px;
+  --breakpoint-lg: 901px;
+  --breakpoint-xl: 1001px;
+  --breakpoint-nav: 1140px;
+  --breakpoint-wide: 1360px;
+}
+
+/* Varian dark: mengikuti tombol tema (data-theme di <html>), bukan setelan perangkat. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Animasi situs, dipakai lewat kelas animate-[nama_...]. Animasi maket PRD ada di mock.css. */
+@theme {
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes type {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+  }
+  @keyframes doc-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+    }
+  }
+  @keyframes frame-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+  @keyframes tour {
+    to {
+      transform: translateY(calc((var(--frame) - 100%) * 0.55));
+    }
+  }
+  @keyframes shimmer {
+    50% {
+      opacity: 0.45;
+    }
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes bounce {
+    0%,
+    60%,
+    100% {
+      transform: none;
+      opacity: 0.5;
+    }
+    30% {
+      transform: translateY(-3px);
+      opacity: 1;
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 16px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  @keyframes rs-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Warna dan huruf Tailwind memakai token situs, jadi ikut berubah saat tema terang/gelap berganti. */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-field: var(--field);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --font-display: var(--f-display);
+  --font-body: var(--f-body);
+  --font-mono: var(--f-mono);
+}
+
+/* Token situs, gaya hitam-putih. Tema dipilih lewat data-theme di <html>; bawaannya gelap (lihat lib/app.jsx). */
+:root {
+  --accent: #0a0a0a;
+  --accent-2: #333333;
+  --on-accent: #ffffff;
+  --grad: var(--accent);
+  --grad-v: var(--accent);
+  --grad-soft: color-mix(in srgb, var(--accent) 5%, var(--surface));
+  --press: brightness(0.92);
+  --accent-soft: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  --ring: color-mix(in srgb, var(--accent) 24%, transparent);
+  --dot: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --field: #f4f4f4;
+  --ink: #0a0a0a;
+  --muted: #5e5e5e;
+  --line: #dcdcdc;
+  --chart: var(--accent);
+  --ok: var(--accent);
+  --ok-soft: var(--accent-soft);
+  --warn: var(--ink);
+  --warn-soft: #f1f3f7;
+  --danger: #b3263f;
+  --danger-soft: #fbe9ec;
+  --shadow: none;
+  --shadow-up: none;
+  --shadow-xl: none;
+  --glow: 0 0 0 transparent;
+  --glass: color-mix(in srgb, var(--surface) 76%, transparent);
+  --skel: color-mix(in srgb, var(--ink) 7%, transparent);
+  --aura-1: transparent;
+  --aura-2: transparent;
+  --bezel: #111827;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --f-display: 'Pixelify Sans', 'IBM Plex Mono', ui-monospace, monospace;
+  --f-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Jarak elemen yang menempel (panel hasil, pengalih panel) dari atas layar: tinggi navigasi ditambah sedikit ruang. */
+  --stick: calc(env(safe-area-inset-top, 0px) + 86px);
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  --accent: #f5f5f5;
+  --accent-2: #cccccc;
+  --on-accent: #000000;
+  --grad-soft: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  --press: brightness(1.1);
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  --dot: color-mix(in srgb, var(--accent) 22%, var(--surface));
+  --paper: #000000;
+  --surface: #0d0d0d;
+  --field: #161616;
+  --ink: #f5f5f5;
+  --muted: #a3a3a3;
+  --line: #2a2a2a;
+  --warn-soft: #242932;
+  --danger: #ff8fa3;
+  --danger-soft: #3a1620;
+  --glass: color-mix(in srgb, var(--surface) 72%, transparent);
+  --skel: color-mix(in srgb, var(--ink) 9%, transparent);
+  --aura-1: color-mix(in srgb, #0077b6 22%, transparent);
+  --aura-2: color-mix(in srgb, #00b4d8 14%, transparent);
+  --bezel: #05070b;
+  color-scheme: dark;
+}
+@media (max-width: 760px) {
+  :root {
+    --stick: calc(env(safe-area-inset-top, 0px) + 78px);
+  }
+}
+
+/* Palet gelap untuk footer dan blok penutup, sama di mode terang dan gelap. */
+@utility tema-gelap {
+  --surface: #0d0d0d;
+  --field: #161616;
+  --line: #2a2a2a;
+  --ink: #f5f5f5;
+  --muted: #a3a3a3;
+  --accent: #f5f5f5;
+  --accent-soft: rgba(245, 245, 245, 0.1);
+  --on-accent: #000000;
+  --grad: #f5f5f5;
+  --nav-bg: #000000;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  img {
+    max-width: 100%;
+  }
+  html {
+    scroll-padding-top: 100px;
+  }
+  body {
+    @apply m-0 bg-paper font-body text-base/[1.6] text-ink antialiased;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  textarea,
+  select {
+    @apply w-full min-w-0 rounded-[10px] border border-line bg-field px-3 py-2.5 text-base/[1.4];
+    &:focus {
+      @apply border-accent shadow-[0_0_0_3px_var(--ring)] outline-none;
+    }
+  }
+  /* Kursor bawaan disembunyikan selama kursor ikon tampil (lihat usePengikut di Layout.jsx), kecuali di kolom teks. */
+  html.kursor-ikon,
+  html.kursor-ikon * {
+    cursor: none !important;
+  }
+  html.kursor-ikon :is(input:not([type='checkbox'], [type='radio'], [type='range'], [type='button'], [type='submit']), textarea, [contenteditable='true']) {
+    cursor: text !important;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  input[type='color'] {
+    @apply h-9 w-12 cursor-pointer rounded-lg border border-line bg-field p-0;
+  }
+  ::placeholder {
+    @apply text-muted opacity-85;
+  }
+  textarea {
+    @apply min-h-21 resize-y leading-normal;
+  }
+  :is(input, textarea, select) {
+    @apply motion-safe:transition-[border-color,background-color,color,box-shadow] motion-safe:duration-150;
+  }
+}
+
+/* Komponen bersama yang dipakai di banyak halaman. */
+@layer components {
+  .page {
+    @apply mx-auto flex max-w-330 flex-col gap-10 px-[clamp(16px,3vw,40px)] pt-4 pb-20;
+  }
+  .view {
+    @apply flex flex-col gap-14 max-md:gap-11;
+    &.tight {
+      @apply gap-5.5;
+      &:is(main) > .view-head {
+        @apply motion-safe:animate-[rise_.55s_var(--ease-out)_both];
+      }
+    }
+  }
+  .view-head {
+    @apply flex flex-wrap items-end justify-between gap-4;
+    & h1 {
+      @apply m-0 font-display text-[clamp(1.6rem,3vw,2.1rem)]/[1.15] font-medium;
+    }
+    & p {
+      @apply mt-1.5 mb-0 max-w-[64ch] text-muted;
+    }
+  }
+  .dash-sec {
+    @apply flex flex-col gap-5;
+    & h2 {
+      @apply m-0 font-display text-[1.3rem]/[1.25] font-medium;
+    }
+  }
+  .sheet {
+    @apply min-w-0 rounded-2xl border border-line bg-surface;
+  }
+  .empty {
+    @apply flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line px-6 py-11 text-center;
+    & h2 {
+      @apply m-0 font-display text-[1.3rem]/[1.25] font-medium;
+    }
+    & p {
+      @apply m-0 max-w-[48ch] text-muted;
+    }
+  }
+  .row {
+    @apply flex flex-wrap items-center gap-2.5;
+  }
+
+  .btn {
+    @apply relative isolate inline-flex min-h-10.5 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-[11px] border border-transparent bg-(--grad) bg-origin-border px-4 py-2.25 font-mono text-[.82rem]/[1.2] font-medium tracking-[.06em] whitespace-nowrap text-on-accent uppercase no-underline;
+    @apply motion-safe:transition-[border-color,background-color,color,box-shadow,filter,transform] motion-safe:duration-150 motion-safe:ease-(--ease-out) motion-safe:hover:-translate-y-px;
+    &:active {
+      @apply translate-y-0 [filter:var(--press)];
+    }
+    &:disabled {
+      @apply translate-y-0 cursor-default opacity-55;
+    }
+    &.quiet {
+      @apply border-line bg-surface text-ink hover:border-accent hover:text-accent;
+    }
+    &.ghost {
+      @apply border-[color-mix(in_srgb,var(--on-accent)_55%,transparent)] bg-transparent text-on-accent;
+    }
+    &.big {
+      @apply min-h-12.5 rounded-[13px] px-5.5 py-3 text-[.86rem];
+    }
+  }
+  .icon-btn {
+    @apply grid size-10.5 flex-none cursor-pointer place-items-center rounded-[10px] border border-line bg-surface p-0 text-ink hover:border-accent hover:text-accent;
+    @apply motion-safe:transition-[border-color,background-color,color] motion-safe:duration-150;
+  }
+  .ico {
+    @apply block flex-none;
+  }
+  .ico-sun,
+  .is-dark > .ico-moon {
+    @apply hidden;
+  }
+  .is-dark > .ico-sun {
+    @apply block;
+  }
+  .link {
+    @apply cursor-pointer border-0 bg-transparent px-0 py-1.5 text-[.9rem] font-semibold text-accent underline underline-offset-3;
+    &.danger {
+      @apply text-danger;
+    }
+    &:is(a) {
+      @apply inline-block;
+    }
+  }
+  .step {
+    @apply font-mono text-[.76rem]/[1.2] font-medium tracking-[.06em] text-accent uppercase;
+  }
+  .hint {
+    @apply text-[.86rem]/normal font-normal text-muted;
+  }
+  .tag {
+    @apply rounded-full border border-line bg-field px-2.5 py-1 font-mono text-[.76rem]/[1.2] font-medium tracking-[.06em] whitespace-nowrap text-muted uppercase;
+  }
+  .brand {
+    @apply flex items-center gap-2.5 font-display text-[1.12rem]/none font-medium text-inherit no-underline max-md:mr-auto;
+  }
+  .brand-mark {
+    @apply inline-grid size-8.5 flex-none place-items-center rounded-[9px] bg-(--grad) text-on-accent;
+  }
+
+  .fld {
+    @apply flex min-w-0 flex-col gap-1.5;
+    & > :is(label, .lbl) {
+      @apply text-[.92rem] font-semibold;
+    }
+  }
+  .form-err {
+    @apply m-0 text-[.94rem] text-danger;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border-0 px-3 py-1.75 font-body text-[.86rem]/[1.2] font-semibold whitespace-nowrap;
+    &:is(button) {
+      @apply cursor-pointer;
+    }
+    &.ok {
+      @apply bg-(--ok-soft) text-(--ok);
+    }
+    &.warn {
+      @apply bg-(--warn-soft) text-(--warn);
+    }
+    &.bad {
+      @apply bg-danger-soft text-danger;
+    }
+  }
+  .chip {
+    @apply cursor-pointer rounded-full border border-line bg-field px-3.5 py-1.75 text-[.9rem]/[1.3] hover:border-accent;
+    @apply motion-safe:transition-[border-color,background-color,color] motion-safe:duration-150;
+    &[aria-pressed='true'] {
+      @apply border-accent bg-accent-soft font-semibold text-accent before:content-['✓_'];
+    }
+    &.sm {
+      @apply px-2.5 py-1 text-[.8rem];
+    }
+  }
+  .tab {
+    @apply cursor-pointer rounded-[9px] border-0 bg-transparent px-3.5 py-2.25 text-[.95rem] font-semibold text-muted hover:bg-field hover:text-ink;
+    @apply motion-safe:transition-[background-color,color] motion-safe:duration-150;
+    &[aria-selected='true'] {
+      @apply bg-(--grad) text-on-accent;
+    }
+  }
+  /* Kelompok formulir yang bisa dibuka-tutup (editor PRD dan admin). */
+  .grp {
+    @apply border-b border-line last:border-b-0;
+    & > summary {
+      @apply flex cursor-pointer list-none items-center justify-between gap-2.5 px-5.5 py-4 font-display text-[1.05rem]/[1.3] font-bold hover:text-accent;
+      @apply after:mx-1 after:-mt-1 after:size-2.25 after:flex-none after:rotate-45 after:border-r-2 after:border-b-2 after:border-muted after:content-[''] motion-safe:after:transition-[rotate] motion-safe:after:duration-150;
+      &::-webkit-details-marker {
+        @apply hidden;
+      }
+    }
+    &[open] > summary {
+      @apply after:mt-1 after:-rotate-135;
+    }
+  }
+  .grp-body {
+    @apply flex flex-col gap-4 px-5.5 pt-0.5 pb-5.5;
+  }
+  .sum-meta {
+    @apply ml-auto font-body text-[.84rem]/[1.2] font-medium text-muted;
+  }
+  .chips {
+    @apply flex flex-wrap gap-2;
+  }
+  .addrow {
+    @apply flex gap-2;
+    & input {
+      @apply flex-1;
+    }
+    & select {
+      @apply w-auto max-w-50;
+    }
+  }
+  /* Kartu isian peran, alur, dan fitur di editor. */
+  .isian {
+    @apply rounded-xl border border-line bg-field p-2.5;
+    & :is(input[type='text'], textarea, select) {
+      @apply bg-surface;
+    }
+    & input[type='checkbox'] {
+      @apply mx-0.5 my-0 size-5 accent-accent;
+    }
+    & select {
+      @apply w-auto max-w-45 px-2 py-2.5 text-[.92rem];
+    }
+    &.off {
+      @apply border-dashed;
+      & :is(input[type='text'], textarea) {
+        @apply text-muted;
+      }
+    }
+  }
+  /* Pilihan warna merek (editor dan wizard). */
+  .swatches {
+    @apply flex flex-wrap items-center gap-2.5;
+  }
+  .sw {
+    @apply size-8.5 cursor-pointer rounded-full border-3 border-surface p-0 shadow-[0_0_0_1px_var(--line)] aria-pressed:shadow-[0_0_0_2px_var(--ink)];
+  }
+  .rf {
+    @apply flex min-w-0 flex-col gap-1;
+    & > span {
+      @apply text-[.76rem] font-semibold tracking-[.02em] text-muted;
+    }
+  }
+  .x {
+    @apply h-10.5 w-10 cursor-pointer rounded-[10px] border border-line bg-surface text-[1.15rem]/none text-muted hover:border-danger hover:text-danger disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  /* Dokumen PRD hasil Markdown (lihat md() di lib/prd.js). */
+  .doc {
+    @apply max-h-[min(640px,72vh)] overflow-y-auto pr-1.5;
+    & > * {
+      @apply max-w-[68ch];
+    }
+    & h3 {
+      @apply mt-0 mb-2 font-display text-[1.7rem]/[1.2] font-extrabold tracking-[-.02em];
+    }
+    & h4 {
+      @apply mt-7 mb-2 border-t border-line pt-4 font-display text-[1.15rem]/[1.3] font-bold;
+    }
+    & h5 {
+      @apply mt-4 mb-1.5 font-body text-base/[1.3] font-bold;
+      & code {
+        @apply mr-1.5;
+      }
+    }
+    & p {
+      @apply mt-0 mb-2.5;
+    }
+    & :is(ul, ol) {
+      @apply mt-0 mb-3 pl-5.5;
+    }
+    & ul ul {
+      @apply mt-1 mb-0 list-none pl-5;
+    }
+    & li {
+      @apply mb-1;
+    }
+    & blockquote {
+      @apply mx-0 mt-0 mb-3.5 border-l-3 border-accent py-0 pr-0 pl-3 text-[1.05rem] text-muted;
+    }
+    & code {
+      @apply rounded-[5px] border border-line bg-field px-1.25 py-px font-mono text-[.82em] font-semibold;
+    }
+    & .tbl {
+      @apply mt-0 mb-3.5 max-w-none overflow-x-auto;
+    }
+    & table {
+      @apply w-full min-w-120 border-collapse text-[.92rem];
+    }
+    & :is(th, td) {
+      @apply border-b border-line px-2.5 py-2.25 text-left align-top;
+    }
+    & th {
+      @apply font-body text-[.82rem]/[1.3] font-semibold text-muted;
+    }
+    & td:is(:first-child, :last-child) {
+      @apply whitespace-nowrap;
+    }
+    & .cb {
+      @apply mr-[.5em] inline-block size-[.85em] rounded-[3px] border-[1.5px] border-muted align-[-.06em];
+      &.on {
+        @apply border-accent bg-accent;
+      }
+    }
+  }
+  .doc-meta {
+    @apply mt-0 mb-4.5 grid max-w-none grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-x-4 gap-y-2 rounded-[10px] border border-line bg-field px-3.5 py-3;
+    & div {
+      @apply min-w-0;
+    }
+    & dt {
+      @apply font-mono text-[.74rem]/[1.3] font-semibold text-muted;
+    }
+    & dd {
+      @apply m-0 text-[.92rem] wrap-anywhere;
+    }
+  }
+
+  /* Kartu PRD di perpustakaan, dashboard, dan admin. Saat disorot, maket di gambar kecil "digulir" sampai bawah. */
+  .tpl,
+  .prd-card {
+    @apply relative flex min-w-0 flex-col overflow-hidden rounded-[18px] border border-line bg-surface hover:border-[color-mix(in_srgb,var(--accent)_45%,var(--line))];
+    @apply before:absolute before:inset-x-0 before:top-0 before:z-2 before:h-0.75 before:bg-(--grad) before:opacity-0 before:transition-opacity before:duration-200 before:content-[''] hover:before:opacity-100;
+    @apply motion-safe:transition-[border-color,translate] motion-safe:duration-300 motion-safe:ease-(--ease-out) motion-safe:hover:-translate-y-1;
+    @media (prefers-reduced-motion: no-preference) {
+      &:hover .thumb-win {
+        @apply -translate-y-1;
+      }
+      &:hover .mp-phone {
+        @apply -translate-y-5.5;
+      }
+    }
+  }
+  /* Saat kartu disorot, maket di gambar kecil "digulir" sampai bawah (juga di galeri gaya). */
+  :is(.tpl, .prd-card, .gy-card):hover .thumb-view > .mock {
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translateY(calc(var(--frame) - 100%));
+      transition: transform 4.5s cubic-bezier(0.45, 0, 0.3, 1) 0.15s;
+    }
+  }
+  .tpl {
+    @apply cursor-pointer p-0 text-left text-inherit no-underline disabled:cursor-progress disabled:opacity-70;
+  }
+  /* Gambar kecil kartu PRD. Latarnya memakai warna merek dan latar gaya PRD itu (--th-a, --th-bg dari MockThumb),
+     jadi setiap kartu punya warnanya sendiri. Website tampil di jendela peramban; aplikasi mobile tampil sebagai
+     poster selebar kartu. */
+  .tpl-thumb {
+    --th-a: var(--accent);
+    --th-bg: var(--field);
+    @apply pointer-events-none relative aspect-[16/10.5] overflow-hidden border-b border-line px-4.5 pt-4.5;
+    background:
+      radial-gradient(90% 80% at 0% 0%, color-mix(in srgb, var(--th-a) 55%, transparent), transparent 70%),
+      radial-gradient(80% 90% at 100% 100%, color-mix(in srgb, var(--th-a) 32%, transparent), transparent 65%),
+      color-mix(in srgb, var(--th-a) 12%, var(--th-bg));
+    &.is-poster {
+      @apply p-0;
+      & .thumb-view {
+        @apply rounded-none border-0 bg-transparent;
+      }
+    }
+  }
+  .thumb-win {
+    @apply flex h-full flex-col overflow-hidden rounded-t-[10px] bg-white shadow-[0_22px_44px_-18px_rgba(0,0,0,.55),0_0_0_1px_rgba(0,0,0,.08)];
+    @apply motion-safe:transition-[translate] motion-safe:duration-500 motion-safe:ease-(--ease-out);
+    & > .thumb-view {
+      @apply min-h-0 flex-1;
+    }
+  }
+  .thumb-bar {
+    @apply flex flex-none items-center gap-1 border-b border-black/5 bg-[#f3f4f6] px-2.5 py-1.5;
+    & i {
+      @apply size-1.75 rounded-full bg-[#ff5f57] nth-2:bg-[#febc2e] nth-3:bg-[#28c840];
+    }
+    & span {
+      @apply ml-2 max-w-[60%] truncate rounded-full bg-white px-2.5 py-0.5 font-mono text-[9px]/[1.4] text-[#6b7280];
+    }
+  }
+  .thumb-view {
+    @apply h-full overflow-hidden bg-white;
+    &.is-wait {
+      @apply bg-field;
+    }
+    & > .mock {
+      @apply motion-safe:transition-transform motion-safe:duration-900 motion-safe:ease-(--ease-out);
+    }
+  }
+  .mp-phone {
+    @apply motion-safe:transition-[translate] motion-safe:duration-600 motion-safe:ease-(--ease-spring);
+  }
+  .tpl-body {
+    @apply flex min-w-0 flex-1 flex-col gap-1 px-4 pt-3.5 pb-4;
+  }
+  .tpl-name {
+    @apply font-display text-[1.04rem]/[1.3] font-bold;
+  }
+  .tpl-desc {
+    @apply text-[.86rem]/[1.45] text-muted max-[481px]:hidden;
+  }
+  .tpl-fit {
+    @apply mt-1 line-clamp-2 text-[.84rem]/[1.45] text-muted;
+    & b {
+      @apply font-semibold text-ink;
+    }
+  }
+  .tpl-tags {
+    @apply mt-auto flex flex-wrap gap-1.5 pt-2.5;
+  }
+  .tag-pf,
+  .tag-gaya {
+    @apply inline-flex items-center gap-1.5;
+  }
+  .tag-pf {
+    @apply gap-1.25;
+    & .ico {
+      @apply size-3.25;
+    }
+  }
+
+  /* Kisi PRD milik pengguna (PRD Saya dan dashboard). */
+  .prd-grid {
+    @apply grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-5;
+  }
+  .prd-open {
+    @apply flex w-full min-w-0 cursor-pointer flex-col border-0 bg-transparent p-0 text-left text-inherit no-underline;
+  }
+  .prd-actions {
+    @apply mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 px-4 pb-3.5;
+  }
+  .kpis {
+    @apply grid grid-cols-4 gap-4 max-md:grid-cols-2 max-md:gap-3;
+  }
+  .kpi {
+    @apply flex min-w-0 flex-col gap-1 rounded-[14px] border border-line bg-surface px-4.5 py-4;
+    & span {
+      @apply text-[.88rem] font-semibold text-muted;
+    }
+    & b {
+      @apply font-body text-[2rem]/[1.15] font-bold tracking-[-.01em];
+    }
+    & small {
+      @apply text-[.82rem] text-muted;
+    }
+  }
+  .plan-bar {
+    @apply flex flex-wrap items-center justify-between gap-3 px-4.5 py-3.5;
+  }
+  .komentar-list {
+    @apply m-0 flex list-none flex-col p-0;
+    & li {
+      @apply border-t border-line py-3;
+    }
+    & small {
+      @apply ml-1.5 text-muted;
+    }
+    & .link {
+      @apply float-right p-0;
+    }
+    & p {
+      @apply mt-1 mb-0 whitespace-pre-wrap;
+    }
+  }
+
+  /* Kartu dan daftar di dashboard admin. */
+  .adm {
+    @apply flex flex-col gap-3.5 p-5.5;
+    & h2 {
+      @apply m-0 font-display text-[1.2rem]/[1.3] font-bold;
+      & + .hint {
+        @apply -mt-2;
+      }
+    }
+    & code {
+      @apply rounded-[5px] border border-line bg-field px-1.25 py-px font-mono text-[.86em] font-semibold;
+    }
+  }
+  .adm-head {
+    @apply flex flex-wrap items-center justify-between gap-3;
+    & .addrow {
+      @apply min-w-0 flex-wrap justify-end max-[641px]:flex-[1_1_100%];
+      & select {
+        @apply w-auto max-w-75 min-w-0 flex-[1_1_200px] max-[641px]:max-w-none;
+      }
+      & .btn {
+        @apply max-[641px]:flex-[1_1_auto];
+      }
+    }
+  }
+  .adm-filter {
+    @apply flex flex-wrap items-center gap-x-2.5 gap-y-2;
+    & input[type='search'] {
+      @apply min-w-0 flex-[2_1_240px];
+    }
+    & select {
+      @apply w-auto min-w-0 flex-[1_1_170px];
+    }
+    & .hint {
+      @apply ml-auto flex-none;
+    }
+  }
+  .adm-list {
+    @apply m-0 list-none p-0;
+    & li {
+      @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 border-t border-line py-3.5 max-lg:grid-cols-1;
+      &.adm-none {
+        @apply flex flex-wrap gap-x-3.5 gap-y-1.5 text-muted;
+      }
+    }
+  }
+  .t-main {
+    @apply min-w-0;
+    & b {
+      @apply block;
+    }
+    & span {
+      @apply text-[.88rem] text-muted;
+    }
+    .is-hidden & {
+      @apply opacity-55;
+    }
+  }
+  .t-act {
+    @apply flex flex-wrap items-center justify-end gap-x-3.5 gap-y-2 max-lg:justify-start;
+  }
+  .utbl {
+    @apply overflow-x-auto;
+    & table {
+      @apply w-full min-w-105 border-collapse text-[.94rem];
+    }
+    & :is(th, td) {
+      @apply border-b border-line px-2.5 py-2.75 text-left;
+    }
+    & th {
+      @apply font-body text-[.82rem]/[1.3] font-semibold text-muted;
+    }
+    & td:nth-child(n + 2) {
+      @apply whitespace-nowrap tabular-nums;
+    }
+    & select {
+      @apply w-auto px-2.5 py-2 text-[.94rem];
+    }
+    & .is-me {
+      @apply bg-accent-soft text-accent;
+      & small {
+        @apply font-medium;
+      }
+    }
+  }
+  .u {
+    @apply flex items-center gap-2.5;
+    & .tag {
+      @apply ml-1;
+    }
+  }
+  .u-mail {
+    @apply block text-[.82rem] text-muted;
+  }
+  /* Isi langkah panduan dan daftar berikon di panduan admin. */
+  .g-main {
+    @apply flex min-w-0 flex-col gap-2.5;
+    & h2 {
+      @apply m-0 font-display text-[1.3rem]/[1.25] font-extrabold tracking-[-.015em];
+    }
+    & > p {
+      @apply m-0 max-w-[68ch] text-muted;
+    }
+    & .row {
+      @apply mt-1.5;
+    }
+    & code {
+      @apply rounded-[5px] border border-line bg-field px-1.25 py-px font-mono text-[.86em] font-semibold;
+    }
+  }
+  .g-main ul,
+  .ag-list {
+    @apply mt-1 mb-0 flex list-none flex-col gap-2.25 p-0;
+    & li {
+      @apply flex items-start gap-2.5 leading-[1.55];
+      & > .ico {
+        @apply mt-1 text-accent;
+      }
+    }
+  }
+  .sample {
+    @apply m-0 overflow-x-auto rounded-xl border border-line bg-field px-4 py-3.5 font-mono text-[.84rem]/[1.6] whitespace-pre-wrap wrap-anywhere;
+  }
+  .ui-ref {
+    @apply inline-block rounded-md border border-line bg-field px-1.75 py-0 align-baseline font-body text-[.86em]/[1.35] font-semibold whitespace-nowrap text-ink;
+  }
+
+  /* Halaman masuk dan daftar, untuk pengguna dan admin. */
+  .login {
+    @apply grid place-items-center py-[clamp(24px,8vh,96px)];
+  }
+  .login-card {
+    @apply flex w-[min(440px,100%)] flex-col items-start gap-4 rounded-[22px] p-8 max-hp:p-6 motion-safe:animate-[rise_.6s_var(--ease-out)_both];
+    & h1 {
+      @apply m-0 font-display text-[1.8rem]/[1.15] font-extrabold tracking-[-.02em];
+    }
+    & p {
+      @apply m-0;
+    }
+    & .btn {
+      @apply w-full;
+    }
+    & a:not(.btn) {
+      @apply font-semibold text-accent;
+    }
+    & .row {
+      @apply w-full flex-nowrap;
+      & .btn {
+        @apply w-auto flex-1;
+      }
+    }
+  }
+  .form {
+    @apply flex w-full flex-col gap-3.5;
+  }
+
+  /* Contoh huruf dan bentuk tiap gaya desain. Warnanya sengaja milik gaya itu sendiri, bukan warna situs. */
+  .gy-swatch {
+    @apply grid h-6 w-8 flex-none place-items-center rounded-md border border-line bg-surface font-display text-[.78rem]/none font-bold text-ink not-italic;
+    &[data-gaya='tegas'] {
+      @apply rounded-none border-2 border-[#14171f] bg-white font-extrabold text-[#14171f] shadow-[2px_2px_0_#14171f];
+    }
+    &[data-gaya='hangat'] {
+      @apply rounded-xl border-transparent bg-[#fbefe6] text-[#8a4a1f];
+    }
+    &[data-gaya='gelap'] {
+      @apply border-[#14161d] bg-[#14161d] text-[#f1f3f8];
+    }
+    &[data-gaya='elegan'] {
+      @apply rounded-none border-[#d9cfbf] bg-[#fbf8f2] font-['Playfair_Display',Georgia,serif] font-semibold text-[#3b3226];
+    }
+    &[data-gaya='ceria'] {
+      @apply rounded-full border-transparent bg-[#ffe9a8] font-['Fredoka',system-ui,sans-serif] font-semibold text-[#7a4b00] shadow-[0_2px_0_#d9a400];
+    }
+    &[data-gaya='minimal'] {
+      @apply rounded-none border-[#111] bg-white font-medium text-[#111];
+    }
+    &[data-gaya='gradasi'] {
+      @apply rounded-full border-0 bg-[linear-gradient(135deg,#2456e6,#ec4899)] text-white;
+    }
+    &[data-gaya='teknis'] {
+      @apply rounded-[3px] bg-[#f6f7f9] font-mono text-[#14171f];
+    }
+    &[data-gaya='resmi'] {
+      @apply rounded-sm border-[#1e3a8a] bg-[#1e3a8a] text-white;
+    }
+    &[data-gaya='ukiran'] {
+      @apply rounded-none border-[#0e0e0d] bg-[radial-gradient(#ebe4d2_.7px,transparent_1px)] bg-size-[4px_4px] bg-[#0e0e0d] font-['Pixelify_Sans',monospace] text-[#ebe4d2] italic;
+    }
+    &[data-gaya='halftone'] {
+      @apply rounded-full border-2 border-[#1d1a16] bg-[radial-gradient(#ff4d6d_1.1px,transparent_1.4px)] bg-size-[4px_4px] bg-[#f3ede0] font-['Bricolage_Grotesque',sans-serif] font-extrabold text-[#1d1a16] shadow-[2px_2px_0_#ff4d6d];
+    }
+    &[data-gaya='retro'] {
+      @apply rounded-none border-2 border-dotted border-[#1c1b17] bg-[#e9e6da] font-['Pixelify_Sans',monospace] text-[#1c1b17];
+    }
+    &[data-gaya='editorial'] {
+      @apply rounded-none border-transparent border-b-2 border-b-[#161411] [border-bottom-style:dotted] bg-[#faf7f0] font-['Fraunces',Georgia,serif] font-semibold text-[#161411] italic;
+    }
+    &.big {
+      @apply h-10 w-13 rounded-[10px] text-[1.1rem];
+    }
+    .tag & {
+      @apply h-4 w-5.5 rounded-sm text-[.6rem];
+      &:is([data-gaya='ceria'], [data-gaya='gradasi']) {
+        @apply rounded-full;
+      }
+      &[data-gaya='tegas'] {
+        @apply border-[1.5px] shadow-[1px_1px_0_#14171f];
+      }
+    }
+  }
+
+  .seg {
+    @apply inline-flex overflow-hidden rounded-[10px] border border-line bg-surface;
+    & button {
+      @apply min-h-10 cursor-pointer border-0 bg-transparent px-3.5 py-2 text-[.9rem] font-medium text-muted hover:text-ink;
+      @apply motion-safe:transition-[background-color,color] motion-safe:duration-150;
+      &[aria-pressed='true'] {
+        @apply bg-accent-soft font-semibold text-accent;
+      }
+    }
+  }
+}

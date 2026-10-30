@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Link, MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
-import './styles.css';
+import './app.css';
 import { AppProvider, DEMO } from './lib/app.jsx';
 import { PublicLayout } from './components/Layout.jsx';
 import Landing from './pages/Landing.jsx';

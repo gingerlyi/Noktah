@@ -254,6 +254,12 @@ function rincianDesain(s,b){
   o.push('');
   return o;
 }
+// Design brief saja: bagian Desain dari dokumen (termasuk hasil edit langsung), untuk disalin atau diunduh terpisah.
+export function briefMd(s,text=genMd(s)){
+  const judul='## '+sectionTitle(SECTIONS[12],T[s.tpl].platform==='mobile');
+  const bag=text.split(/^(?=## )/m).find(x=>x.startsWith(judul))||'';
+  return `# Design brief: ${one(s.nama)||KOSONG}\n\n> ${one(s.tagline)||KOSONG}\n\n`+bag.slice(judul.length).trim()+'\n';
+}
 
 export function genMd(s){
   const t=T[s.tpl],mobile=t.platform==='mobile',L=k=>lines(s[k]);

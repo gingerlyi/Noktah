@@ -1,0 +1,850 @@
+/* Tampilan maket PRD: contoh website dan aplikasi di pratinjau, gambar kecil, galeri, dan papan design brief.
+   Ditulis sebagai CSS biasa, bukan kelas Tailwind, karena HTML maket dibuat sebagai teks di lib/mock.js dan
+   warnanya diatur dari data tiap PRD: palet lewat --m-*, 14 gaya dasar lewat [data-gaya="..."], dan gaya lain
+   dari data lewat variabel dan atribut data-* (lihat bagian terakhir berkas ini). */
+/* ===== Maket website (pratinjau). Palet sendiri, diturunkan dari warna merek di PRD. ===== */
+/* Maket PRD memakai font aslinya, bukan font situs. */
+.mock,.mock-poster{--f-display:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.mock{--m-bg:#fff;--m-surface:#fff;--m-fg:#14171f;--m-muted:#626b7c;--m-line:#e3e6ee;--m-r:12px;--m-bw:1px;
+  --m-tint:color-mix(in srgb,var(--m-accent) 10%,var(--m-bg));
+  width:1120px;background:var(--m-bg);color:var(--m-fg);font:400 16px/1.5 var(--f-body);text-align:left;overflow:hidden}
+.mock.is-mobile{width:390px}
+.mock[data-gaya="tegas"]{--m-line:#14171f;--m-r:0px;--m-bw:2px}
+.mock[data-gaya="hangat"]{--m-bg:color-mix(in srgb,var(--m-accent) 7%,#fffdfa);--m-line:color-mix(in srgb,var(--m-accent) 18%,#ece9e4);--m-r:22px}
+.mock[data-gaya="gelap"]{--m-bg:#0e1016;--m-surface:#171a23;--m-fg:#f1f3f8;--m-muted:#9ba3b5;--m-line:#292e3d;--m-r:10px}
+.mock *{box-sizing:border-box}
+.mock p,.mock h1,.mock h2,.mock h3{margin:0}
+.m-nav{display:flex;align-items:center;gap:22px;padding:16px 56px;border-bottom:var(--m-bw) solid var(--m-line)}
+.m-logo{display:flex;gap:10px;align-items:center;font:700 18px/1 var(--f-display);white-space:nowrap;flex-shrink:0}
+.m-logo i{width:28px;height:28px;border-radius:calc(var(--m-r)*.6);background:var(--m-accent);color:var(--m-on);display:grid;place-items:center;font:700 14px/1 var(--f-display)}
+.m-links{display:flex;flex-wrap:wrap;justify-content:flex-end;column-gap:22px;row-gap:0;margin-left:auto;min-width:0;height:21px;line-height:21px;overflow:hidden;font-size:14px;color:var(--m-muted)}
+.m-links span{white-space:nowrap}
+.m-tools{display:flex;gap:10px;align-items:center;flex-shrink:0;white-space:nowrap;font-size:13px;color:var(--m-muted)}
+.m-nav>.m-btn{flex-shrink:0;white-space:nowrap}
+.m-pill{border:var(--m-bw) solid var(--m-line);border-radius:999px;padding:6px 12px;background:var(--m-surface)}
+.m-burger{display:none;margin-left:auto;width:22px;height:14px;border-block:2px solid var(--m-fg)}
+.m-btn{background:var(--m-accent);color:var(--m-on);padding:11px 18px;border-radius:var(--m-r);font-weight:600;font-size:14px;display:inline-block;white-space:nowrap}
+.m-btn.ghost{background:transparent;color:var(--m-fg);box-shadow:inset 0 0 0 1.5px var(--m-line)}
+.mock[data-gaya="tegas"] .m-btn{box-shadow:4px 4px 0 var(--m-fg)}
+.mock[data-gaya="tegas"] .m-btn.ghost{box-shadow:inset 0 0 0 2px var(--m-fg)}
+.m-sec{padding:60px 56px}
+.m-sec.tint{background:var(--m-tint)}
+.m-eyebrow{font:600 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--m-accent);margin-bottom:14px!important}
+.m-h1{font:800 52px/1.04 var(--f-display);letter-spacing:-.02em;margin-bottom:16px!important;text-wrap:balance}
+.m-h1.big{font-size:68px;max-width:900px}
+.mock[data-gaya="tegas"] .m-h1{text-transform:uppercase;letter-spacing:-.01em}
+.m-h2{font:700 32px/1.15 var(--f-display);margin-bottom:8px!important}
+.m-sub{color:var(--m-muted);margin-bottom:30px!important;max-width:560px}
+.m-lead{font-size:18px;color:var(--m-muted);margin-bottom:26px!important}
+.m-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.m-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:68px 56px}
+.m-img{border-radius:var(--m-r);border:var(--m-bw) solid var(--m-line);display:grid;place-items:center;min-height:60px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--m-accent) var(--k,26%),var(--m-bg)),color-mix(in srgb,var(--m-accent) 7%,var(--m-bg)))}
+.m-img{position:relative;overflow:hidden}
+.m-img span{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 8px;border-radius:6px;background:color-mix(in srgb,var(--m-bg) 82%,transparent);font:600 10px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--m-fg);opacity:.8}
+/* Ilustrasi pengganti foto (lihat ILUS di mock.js). */
+.m-ilus-bg,.m-ilus{position:absolute;inset:0;width:100%;height:100%}
+.m-ilus{inset:8% 0 0}
+.m-img .i-a{fill:var(--m-accent)}
+.m-img .i-d{fill:color-mix(in srgb,var(--m-accent) 62%,#000)}
+.m-img .i-s{fill:color-mix(in srgb,var(--m-accent) 26%,var(--m-bg))}
+.m-img .i-w{fill:#fff}
+.m-img .i-l{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.m-img .i-la{fill:none;stroke:var(--m-accent);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.m-shot{border-radius:var(--m-r);border:var(--m-bw) solid var(--m-line);background:var(--m-surface);padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 18px 40px -22px color-mix(in srgb,var(--m-accent) 60%,transparent)}
+.m-shot .bar{height:12px;border-radius:6px;background:var(--m-tint)}
+.m-shot .big{height:86px;border-radius:calc(var(--m-r)*.6);background:linear-gradient(135deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 55%,var(--m-bg)))}
+.m-shot .rowx{display:flex;gap:10px}
+.m-shot .rowx>*{flex:1;height:54px;border-radius:calc(var(--m-r)*.6);border:1px solid var(--m-line)}
+.m-g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.m-g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.m-g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:center}
+.m-card{background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);padding:22px;min-width:0}
+.mock[data-gaya="tegas"] .m-card{box-shadow:5px 5px 0 var(--m-fg)}
+.m-card h3{font:700 17px/1.25 var(--f-display);margin-bottom:6px}
+.m-card p{font-size:14px;color:var(--m-muted)}
+.m-ico{width:36px;height:36px;border-radius:calc(var(--m-r)*.6);background:var(--m-tint);color:var(--m-accent);display:grid;place-items:center;font:700 14px/1 var(--f-mono);margin-bottom:14px}
+.m-logos{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:22px 56px;border-bottom:var(--m-bw) solid var(--m-line);font-size:13px;color:var(--m-muted)}
+.m-logos b{font:700 15px/1 var(--f-display);color:var(--m-muted);opacity:.8;padding:0 8px}
+.m-stat b{display:block;font:800 44px/1 var(--f-display);color:var(--m-accent);margin-bottom:6px}
+.m-stat span{color:var(--m-muted);font-size:14px}
+.m-price b{display:block;font:800 30px/1.1 var(--f-display);margin:8px 0 10px}
+.m-price.hot{border-color:var(--m-accent);box-shadow:0 0 0 1px var(--m-accent)}
+.m-price .m-btn{margin-top:16px;display:block;text-align:center}
+.m-quote p{font-size:15px;color:var(--m-fg)}
+.m-quote small{display:block;margin-top:14px;color:var(--m-muted);font-size:13px}
+.m-faq{border-top:var(--m-bw) solid var(--m-line);padding:16px 0;display:flex;justify-content:space-between;gap:16px;font-weight:600}
+.m-faq+p{color:var(--m-muted);font-size:14px;padding-bottom:16px;max-width:640px}
+.m-cta{margin:0 56px 60px;padding:44px;border-radius:var(--m-r);background:var(--m-accent);color:var(--m-on);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.m-cta .m-h2{margin:0!important;max-width:620px}
+.m-cta .m-btn{background:var(--m-on);color:var(--m-accent);box-shadow:none}
+.m-chips{display:flex;gap:10px;flex-wrap:wrap}
+.m-prod .m-img{aspect-ratio:1/1;margin-bottom:12px}
+.m-prod h3{font:600 15px/1.3 var(--f-body)}
+.m-prod p{font:600 14px/1.4 var(--f-mono);color:var(--m-accent)}
+.m-art{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;padding:20px 0;border-top:var(--m-bw) solid var(--m-line);align-items:center}
+.m-art h3{font:700 21px/1.2 var(--f-display);margin-bottom:6px}
+.m-art p{font-size:13px;color:var(--m-muted)}
+.m-svc{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:var(--m-bw) solid var(--m-line)}
+.m-svc span{color:var(--m-muted);font-size:14px;text-align:right}
+.m-input{border:var(--m-bw) solid var(--m-line);border-radius:calc(var(--m-r)*.6);padding:11px 13px;font-size:14px;color:var(--m-muted);background:var(--m-bg)}
+.m-form{display:flex;flex-direction:column;gap:10px}
+.m-foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 56px;border-top:var(--m-bw) solid var(--m-line);font-size:13px;color:var(--m-muted)}
+.m-wa{position:sticky;bottom:14px;margin:-58px 20px 14px auto;width:44px;height:44px;border-radius:50%;background:#1faa59;color:#fff;display:grid;place-items:center;font:700 12px/1 var(--f-mono)}
+/* cangkang aplikasi (dashboard) */
+.m-app{display:grid;grid-template-columns:216px minmax(0,1fr);min-height:660px}
+.m-side{border-right:var(--m-bw) solid var(--m-line);background:var(--m-surface);padding:20px 14px;display:flex;flex-direction:column;gap:4px}
+.m-side .m-logo{margin:0 6px 18px}
+.m-side .m-logo{min-width:0}
+.m-side .m-logo span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.m-side a{padding:9px 12px;border-radius:calc(var(--m-r)*.6);font-size:14px;color:var(--m-muted)}
+.m-side a.on{background:var(--m-tint);color:var(--m-accent);font-weight:600}
+.m-main{padding:20px 28px 32px;display:flex;flex-direction:column;gap:20px;min-width:0;background:var(--m-tint)}
+.m-top{display:flex;align-items:center;gap:12px}
+.m-top b{font:700 22px/1 var(--f-display)}
+.m-top .m-pill{margin-left:auto;min-width:200px}
+.m-kpi small{font-size:13px;color:var(--m-muted)}
+.m-kpi b{display:block;font:800 28px/1.1 var(--f-display);margin:6px 0 4px}
+.m-kpi em{font:600 12px/1 var(--f-mono);font-style:normal;color:var(--m-accent)}
+.m-kpi b.long{font-size:22px;white-space:nowrap}
+.m-bars{display:flex;align-items:flex-end;gap:12px;height:170px;margin-top:16px;border-bottom:1px solid var(--m-line)}
+.m-bars div{flex:1;background:var(--m-accent);border-radius:calc(var(--m-r)*.4) calc(var(--m-r)*.4) 0 0;opacity:.85}
+.m-days{display:flex;gap:12px;margin-top:6px;font:400 11px/1 var(--f-mono);color:var(--m-muted)}
+.m-days span{flex:1;text-align:center}
+.m-tr{display:grid;grid-template-columns:90px minmax(0,1fr) 70px 110px;gap:12px;padding:11px 0;border-top:1px solid var(--m-line);font-size:14px;align-items:center}
+.m-tbl-nama .m-tr{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 90px 120px}
+.m-tr.h{border:0;font:600 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--m-muted)}
+.m-tag{font:600 11px/1 var(--f-mono);padding:5px 8px;border-radius:999px;background:var(--m-tint);color:var(--m-accent);justify-self:start}
+.m-act{padding:10px 0;border-top:1px solid var(--m-line);font-size:14px}
+.m-act small{display:block;color:var(--m-muted);font-size:12px}
+/* varian ponsel */
+.mock.is-mobile .m-nav{padding:14px 20px}
+.mock.is-mobile .m-links,.mock.is-mobile .m-tools,.mock.is-mobile .m-nav>.m-btn{display:none}
+.mock.is-mobile .m-burger{display:block}
+.mock.is-mobile .m-sec{padding:40px 20px}
+.mock.is-mobile .m-hero{grid-template-columns:1fr;padding:40px 20px;gap:28px}
+.mock.is-mobile .m-h1{font-size:36px}
+.mock.is-mobile .m-h2{font-size:26px}
+.mock.is-mobile .m-g3,.mock.is-mobile .m-g2{grid-template-columns:1fr}
+.mock.is-mobile .m-g4{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mock.is-mobile .m-logos{padding:18px 20px}
+.mock.is-mobile .m-cta{margin:0 20px 40px;padding:28px}
+.mock.is-mobile .m-art{grid-template-columns:96px minmax(0,1fr);gap:14px}
+.mock.is-mobile .m-art h3{font-size:17px}
+.mock.is-mobile .m-foot{padding:22px 20px}
+.mock.is-mobile .m-app{grid-template-columns:1fr}
+.mock.is-mobile .m-side{display:none}
+.mock.is-mobile .m-main{padding:16px}
+.mock.is-mobile .m-top .m-pill{display:none}
+.mock.is-mobile .m-top .m-btn{margin-left:auto}
+/* Pratinjau peran lain sebagai panel web: nama peran di menu samping dan bilah atas, tabel dengan 3 sampai 5 kolom. */
+.m-side .m-role{margin:-10px 6px 14px;font:600 11px/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--m-muted)}
+.m-rolepill{margin-left:auto;padding:6px 12px;border-radius:999px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);font-size:13px;font-weight:600;color:var(--m-accent);white-space:nowrap}
+.m-ava-sm{width:34px;height:34px;flex:none;border-radius:50%;background:var(--m-accent);color:var(--m-on);display:grid;place-items:center;font:700 14px/1 var(--f-display)}
+.m-ptbl.k3 .m-tr{grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr))}
+.m-ptbl.k4 .m-tr{grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr) minmax(0,1fr) minmax(0,.9fr)}
+.m-ptbl.k5 .m-tr{grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr) repeat(3,minmax(0,1fr))}
+.m-ptbl .m-tr>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-ptbl .m-tag{justify-self:start;max-width:100%}
+.mock.is-mobile .m-ptbl .m-tr>:first-child{display:block}
+.mock.is-mobile .m-ptbl.k4 .m-tr,.mock.is-mobile .m-ptbl.k5 .m-tr{grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) minmax(0,1fr)}
+.mock.is-mobile .m-ptbl.k4 .m-tr>:nth-child(3),.mock.is-mobile .m-ptbl.k5 .m-tr>:nth-child(3),.mock.is-mobile .m-ptbl.k5 .m-tr>:nth-child(4){display:none}
+.mock.is-mobile .m-rolepill{display:none}
+.mock.is-mobile .m-ava-sm{margin-left:auto}
+.mock.is-mobile .m-tr{grid-template-columns:minmax(0,1fr) 50px 96px}
+.mock.is-mobile .m-tr>:first-child{display:none}
+.mock.is-mobile .m-tbl-nama .m-tr{grid-template-columns:minmax(0,1fr) 64px 96px}
+.mock.is-mobile .m-tbl-nama .m-tr>:first-child{display:block}
+.mock.is-mobile .m-tbl-nama .m-tr>:nth-child(2){display:none}
+
+/* ===== Maket aplikasi mobile (pratinjau PRD mobile) ===== */
+/* overflow:clip (bukan hidden) supaya tab navigasi bisa menempel di dasar bingkai yang digulir */
+.mock.is-app{width:390px;overflow:clip}
+.a-screen{display:flex;flex-direction:column;min-height:780px;background:var(--m-bg)}
+.a-status{display:flex;justify-content:space-between;padding:12px 24px 4px;font:600 13px/1 var(--f-body)}
+.a-body{flex:1;display:flex;flex-direction:column;gap:16px;padding:14px 20px 24px}
+.a-hello{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.a-hello small{display:block;font-size:13px;color:var(--m-muted)}
+.a-hello b{font:800 22px/1.2 var(--f-display);letter-spacing:-.01em}
+.a-ava{width:40px;height:40px;flex:none;border-radius:50%;background:var(--m-accent);color:var(--m-on);display:grid;place-items:center;font-weight:700}
+.a-search{border:var(--m-bw) solid var(--m-line);background:var(--m-surface);border-radius:var(--m-r);padding:12px 14px;font-size:14px;color:var(--m-muted)}
+.a-banner{background:var(--m-accent);color:var(--m-on);border-radius:var(--m-r);padding:18px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.a-banner b{font:800 20px/1.2 var(--f-display)}
+.a-banner span{font-size:13px;opacity:.9}
+.a-banner em{font-style:normal;font-weight:700;font-size:13px;background:var(--m-on);color:var(--m-accent);padding:7px 12px;border-radius:999px;margin-top:8px}
+.a-cats{display:flex;gap:8px;justify-content:space-between}
+.a-cats div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--m-muted);min-width:0}
+.a-cats i{width:52px;height:52px;border-radius:calc(var(--m-r)*1.1);background:var(--m-tint);color:var(--m-accent);display:grid;place-items:center;font:800 18px/1 var(--f-display);font-style:normal}
+.a-h{font:700 16px/1.25 var(--f-display)}
+.a-body>.a-h{margin-bottom:-6px}
+.a-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.a-prod{position:relative;display:flex;flex-direction:column;gap:3px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);padding:10px;min-width:0}
+.a-prod .m-img{border:0;margin-bottom:6px;border-radius:calc(var(--m-r)*.7)}
+.a-prod b{font-size:14px;line-height:1.3}
+.a-prod>span{font-size:13px;font-weight:700;color:var(--m-accent)}
+.a-prod em{position:absolute;right:10px;bottom:10px;width:28px;height:28px;border-radius:50%;background:var(--m-accent);color:var(--m-on);display:grid;place-items:center;font-style:normal;font-weight:700}
+.a-balance{background:var(--m-accent);color:var(--m-on);border-radius:var(--m-r);padding:20px;display:flex;flex-direction:column;gap:4px}
+.a-balance small{font-size:13px;opacity:.85}
+.a-balance b{font:800 30px/1.1 var(--f-display)}
+.a-balance span{font-size:12px;opacity:.85}
+.a-actions{display:flex;gap:10px}
+.a-actions span{flex:1;text-align:center;padding:12px 6px;border-radius:var(--m-r);font-size:13px;font-weight:700;border:var(--m-bw) solid var(--m-line);background:var(--m-surface)}
+.a-actions .on{background:var(--m-accent);color:var(--m-on);border-color:var(--m-accent)}
+.a-card{background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);padding:16px}
+.a-bars{display:flex;align-items:flex-end;gap:10px;height:110px;margin-top:14px;border-bottom:1px solid var(--m-line)}
+.a-bars i{flex:1;background:var(--m-accent);border-radius:6px 6px 0 0;opacity:.9}
+.a-days{display:flex;gap:10px;margin-top:6px;font-size:11px;color:var(--m-muted)}
+.a-days span{flex:1;text-align:center}
+.a-list{display:flex;flex-direction:column;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);padding:0 14px}
+.a-list>div{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--m-line)}
+.a-list>div:first-child{border-top:0}
+.a-list>div>div{min-width:0}
+.a-dot{width:36px;height:36px;flex:none;border-radius:calc(var(--m-r)*.8);background:var(--m-tint)}
+.a-list b{display:block;font-size:14px;line-height:1.3}
+.a-list small{font-size:12px;color:var(--m-muted)}
+.a-list em{margin-left:auto;font-style:normal;font-weight:700;font-size:13px;white-space:nowrap}
+.a-daysel,.a-slots{display:grid;gap:8px}
+.a-daysel{grid-template-columns:repeat(4,1fr)}
+.a-slots{grid-template-columns:repeat(3,1fr)}
+.a-daysel span,.a-slots span{text-align:center;padding:10px 4px;border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);background:var(--m-surface);font-size:13px;font-weight:600}
+.a-daysel .on,.a-slots .on{background:var(--m-accent);color:var(--m-on);border-color:var(--m-accent)}
+.a-slots .full{opacity:.4;text-decoration:line-through}
+.a-cta{background:var(--m-accent);color:var(--m-on);text-align:center;padding:14px;border-radius:var(--m-r);font-weight:700}
+.a-progress{background:var(--m-tint);border-radius:var(--m-r);padding:16px;display:flex;flex-direction:column;gap:12px}
+.a-progress b{display:block;font:800 18px/1.2 var(--f-display)}
+.a-progress small{font-size:13px;color:var(--m-muted)}
+.a-track{height:10px;border-radius:999px;background:color-mix(in srgb,var(--m-accent) 22%,var(--m-bg))}
+.a-track i{display:block;height:100%;border-radius:999px;background:var(--m-accent)}
+.a-map{position:relative;height:190px;border-radius:var(--m-r);border:var(--m-bw) solid var(--m-line);overflow:hidden;background-color:var(--m-tint);background-image:linear-gradient(var(--m-bg) 2px,transparent 2px),linear-gradient(90deg,var(--m-bg) 2px,transparent 2px);background-size:44px 44px}
+.a-pin{position:absolute;left:58%;top:30%;width:18px;height:18px;border-radius:50%;background:var(--m-accent);box-shadow:0 0 0 8px color-mix(in srgb,var(--m-accent) 25%,transparent)}
+.a-eta{position:absolute;left:12px;right:12px;bottom:12px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:calc(var(--m-r)*.8);padding:10px 12px}
+.a-eta b{display:block;font-size:14px}
+.a-eta small{font-size:12px;color:var(--m-muted)}
+.a-tabs{position:sticky;bottom:0;display:flex;background:var(--m-surface);border-top:var(--m-bw) solid var(--m-line);padding:8px 6px 14px}
+.a-tabs span{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--m-muted);min-width:0;text-align:center}
+.a-tabs i{width:22px;height:22px;border-radius:7px;background:var(--m-line)}
+.a-tabs .on{color:var(--m-accent);font-weight:700}
+.a-tabs .on i{background:var(--m-accent)}
+/* Poster untuk kartu perpustakaan: nama aplikasi di kiri, ponsel di kanan */
+.mock-poster{width:1120px;height:700px;display:grid;grid-template-columns:minmax(0,1fr) 410px;gap:48px;align-items:start;padding:70px 80px 0;overflow:hidden;text-align:left;font-family:var(--f-body);color:#14171f;background:color-mix(in srgb,var(--m-accent) 5%,#ffffff)}
+.mp-text{display:flex;flex-direction:column;gap:18px;padding-top:70px}
+.mp-text span{align-self:flex-start;font:700 20px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;background:var(--m-accent);color:var(--m-on);padding:10px 16px;border-radius:999px}
+.mp-text b{font:800 76px/1.05 var(--f-display);letter-spacing:-.03em}
+.mp-text p{margin:0;font-size:30px;line-height:1.35;color:#3f4758}
+.mp-phone{height:630px;border:10px solid #14171f;border-bottom:0;border-radius:46px 46px 0 0;overflow:hidden;background:#14171f}
+
+/* ===== Maket website: bagian tambahan ===== */
+.m-pill.on{background:var(--m-accent);color:var(--m-on);border-color:var(--m-accent)}
+.m-sec-chips{padding-block:28px 0}
+.m-sec.center{text-align:center}
+.m-sec.center .m-sub,.m-sec.center .m-lead{margin-inline:auto}
+.m-sec.center .m-row,.m-sec.center .m-chips{justify-content:center}
+.m-cap{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
+.m-cap span{color:var(--m-muted);font-size:14px}
+.m-masonry{columns:3;column-gap:16px}
+.m-masonry>div{break-inside:avoid;margin-bottom:16px}
+.m-narrow{max-width:760px;margin-inline:auto}
+/* hero varian: pencarian, undangan, poster bergambar, judul di tengah */
+.m-hero-cari{padding-block:76px 64px}
+.m-hero-cari .m-lead{max-width:680px}
+.m-search{display:flex;align-items:center;gap:12px;max-width:720px;margin:4px auto 0;padding:8px 8px 8px 22px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:calc(var(--m-r) + 6px);box-shadow:0 18px 40px -26px color-mix(in srgb,var(--m-accent) 70%,transparent);text-align:left}
+.m-search span:first-child{flex:1;color:var(--m-muted);font-size:15px}
+.m-hero-cari .m-chips{margin-top:18px}
+.m-hero-wed{padding-top:28px}
+.m-hero-wed .m-img{margin-bottom:36px}
+.m-hero-wed .m-h1{margin-inline:auto}
+.m-poster{position:relative;min-height:560px;display:flex;align-items:flex-end;padding:56px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,0) 25%,rgba(0,0,0,.55)),linear-gradient(135deg,color-mix(in srgb,var(--m-accent) 75%,#000),color-mix(in srgb,var(--m-accent) 40%,#fff))}
+.m-poster-in{max-width:720px}
+.m-poster .m-eyebrow{color:#fff;opacity:.85}
+.m-poster .m-lead{color:rgba(255,255,255,.86)}
+.m-poster .m-btn.ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.65)}
+.m-poster-tag{position:absolute;top:24px;right:28px;font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.m-hero-mid{padding-block:84px 60px}
+.m-hero-mid .m-h1{max-width:900px;margin-inline:auto}
+.m-hero-mid .m-lead{max-width:640px}
+.m-hero-img{margin-top:48px}
+/* menu makanan */
+.m-menu{display:grid;grid-template-columns:1fr 1fr;gap:4px 56px}
+.m-dish{display:grid;grid-template-columns:auto minmax(24px,1fr) auto;align-items:baseline;gap:10px;padding:14px 0;border-bottom:var(--m-bw) solid var(--m-line)}
+.m-dish b{font:700 16px/1.3 var(--f-display)}
+.m-dish p{font-size:13px;color:var(--m-muted);max-width:300px}
+.m-dish i{border-bottom:1.5px dotted color-mix(in srgb,var(--m-muted) 60%,transparent)}
+.m-dish span{font-weight:700;font-size:15px;color:var(--m-accent);white-space:nowrap}
+/* lokasi */
+.m-map{position:relative;min-height:280px;border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);overflow:hidden;background-color:var(--m-tint);background-image:linear-gradient(var(--m-bg) 3px,transparent 3px),linear-gradient(90deg,var(--m-bg) 3px,transparent 3px);background-size:56px 56px}
+.m-mpin{position:absolute;left:46%;top:38%;width:24px;height:24px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--m-accent);box-shadow:0 0 0 10px color-mix(in srgb,var(--m-accent) 20%,transparent)}
+/* hitung mundur, acara, amplop */
+.m-count{display:flex;justify-content:center;gap:18px}
+.m-count div{min-width:116px;padding:20px 12px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r)}
+.m-count b{display:block;font:600 46px/1 var(--f-display);color:var(--m-accent)}
+.m-count span{font-size:13px;color:var(--m-muted)}
+.m-event{text-align:center;padding:30px}
+.m-event h3{font-size:22px!important}
+.m-event .m-btn{margin-top:16px}
+.m-gift{display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px;text-align:center}
+.m-gift small{font:600 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--m-muted)}
+.m-gift b{font:700 24px/1.2 var(--f-display);letter-spacing:.04em}
+.m-gift .m-btn{margin-top:8px}
+/* orang: tim, pembicara, pelatih */
+.m-person{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.m-ava{width:128px;height:128px;margin-bottom:12px;border-radius:50%;border:var(--m-bw) solid var(--m-line);background:linear-gradient(135deg,color-mix(in srgb,var(--m-accent) var(--k,26%),var(--m-bg)),color-mix(in srgb,var(--m-accent) 6%,var(--m-bg)))}
+.m-ava.big{width:132px;height:132px;margin:0 auto 18px}
+.m-person b{font:700 16px/1.3 var(--f-display)}
+.m-person span{font-size:13px;color:var(--m-muted)}
+/* agenda */
+.m-agenda{margin-left:8px;border-left:2px solid color-mix(in srgb,var(--m-accent) 50%,var(--m-line))}
+.m-ag{position:relative;display:grid;grid-template-columns:170px 1fr;gap:20px;padding:14px 0 14px 28px}
+.m-ag::before{content:"";position:absolute;left:-7px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--m-accent);box-shadow:0 0 0 4px var(--m-bg)}
+.m-ag>span{font:600 14px/1.5 var(--f-mono);color:var(--m-accent)}
+.m-ag b{font:700 17px/1.35 var(--f-display)}
+.m-ag p{font-size:14px;color:var(--m-muted)}
+/* kartu daftar: properti, kamar, paket, kampanye */
+.m-list{position:relative;display:flex;flex-direction:column;padding:0;overflow:hidden}
+.m-list .m-img{border:0;border-radius:0}
+.m-list h3{margin:16px 18px 4px!important}
+.m-list p{margin:0 18px!important;font-size:14px;color:var(--m-muted)}
+.m-list>b{margin:12px 18px 18px;font:700 19px/1.2 var(--f-display);color:var(--m-accent)}
+.m-list .m-btn{align-self:flex-start;margin:14px 18px 18px}
+.m-list strong{color:var(--m-fg)}
+.m-badge{position:absolute;top:12px;left:12px;background:var(--m-surface)!important}
+.m-prog{height:8px;margin:12px 18px 8px;border-radius:999px;background:color-mix(in srgb,var(--m-accent) 16%,var(--m-bg));overflow:hidden}
+.m-prog i{display:block;height:100%;border-radius:inherit;background:var(--m-accent)}
+/* kalkulator */
+.m-calc{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;font-size:14px}
+.m-calc>span:first-child{color:var(--m-muted)}
+.m-calc-out{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding:14px 16px;border-radius:calc(var(--m-r)*.7);background:var(--m-tint)}
+.m-calc-out b{font:800 26px/1 var(--f-display);color:var(--m-accent)}
+/* lowongan */
+.m-job{display:grid;grid-template-columns:48px minmax(0,1fr) auto 170px;gap:16px;align-items:center;margin-bottom:10px;padding:16px 18px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r)}
+.m-jlogo{display:grid;place-items:center;width:48px;height:48px;border-radius:calc(var(--m-r)*.7);background:var(--m-tint);color:var(--m-accent);font:800 18px/1 var(--f-display)}
+.m-job b{font:700 16px/1.3 var(--f-display)}
+.m-job p{font-size:13px;color:var(--m-muted)}
+.m-jpay{text-align:right;font-weight:700;font-size:14px}
+/* laporan dana */
+.m-row3{display:grid;grid-template-columns:120px 1fr 170px;gap:12px;padding:12px 0;border-top:1px solid var(--m-line);font-size:14px}
+.m-row3:first-child{border-top:0}
+.m-row3>span:first-child{color:var(--m-muted);font:400 12px/1.6 var(--f-mono)}
+.m-row3 b{text-align:right}
+/* jadwal harian */
+.m-sec-times{padding-block:36px}
+.m-times-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:16px}
+.m-times-h b{font:700 22px/1.2 var(--f-display)}
+.m-times-h span{color:var(--m-muted);font-size:14px}
+.m-times{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.m-times div{display:flex;flex-direction:column;gap:6px;padding:16px;border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);background:var(--m-surface)}
+.m-times span{font-size:13px;color:var(--m-muted)}
+.m-times b{font:700 26px/1 var(--f-display)}
+.m-times .on{background:var(--m-accent);border-color:var(--m-accent);color:var(--m-on)}
+.m-times .on span{color:inherit;opacity:.85}
+/* halaman tautan kreator: satu kolom di tengah */
+.m-biopage{min-height:900px;padding-bottom:20px;background:var(--m-tint)}
+.m-bio{padding-bottom:20px}
+.m-bio .m-chips{justify-content:center;margin-top:18px}
+.m-bio-links{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:12px;padding-top:8px}
+.m-bio-links .m-btn{display:block;padding:16px;text-align:center;font-size:15px}
+.m-bio-links .m-btn.ghost{background:var(--m-surface)}
+.m-biopage .m-sec:not(.m-bio):not(.m-bio-links){max-width:760px;margin-inline:auto}
+.m-foot.center{justify-content:center;border-top:0}
+.mock.is-mobile .m-menu{grid-template-columns:1fr}
+.mock.is-mobile .m-masonry{columns:2;column-gap:12px}
+.mock.is-mobile .m-masonry>div{margin-bottom:12px}
+.mock.is-mobile .m-times{grid-template-columns:repeat(2,1fr)}
+.mock.is-mobile .m-job{grid-template-columns:40px minmax(0,1fr)}
+.mock.is-mobile .m-job .m-tag,.mock.is-mobile .m-jpay{display:none}
+.mock.is-mobile .m-ag{grid-template-columns:1fr;gap:4px}
+.mock.is-mobile .m-row3{grid-template-columns:1fr auto}
+.mock.is-mobile .m-row3>span:first-child{display:none}
+.mock.is-mobile .m-count div{min-width:0;flex:1}
+.mock.is-mobile .m-poster{padding:28px 20px;min-height:460px}
+.mock.is-mobile .m-poster-tag{display:none}
+.mock.is-mobile .m-h1.big,.mock.is-mobile[data-gaya] .m-h1.big{font-size:42px}
+.mock.is-mobile .m-calc{grid-template-columns:1fr}
+.mock.is-mobile .m-calc-out{flex-direction:column;align-items:flex-start;gap:8px}
+.mock.is-mobile .m-kpi b{font-size:22px;white-space:nowrap}
+
+/* ===== Gaya tambahan untuk maket ===== */
+/* Elegan: putih gading, judul serif, garis tipis, tombol bersudut tajam */
+.mock[data-gaya="elegan"],.mock-poster[data-gaya="elegan"]{--f-display:"Playfair Display",Georgia,"Times New Roman",serif}
+.mock[data-gaya="elegan"]{--m-bg:color-mix(in srgb,var(--m-accent) 3%,#fdfbf7);--m-surface:#fffefb;--m-line:color-mix(in srgb,var(--m-accent) 20%,#e9e3d8);--m-r:2px;--m-tint:color-mix(in srgb,var(--m-accent) 7%,#fbf8f2)}
+.mock[data-gaya="elegan"] .m-h1,.mock[data-gaya="elegan"] .m-h2{font-weight:600;letter-spacing:-.005em}
+.mock[data-gaya="elegan"] .m-h1.big{font-size:64px}
+.mock[data-gaya="elegan"] .m-eyebrow{font-family:var(--f-body);font-size:11px;letter-spacing:.22em}
+.mock[data-gaya="elegan"] .m-btn{border-radius:0;padding:13px 22px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.mock[data-gaya="elegan"] .m-sec>.m-h2,.mock[data-gaya="elegan"] .m-sec>.m-sub{text-align:center;margin-inline:auto}
+.mock[data-gaya="elegan"] .m-logo i{border-radius:50%}
+.mock-poster[data-gaya="elegan"]{background:color-mix(in srgb,var(--m-accent) 5%,#fdfbf7)}
+/* Ceria: kapsul dengan bayangan tebal, sudut sangat bulat, huruf membulat */
+.mock[data-gaya="ceria"],.mock-poster[data-gaya="ceria"]{--f-display:"Fredoka","Baloo 2",system-ui,sans-serif}
+.mock[data-gaya="ceria"]{--m-r:26px;--m-bw:2px;--m-line:color-mix(in srgb,var(--m-accent) 22%,#eef0f5);--m-tint:color-mix(in srgb,var(--m-accent) 12%,#fff)}
+.mock[data-gaya="ceria"] .m-h1,.mock[data-gaya="ceria"] .m-h2,.mock[data-gaya="ceria"] h3,.mock[data-gaya="ceria"] .m-logo{font-weight:600;letter-spacing:0}
+.mock[data-gaya="ceria"] .m-btn{border-radius:999px;padding:12px 22px;box-shadow:0 5px 0 color-mix(in srgb,var(--m-accent) 60%,#000)}
+.mock[data-gaya="ceria"] .m-btn.ghost{box-shadow:inset 0 0 0 2px var(--m-line),0 5px 0 var(--m-line)}
+.mock[data-gaya="ceria"] .m-hero,.mock[data-gaya="ceria"] .m-hero-mid{background:radial-gradient(40% 60% at 92% 8%,color-mix(in srgb,var(--m-accent) 20%,transparent),transparent 70%),radial-gradient(30% 50% at 4% 92%,color-mix(in srgb,var(--m-accent) 14%,transparent),transparent 70%)}
+.mock[data-gaya="ceria"] .m-img{border-radius:32px}
+.mock[data-gaya="ceria"] .a-banner,.mock[data-gaya="ceria"] .a-balance,.mock[data-gaya="ceria"] .a-clock{box-shadow:0 5px 0 color-mix(in srgb,var(--m-accent) 60%,#000)}
+.mock-poster[data-gaya="ceria"]{background:radial-gradient(45% 70% at 15% 20%,color-mix(in srgb,var(--m-accent) 22%,#fff),transparent 70%),color-mix(in srgb,var(--m-accent) 8%,#fff)}
+/* Minimal: hampir monokrom, garis rambut, tanpa bayangan */
+.mock[data-gaya="minimal"]{--m-r:0px;--m-fg:#111;--m-muted:#7a7a7a;--m-line:#e6e6e6;--m-tint:#f6f6f6}
+.mock[data-gaya="minimal"] .m-h1{font-weight:500;letter-spacing:-.035em}
+.mock[data-gaya="minimal"] .m-h2{font-weight:500;letter-spacing:-.02em}
+.mock[data-gaya="minimal"] .m-eyebrow{color:var(--m-muted)}
+.mock[data-gaya="minimal"] .m-btn{border-radius:0;background:var(--m-fg);color:var(--m-bg)}
+.mock[data-gaya="minimal"] .m-btn.ghost{padding-inline:4px;background:transparent;color:var(--m-fg);box-shadow:none;text-decoration:underline;text-underline-offset:4px}
+.mock[data-gaya="minimal"] .m-card:not(.m-list):not(.m-kpi){padding:20px 0;border-width:0 0 1px;border-radius:0;background:transparent}
+.mock[data-gaya="minimal"] .m-cta{background:var(--m-fg);color:var(--m-bg)}
+.mock[data-gaya="minimal"] .m-cta .m-btn{background:var(--m-bg);color:var(--m-fg)}
+.mock[data-gaya="minimal"] .m-logo i{background:var(--m-fg);color:var(--m-bg)}
+.mock[data-gaya="minimal"] .m-img{filter:grayscale(1)}
+.mock[data-gaya="minimal"] .a-banner,.mock[data-gaya="minimal"] .a-balance,.mock[data-gaya="minimal"] .a-clock,.mock[data-gaya="minimal"] .a-cta{background:var(--m-fg);color:var(--m-bg)}
+.mock-poster[data-gaya="minimal"]{background:#f3f3f3}
+/* Gradasi: latar gradasi warna merek, kartu kaca, tombol kapsul */
+.mock[data-gaya="gradasi"],.mock-poster[data-gaya="gradasi"]{--m-grad:linear-gradient(135deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 45%,#ec4899))}
+.mock[data-gaya="gradasi"]{--m-r:20px;--m-tint:color-mix(in srgb,var(--m-accent) 8%,#fff)}
+.mock[data-gaya="gradasi"] .m-btn:not(.ghost){border-radius:999px;background:var(--m-grad);color:#fff}
+.mock[data-gaya="gradasi"] .m-btn.ghost{border-radius:999px}
+.mock[data-gaya="gradasi"] .m-hero,.mock[data-gaya="gradasi"] .m-hero-mid,.mock[data-gaya="gradasi"] .m-hero-cari,.mock[data-gaya="gradasi"] .m-bio{background:var(--m-grad);color:#fff}
+.mock[data-gaya="gradasi"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-bio) :is(.m-eyebrow,.m-lead,.m-sub){color:rgba(255,255,255,.86)}
+.mock[data-gaya="gradasi"] :is(.m-hero,.m-hero-mid,.m-hero-cari) .m-btn:not(.ghost){background:#fff;color:var(--m-accent)}
+.mock[data-gaya="gradasi"] :is(.m-hero,.m-hero-mid,.m-hero-cari) .m-btn.ghost{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.mock[data-gaya="gradasi"] .m-bio .m-pill{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.4);color:#fff}
+.mock[data-gaya="gradasi"] .m-shot{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
+.mock[data-gaya="gradasi"] .m-search{background:#fff;color:#14171f;border-color:transparent}
+.mock[data-gaya="gradasi"] .m-card{background:rgba(255,255,255,.75);box-shadow:0 22px 44px -30px color-mix(in srgb,var(--m-accent) 75%,transparent)}
+.mock[data-gaya="gradasi"] .m-sec.tint,.mock[data-gaya="gradasi"] .m-biopage{background:linear-gradient(135deg,color-mix(in srgb,var(--m-accent) 10%,#fff),color-mix(in srgb,#ec4899 9%,#fff))}
+.mock[data-gaya="gradasi"] .m-cta{background:var(--m-grad)}
+.mock[data-gaya="gradasi"] :is(.a-banner,.a-balance,.a-clock,.a-cta,.a-art,.a-ctrls em){background:var(--m-grad)}
+.mock-poster[data-gaya="gradasi"]{background:linear-gradient(135deg,color-mix(in srgb,var(--m-accent) 16%,#fff),color-mix(in srgb,#ec4899 12%,#fff))}
+.mock-poster[data-gaya="gradasi"] .mp-text span{background:var(--m-grad)}
+/* Teknis: judul monospace, garis kisi, sudut kecil */
+.mock[data-gaya="teknis"],.mock-poster[data-gaya="teknis"]{--f-display:var(--f-mono)}
+.mock[data-gaya="teknis"]{--m-r:4px;--m-bg:#fbfbfc;--m-line:#dfe3ea}
+.mock[data-gaya="teknis"] .m-h1{font-weight:700;letter-spacing:-.045em}
+.mock[data-gaya="teknis"] .m-h2{letter-spacing:-.03em}
+.mock[data-gaya="teknis"] :is(.m-hero,.m-hero-cari,.m-hero-mid){background-image:linear-gradient(var(--m-line) 1px,transparent 1px),linear-gradient(90deg,var(--m-line) 1px,transparent 1px);background-size:40px 40px}
+.mock[data-gaya="teknis"] .m-eyebrow::before{content:"// "}
+.mock[data-gaya="teknis"] .m-btn{border-radius:4px;font-family:var(--f-mono);font-size:13px}
+.mock-poster[data-gaya="teknis"]{background-color:#f6f7f9;background-image:linear-gradient(#e3e6ec 1px,transparent 1px),linear-gradient(90deg,#e3e6ec 1px,transparent 1px);background-size:40px 40px}
+/* Resmi: navigasi berwarna merek, garis aksen di bawah judul, kaki halaman gelap */
+.mock[data-gaya="resmi"]{--m-r:6px}
+.mock[data-gaya="resmi"] .m-nav{background:var(--m-accent);color:var(--m-on);border-bottom:0}
+.mock[data-gaya="resmi"] .m-nav :is(.m-links,.m-tools){color:color-mix(in srgb,var(--m-on) 82%,transparent)}
+.mock[data-gaya="resmi"] .m-nav .m-btn{background:var(--m-on);color:var(--m-accent)}
+.mock[data-gaya="resmi"] .m-nav .m-pill{background:transparent;border-color:color-mix(in srgb,var(--m-on) 40%,transparent)}
+.mock[data-gaya="resmi"] .m-nav .m-logo i{background:var(--m-on);color:var(--m-accent)}
+.mock[data-gaya="resmi"] .m-nav .m-burger{border-color:var(--m-on)}
+.mock[data-gaya="resmi"] .m-sec .m-h2::after{content:"";display:block;width:56px;height:4px;margin-top:12px;border-radius:2px;background:var(--m-accent)}
+.mock[data-gaya="resmi"] .m-sec.center .m-h2::after{margin-inline:auto}
+.mock[data-gaya="resmi"] .m-foot{background:color-mix(in srgb,var(--m-accent) 80%,#000);color:rgba(255,255,255,.8);border-top:0}
+.mock[data-gaya="resmi"] .a-hello{margin:-14px -20px 0;padding:16px 20px 18px;background:var(--m-accent);color:var(--m-on)}
+.mock[data-gaya="resmi"] .a-hello small{color:inherit;opacity:.8}
+.mock[data-gaya="resmi"] .a-ava{background:var(--m-on);color:var(--m-accent)}
+.mock-poster[data-gaya="resmi"]{background:color-mix(in srgb,var(--m-accent) 9%,#fff)}
+.mock-poster[data-gaya="gelap"]{background:#12141b;color:#f1f3f8}
+.mock-poster[data-gaya="gelap"] .mp-text p{color:#aab1c2}
+
+/* ===== Maket aplikasi mobile: bagian tambahan ===== */
+.a-cards{display:flex;flex-direction:column;gap:12px}
+.a-media{background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);overflow:hidden}
+.a-media .m-img{border:0;border-radius:0}
+.a-media-b{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px 12px}
+.a-media-b b{display:block;font-size:14px;line-height:1.3}
+.a-media-b small{font-size:12px;color:var(--m-muted)}
+.a-media-b em{font-style:normal;font-weight:700;font-size:13px;color:var(--m-accent);white-space:nowrap}
+.a-clock{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 16px;border-radius:var(--m-r);background:var(--m-accent);color:var(--m-on);text-align:center}
+.a-clock small,.a-clock span{font-size:12px;opacity:.85}
+.a-clock b{font:800 44px/1.05 var(--f-display);letter-spacing:-.02em}
+.a-clock em{margin-top:12px;padding:10px 26px;border-radius:999px;background:var(--m-on);color:var(--m-accent);font-style:normal;font-weight:700;font-size:14px}
+.a-player{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px;background:var(--m-surface);border:var(--m-bw) solid var(--m-line);border-radius:var(--m-r);text-align:center}
+.a-art{width:150px;height:150px;margin-bottom:8px;border-radius:calc(var(--m-r) * 1.4 + 6px);background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--m-accent) 30%,#fff),var(--m-accent))}
+.a-player b{font:700 16px/1.3 var(--f-display)}
+.a-player small{font-size:12px;color:var(--m-muted)}
+.a-player .a-track{width:100%;margin-top:8px}
+.a-ctrls{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:6px;font-size:12px;color:var(--m-muted)}
+.a-ctrls em{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--m-accent)}
+.a-ctrls em i{width:0;height:0;margin-left:4px;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent var(--m-on)}
+.a-moods{display:flex;justify-content:space-between;gap:6px;margin-top:10px}
+.a-moods span{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;color:var(--m-muted)}
+.a-moods i{width:38px;height:38px;border-radius:50%;background:var(--m-tint)}
+.a-moods .on{color:var(--m-fg);font-weight:700}
+.a-moods .on i{background:var(--m-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--m-accent) 25%,transparent)}
+.a-stagebar{width:70%;margin:0 auto 14px;padding:4px;border-radius:0 0 50% 50%/0 0 100% 100%;background:var(--m-tint);color:var(--m-muted);font-size:11px;text-align:center}
+.a-seats{display:flex;flex-direction:column;align-items:center;gap:6px}
+.a-seats div{display:flex;gap:6px}
+.a-seats i,.a-legend i{width:22px;height:20px;border:1px solid var(--m-line);border-radius:5px 5px 3px 3px;background:var(--m-tint)}
+.a-seats b{width:12px}
+.a-seats .full,.a-legend .full{background:var(--m-line)}
+.a-seats .on,.a-legend .on{background:var(--m-accent);border-color:var(--m-accent)}
+.a-legend{display:flex;justify-content:center;gap:14px;margin-top:14px;font-size:11px;color:var(--m-muted)}
+.a-legend span{display:flex;align-items:center;gap:5px}
+.a-legend i{width:14px;height:13px}
+.a-ticket{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;background:var(--m-surface);border:var(--m-bw) dashed var(--m-line);border-radius:var(--m-r)}
+.a-ticket small{font-size:12px;color:var(--m-muted)}
+.a-ticket b{display:block;margin:2px 0;font:700 16px/1.25 var(--f-display)}
+.a-ticket span{font-size:12px;font-weight:700;color:var(--m-accent)}
+.a-qr{flex:none;width:72px;height:72px;border:5px solid var(--m-surface);outline:2px solid var(--m-fg);background:repeating-conic-gradient(var(--m-fg) 0 25%,transparent 0 50%) 0 0/12px 12px}
+.a-shelf{display:flex;gap:12px;overflow:hidden}
+.a-shelf>div{flex:none;width:96px;display:flex;flex-direction:column;gap:6px}
+.a-cover{display:flex;align-items:flex-end;height:140px;padding:8px;border-radius:6px;background:linear-gradient(160deg,color-mix(in srgb,var(--m-accent) var(--k),#fff),color-mix(in srgb,var(--m-accent) 72%,#000));box-shadow:0 8px 16px -10px rgba(0,0,0,.5);color:#fff}
+.a-cover b{font:700 12px/1.25 var(--f-display)}
+.a-shelf small{font-size:11px;line-height:1.3;color:var(--m-muted)}
+.a-sum{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 12px 12px 16px;border-radius:var(--m-r);background:var(--m-fg);color:var(--m-bg)}
+.a-sum small{font-size:12px;opacity:.75}
+.a-sum b{display:block;font:800 20px/1.2 var(--f-display)}
+.a-sum em{padding:10px 18px;border-radius:calc(var(--m-r) * .8);background:var(--m-accent);color:var(--m-on);font-style:normal;font-weight:700;font-size:14px}
+.a-steps{position:relative;display:flex;justify-content:space-between;margin:14px 0 10px}
+.a-steps::before{content:"";position:absolute;left:10%;right:10%;top:9px;height:2px;background:var(--m-line)}
+.a-steps span{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10.5px;color:var(--m-muted);text-align:center}
+.a-steps i{width:20px;height:20px;border:2px solid var(--m-line);border-radius:50%;background:var(--m-surface)}
+.a-steps .done i{background:var(--m-accent);border-color:var(--m-accent)}
+.a-steps .on{color:var(--m-fg);font-weight:700}
+.a-steps .on i{border-color:var(--m-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--m-accent) 22%,transparent)}
+.a-note{font-size:12px;color:var(--m-muted)}
+
+/* ==========================================================================
+   Identitas gaya yang lebih kuat: dekorasi hero dan panel dashboard per gaya.
+   Berlaku di semua maket (kartu, galeri, dan pratinjau).
+   ========================================================================== */
+.mock :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio){position:relative;isolation:isolate}
+.mock :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
+.m-bars div{transform-origin:bottom}
+
+/* Bersih: gumpalan aksen lembut dan pola titik di hero; kartu panel berbayang halus dengan garis aksen di atas KPI. */
+.mock[data-gaya="bersih"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{background:radial-gradient(38% 60% at 88% 18%,color-mix(in srgb,var(--m-accent) 16%,transparent),transparent 70%),radial-gradient(color-mix(in srgb,var(--m-accent) 18%,transparent) 1.2px,transparent 1.4px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000);mask-image:linear-gradient(90deg,transparent 30%,#000)}
+.mock[data-gaya="bersih"] .m-card{box-shadow:0 1px 2px rgba(20,23,31,.04),0 8px 24px -14px rgba(20,23,31,.18)}
+.mock[data-gaya="bersih"] .m-kpi{border-top:3px solid var(--m-accent)}
+.mock[data-gaya="bersih"] .m-bars div{border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 55%,#fff))}
+
+/* Hangat: gumpalan bulat bernuansa merek di belakang hero, batang grafik membulat penuh. */
+.mock[data-gaya="hangat"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{background:radial-gradient(circle at 92% 12%,color-mix(in srgb,var(--m-accent) 22%,transparent) 0 120px,transparent 121px),radial-gradient(circle at 4% 96%,color-mix(in srgb,var(--m-accent) 14%,transparent) 0 90px,transparent 91px)}
+.mock[data-gaya="hangat"] .m-bars div{border-radius:999px;opacity:1;background:color-mix(in srgb,var(--m-accent) 80%,#fff)}
+.mock.is-panel[data-gaya="hangat"] .m-card{border-width:0;box-shadow:0 10px 28px -18px color-mix(in srgb,var(--m-accent) 70%,transparent)}
+
+/* Tegas: kartu panel bergaris hitam tebal dengan bayangan keras, batang grafik berbingkai hitam, sorotan di bawah judul. */
+.mock[data-gaya="tegas"] .m-h1{text-decoration:underline;text-decoration-color:var(--m-accent);text-decoration-thickness:.14em;text-underline-offset:.12em}
+.mock.is-panel[data-gaya="tegas"] .m-card{box-shadow:5px 5px 0 #14171f}
+.mock[data-gaya="tegas"] .m-bars div{border:2px solid #14171f;border-bottom:0;opacity:1;border-radius:0}
+.mock.is-panel[data-gaya="tegas"] .m-side a.on{background:var(--m-accent);color:var(--m-on);border:2px solid #14171f}
+
+/* Gelap: cahaya aksen yang menyala di belakang hero dan garis kisi samar; kartu panel berkilau di tepi. */
+.mock[data-gaya="gelap"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{background:radial-gradient(45% 70% at 80% 30%,color-mix(in srgb,var(--m-accent) 34%,transparent),transparent 70%),linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px) 0 0/48px 48px}
+.mock[data-gaya="gelap"] .m-btn:not(.ghost){box-shadow:0 0 0 1px color-mix(in srgb,var(--m-accent) 60%,transparent),0 10px 30px -8px var(--m-accent)}
+.mock.is-panel[data-gaya="gelap"] .m-card{background:linear-gradient(180deg,rgba(255,255,255,.04),transparent),var(--m-surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.mock[data-gaya="gelap"] .m-bars div{background:linear-gradient(180deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 25%,transparent));box-shadow:0 0 18px -4px var(--m-accent);opacity:1}
+
+/* Elegan: bingkai garis ganda tipis di hero, judul panel berhuruf serif, batang grafik ramping. */
+.mock[data-gaya="elegan"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{inset:18px;border:1px solid color-mix(in srgb,var(--m-accent) 35%,transparent);outline:1px solid color-mix(in srgb,var(--m-accent) 18%,transparent);outline-offset:5px}
+.mock.is-panel[data-gaya="elegan"] :is(.m-top b,.m-card h3,.m-kpi b){font-family:"Playfair Display",Georgia,serif;font-weight:600}
+.mock[data-gaya="elegan"] .m-bars{gap:26px}
+.mock[data-gaya="elegan"] .m-bars div{opacity:.75;border-radius:0}
+
+/* Ceria: konfeti warna-warni di hero, batang grafik kapsul berwarna berganti, kartu dengan bayangan tebal. */
+.mock[data-gaya="ceria"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{background:radial-gradient(circle,#ffd166 0 5px,transparent 6px) 8% 22%/140px 120px,radial-gradient(circle,#06d6a0 0 4px,transparent 5px) 62% 8%/170px 150px,radial-gradient(circle,color-mix(in srgb,var(--m-accent) 70%,#fff) 0 6px,transparent 7px) 90% 70%/190px 160px,radial-gradient(circle,#ef476f 0 3px,transparent 4px) 30% 80%/120px 130px;opacity:.6;-webkit-mask-image:radial-gradient(ellipse 34% 62% at 50% 50%,transparent 70%,#000);mask-image:radial-gradient(ellipse 34% 62% at 50% 50%,transparent 70%,#000)}
+.mock.is-panel[data-gaya="ceria"] .m-card{box-shadow:0 5px 0 color-mix(in srgb,var(--m-accent) 35%,#e8e8ee)}
+.mock[data-gaya="ceria"] .m-bars div{border-radius:999px;opacity:1}
+.mock[data-gaya="ceria"] .m-bars div:nth-child(3n+2){background:#ffb703}
+.mock[data-gaya="ceria"] .m-bars div:nth-child(3n){background:#06d6a0}
+
+/* Minimal: panel tanpa kotak, hanya garis rambut; batang abu-abu dengan satu batang aksen terakhir. */
+.mock.is-panel[data-gaya="minimal"] .m-card{background:transparent;border-width:0 0 1px;border-radius:0;padding-inline:0}
+.mock.is-panel[data-gaya="minimal"] .m-main{background:#fff}
+.mock[data-gaya="minimal"] .m-bars div{background:#d9d9d9;opacity:1;border-radius:0}
+.mock[data-gaya="minimal"] .m-bars div:last-child{background:#111}
+
+/* Gradasi: menu samping bergradasi merek, kartu kaca, batang grafik bergradasi. */
+.mock.is-panel[data-gaya="gradasi"] .m-side{background:linear-gradient(170deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 45%,#ec4899));border-color:transparent}
+.mock.is-panel[data-gaya="gradasi"] .m-side :is(a,.m-role,.m-logo){color:rgba(255,255,255,.85)}
+.mock.is-panel[data-gaya="gradasi"] .m-side a.on{background:rgba(255,255,255,.2);color:#fff}
+.mock.is-panel[data-gaya="gradasi"] .m-main{background:linear-gradient(135deg,color-mix(in srgb,var(--m-accent) 9%,#fff),color-mix(in srgb,#ec4899 7%,#fff))}
+.mock.is-panel[data-gaya="gradasi"] .m-card{background:rgba(255,255,255,.72);border-color:rgba(255,255,255,.9);box-shadow:0 18px 36px -26px color-mix(in srgb,var(--m-accent) 80%,transparent)}
+.mock[data-gaya="gradasi"] .m-bars div{background:linear-gradient(180deg,color-mix(in srgb,var(--m-accent) 45%,#ec4899),var(--m-accent));opacity:1;border-radius:10px 10px 4px 4px}
+
+/* Teknis: kertas kisi di panel, kartu bergaris putus-putus, judul dalam kurung siku, batang bergaris miring. */
+.mock.is-panel[data-gaya="teknis"] .m-main{background-color:#f6f7f9;background-image:linear-gradient(#e6e9ef 1px,transparent 1px),linear-gradient(90deg,#e6e9ef 1px,transparent 1px);background-size:24px 24px}
+.mock[data-gaya="teknis"] .m-card{border-style:dashed}
+.mock[data-gaya="teknis"] .m-card h3::before{content:"[ ";color:var(--m-accent)}
+.mock[data-gaya="teknis"] .m-card h3::after{content:" ]";color:var(--m-accent)}
+.mock[data-gaya="teknis"] .m-bars div{opacity:1;border-radius:0;background:repeating-linear-gradient(135deg,var(--m-accent) 0 6px,color-mix(in srgb,var(--m-accent) 70%,#fff) 6px 12px)}
+
+/* Resmi: menu samping berwarna merek dengan teks putih, judul kartu bergaris aksen. */
+.mock.is-panel[data-gaya="resmi"] .m-side{background:color-mix(in srgb,var(--m-accent) 88%,#000);border-color:transparent}
+.mock.is-panel[data-gaya="resmi"] .m-side :is(a,.m-role,.m-logo){color:rgba(255,255,255,.82)}
+.mock.is-panel[data-gaya="resmi"] .m-side a.on{background:#fff;color:var(--m-accent)}
+.mock.is-panel[data-gaya="resmi"] .m-card h3{padding-bottom:8px;border-bottom:2px solid var(--m-accent);display:inline-block}
+
+/* Ilustrasi berurutan dicerminkan bergantian supaya kartu yang berjejer tidak terlihat kembar. */
+.m-img.alt :is(.m-ilus,.m-ilus-bg){transform:scaleX(-1)}
+
+/* ==========================================================================
+   Animasi pratinjau: hanya di pratinjau besar (.frame-view) dan galeri (.hasil-view),
+   tidak di kartu perpustakaan, dan tidak bila pengguna memilih mengurangi gerakan.
+   ========================================================================== */
+@media (prefers-reduced-motion:no-preference){
+  :is(.frame-view,.hasil-view) :is(.mock>*,.m-main>*,.a-body>*){animation:mk-naik .7s var(--ease-out) both}
+  :is(.frame-view,.hasil-view) :is(.mock>*,.m-main>*,.a-body>*):nth-child(2){animation-delay:.08s}
+  :is(.frame-view,.hasil-view) :is(.mock>*,.m-main>*,.a-body>*):nth-child(3){animation-delay:.16s}
+  :is(.frame-view,.hasil-view) :is(.mock>*,.m-main>*,.a-body>*):nth-child(4){animation-delay:.24s}
+  :is(.frame-view,.hasil-view) :is(.mock>*,.m-main>*,.a-body>*):nth-child(n+5){animation-delay:.32s}
+  /* Grafik batang tumbuh dari bawah, berurutan. */
+  :is(.frame-view,.hasil-view) .m-bars div{animation:mk-tumbuh .9s var(--ease-out) both}
+  :is(.frame-view,.hasil-view) .m-bars div:nth-child(2){animation-delay:.06s}
+  :is(.frame-view,.hasil-view) .m-bars div:nth-child(3){animation-delay:.12s}
+  :is(.frame-view,.hasil-view) .m-bars div:nth-child(4){animation-delay:.18s}
+  :is(.frame-view,.hasil-view) .m-bars div:nth-child(5){animation-delay:.24s}
+  :is(.frame-view,.hasil-view) .m-bars div:nth-child(6){animation-delay:.3s}
+  :is(.frame-view,.hasil-view) .m-bars div:nth-child(7){animation-delay:.36s}
+  /* Ilustrasi melayang pelan; uap mengepul; cahaya di latar bernapas. */
+  :is(.frame-view,.hasil-view) .m-ilus{animation:mk-layang 4.5s ease-in-out infinite}
+  :is(.frame-view,.hasil-view) .m-img.alt .m-ilus{animation-name:mk-layang-alt;animation-delay:-1.5s}
+  :is(.frame-view,.hasil-view) .m-ilus .i-l{animation:mk-uap 2.6s ease-in-out infinite}
+  :is(.frame-view,.hasil-view) .m-ilus-bg circle:first-child{animation:mk-napas 6s ease-in-out infinite;transform-origin:17% 17%}
+  /* Kilau yang lewat di tombol utama. */
+  :is(.frame-view,.hasil-view) .m-btn:not(.ghost){position:relative;overflow:hidden}
+  :is(.frame-view,.hasil-view) .m-btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);animation:mk-kilau 3.8s ease-in-out 1s infinite}
+  /* Gaya gradasi: gradasi hero bergerak perlahan. Gaya gelap: cahaya hero berdenyut. */
+  :is(.frame-view,.hasil-view) .mock[data-gaya="gradasi"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-bio){background-size:200% 200%;animation:mk-gradasi 10s ease-in-out infinite alternate}
+  :is(.frame-view,.hasil-view) .mock[data-gaya="gelap"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{animation:mk-pendar 5s ease-in-out infinite}
+  :is(.frame-view,.hasil-view) .mock[data-gaya="ceria"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{animation:mk-konfeti 9s linear infinite}
+  /* Di pratinjau besar, kartu dan tombol bereaksi saat disorot. */
+  .frame-view :is(.m-card,.m-prod,.a-card,.a-prod,.a-media){transition:transform .25s var(--ease-out),box-shadow .25s}
+  .frame-view :is(.m-card,.m-prod,.a-card,.a-prod,.a-media):hover{transform:translateY(-4px);box-shadow:0 18px 34px -20px color-mix(in srgb,var(--m-accent) 70%,transparent)}
+  .frame-view .m-btn{transition:transform .2s var(--ease-out),filter .2s}
+  .frame-view .m-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  .frame-view .m-img:hover .m-ilus{animation-duration:1.6s}
+}
+@keyframes mk-naik{from{opacity:0;transform:translateY(18px)}}
+@keyframes mk-tumbuh{from{transform:scaleY(0)}}
+@keyframes mk-layang{50%{transform:translateY(-5px)}}
+@keyframes mk-layang-alt{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) translateY(-5px)}}
+@keyframes mk-uap{0%,100%{opacity:.35;transform:translateY(3px)}50%{opacity:1;transform:translateY(-3px)}}
+@keyframes mk-napas{50%{transform:scale(1.15)}}
+@keyframes mk-kilau{0%{transform:translateX(-120%)}45%,100%{transform:translateX(120%)}}
+@keyframes mk-gradasi{from{background-position:0% 30%}to{background-position:100% 70%}}
+@keyframes mk-pendar{50%{opacity:.55}}
+@keyframes mk-konfeti{to{background-position:8% 142%,62% 158%,90% 230%,30% 210%}}
+
+/* ===== Empat gaya maket bertema titik ===== */
+/* Ukiran titik: hitam pekat dan krem, arsiran titik (stipple) dari derau SVG, judul piksel miring, label monospace. */
+.mock[data-gaya="ukiran"],.mock-poster[data-gaya="ukiran"]{--f-display:"Pixelify Sans","IBM Plex Mono",monospace;--f-body:"IBM Plex Mono",ui-monospace,monospace;
+  --stip-krem:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .92 0 0 0 0 .89 0 0 0 0 .82 14 0 0 0 -8.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --stip-hitam:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .05 0 0 0 0 .05 14 0 0 0 -6.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
+.mock[data-gaya="ukiran"]{--m-bg:#0e0e0d;--m-surface:#151513;--m-fg:#ebe4d2;--m-muted:#9b9485;--m-line:#34312b;--m-r:0px;--m-tint:#161512}
+.mock[data-gaya="ukiran"] .m-h1{font-style:italic;font-weight:500;letter-spacing:0;text-transform:uppercase}
+.mock[data-gaya="ukiran"] :is(.m-h2,h3,.m-logo){font-weight:500;letter-spacing:0}
+.mock[data-gaya="ukiran"] .m-eyebrow{color:var(--m-muted);letter-spacing:.16em}
+.mock[data-gaya="ukiran"] :is(.m-links,.m-tools,.m-btn){font-family:var(--f-body);text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+.mock[data-gaya="ukiran"] :is(.m-btn:not(.ghost),.m-cta .m-btn,.a-cta){background:#ebe4d2;color:#0e0e0d}
+.mock[data-gaya="ukiran"] :is(.m-logo i,.a-ava){background:#ebe4d2;color:#0e0e0d;border-radius:0}
+.mock[data-gaya="ukiran"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{background:var(--stip-krem);-webkit-mask:radial-gradient(70% 90% at 92% 100%,#000 25%,transparent 72%);mask:radial-gradient(70% 90% at 92% 100%,#000 25%,transparent 72%)}
+.mock[data-gaya="ukiran"] .m-img{background:#1a1916;border-color:var(--m-line)}
+.mock[data-gaya="ukiran"] .m-img .i-la{stroke:#ebe4d2}
+.mock[data-gaya="ukiran"] .m-img .i-w{fill:#0e0e0d}
+.mock[data-gaya="ukiran"] .m-img span{z-index:1;border-radius:0;background:#0e0e0d;color:#ebe4d2}
+.mock[data-gaya="ukiran"] .m-img .i-a{fill:#ebe4d2}
+.mock[data-gaya="ukiran"] .m-img .i-d{fill:#6d675b}
+.mock[data-gaya="ukiran"] .m-img .i-s{fill:#2b2925}
+.mock[data-gaya="ukiran"] .m-img::after{content:"";position:absolute;inset:0;background:var(--stip-hitam);pointer-events:none}
+.mock[data-gaya="ukiran"] .m-cta,.mock[data-gaya="ukiran"] :is(.a-banner,.a-balance,.a-clock){background:var(--stip-krem),#161512;color:#ebe4d2;border:1px solid var(--m-line)}
+.mock[data-gaya="ukiran"] .m-bars div{background:var(--stip-hitam),#ebe4d2;opacity:1;border-radius:0}
+.mock-poster[data-gaya="ukiran"]{background:var(--stip-krem),#0e0e0d;color:#ebe4d2}
+.mock-poster[data-gaya="ukiran"] .mp-text span{background:#ebe4d2;color:#0e0e0d;border-radius:0}
+.mock-poster[data-gaya="ukiran"] .mp-text p{color:#9b9485}
+
+/* Risograf dan halftone: kertas krem, tinta merek + merah muda, titik halftone, cetakan bergeser, tepi tebal. */
+.mock[data-gaya="halftone"],.mock-poster[data-gaya="halftone"]{--f-display:"Bricolage Grotesque","Plus Jakarta Sans",sans-serif;--riso:#ff4d6d;
+  --tone:radial-gradient(color-mix(in srgb,var(--m-accent) 70%,transparent) 32%,transparent 36%) 0 0/9px 9px;
+  --tone-pink:radial-gradient(color-mix(in srgb,var(--riso) 60%,transparent) 30%,transparent 34%) 4px 4px/9px 9px}
+.mock[data-gaya="halftone"]{--m-bg:#f3ede0;--m-surface:#fbf7ee;--m-fg:#1d1a16;--m-line:#1d1a16;--m-bw:2px;--m-r:6px;--m-tint:#ece4d2}
+.mock[data-gaya="halftone"] .m-h1{font-weight:800;letter-spacing:-.03em;text-shadow:3px 3px 0 color-mix(in srgb,var(--riso) 75%,transparent)}
+.mock[data-gaya="halftone"] .m-h2{font-weight:800;letter-spacing:-.02em}
+.mock[data-gaya="halftone"] .m-eyebrow{display:inline-block;padding:5px 9px;background:var(--riso);color:#1d1a16}
+.mock[data-gaya="halftone"] .m-btn{border-radius:999px;box-shadow:inset 0 0 0 2px var(--m-fg),4px 4px 0 var(--riso)}
+.mock[data-gaya="halftone"] .m-btn.ghost{background:var(--m-surface)}
+.mock[data-gaya="halftone"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio)::before{background:var(--tone),var(--tone-pink);-webkit-mask:linear-gradient(110deg,transparent 40%,#000 95%);mask:linear-gradient(110deg,transparent 40%,#000 95%)}
+.mock[data-gaya="halftone"] .m-img{background:var(--tone),var(--tone-pink),var(--m-tint)}
+.mock[data-gaya="halftone"] .m-img .m-ilus{mix-blend-mode:multiply;transform:translate(3px,2px)}
+.mock[data-gaya="halftone"] .m-card{box-shadow:4px 4px 0 var(--riso)}
+.mock[data-gaya="halftone"] :is(.m-cta,.a-banner,.a-balance,.a-clock){background:var(--tone-pink),var(--m-accent);border:2px solid var(--m-fg);box-shadow:5px 5px 0 var(--riso)}
+.mock[data-gaya="halftone"] .m-bars div{background:var(--tone),var(--m-surface);border:2px solid var(--m-fg);border-bottom:0;opacity:1;border-radius:0}
+.mock-poster[data-gaya="halftone"]{background:var(--tone-pink),#f3ede0}
+.mock-poster[data-gaya="halftone"] .mp-text span{background:var(--riso);color:#1d1a16;border:2px solid #1d1a16}
+
+/* Retro piksel: kisi titik seperti layar dot matrix, huruf piksel, gambar berpola dither, tepi bertitik. */
+.mock[data-gaya="retro"],.mock-poster[data-gaya="retro"]{--f-display:"Pixelify Sans",monospace;--f-body:"JetBrains Mono",ui-monospace,monospace;
+  --kisi:radial-gradient(rgba(28,27,23,.16) 1px,transparent 1.5px) 0 0/10px 10px}
+.mock[data-gaya="retro"]{--m-bg:#e9e6da;--m-surface:#f2f0e7;--m-fg:#1c1b17;--m-muted:#5c5a50;--m-line:#1c1b17;--m-bw:2px;--m-r:0px;--m-tint:#dedacb;background:var(--kisi),var(--m-bg)}
+.mock[data-gaya="retro"] :is(.m-h1,.m-h2,h3,.m-logo,.m-stat b,.m-price b,.m-kpi b){font-weight:600;letter-spacing:0}
+.mock[data-gaya="retro"] .m-h1{text-transform:uppercase}
+.mock[data-gaya="retro"] .m-eyebrow::before{content:"> "}
+.mock[data-gaya="retro"] .m-btn{border-radius:0;font-family:var(--f-display);font-weight:500;text-transform:uppercase;box-shadow:inset 0 0 0 2px var(--m-fg),3px 3px 0 var(--m-fg)}
+.mock[data-gaya="retro"] .m-btn.ghost{background:var(--m-surface)}
+.mock[data-gaya="retro"] :is(.m-card,.m-img,.m-shot){border-style:dotted;border-width:3px}
+.mock[data-gaya="retro"] .m-img{background:conic-gradient(var(--m-accent) 25%,transparent 0 50%,var(--m-accent) 0 75%,transparent 0) 0 0/4px 4px,var(--m-tint)}
+.mock[data-gaya="retro"] :is(.m-cta,.a-banner,.a-balance,.a-clock){background:radial-gradient(rgba(255,255,255,.22) 1px,transparent 1.5px) 0 0/6px 6px,var(--m-accent);border:3px dotted var(--m-fg)}
+.mock[data-gaya="retro"] .m-bars div{background:repeating-linear-gradient(var(--m-accent) 0 6px,transparent 6px 8px);opacity:1;border-radius:0}
+.mock-poster[data-gaya="retro"]{background:radial-gradient(rgba(28,27,23,.16) 1px,transparent 1.5px) 0 0/10px 10px,#e9e6da}
+.mock-poster[data-gaya="retro"] .mp-text span{border-radius:0;font-family:"Pixelify Sans",monospace}
+
+/* Editorial majalah: kertas krem, serif besar, huruf awal besar, garis titik-titik sebagai pemisah dan penuntun. */
+.mock[data-gaya="editorial"],.mock-poster[data-gaya="editorial"]{--f-display:"Fraunces",Georgia,serif}
+.mock[data-gaya="editorial"]{--m-bg:#faf7f0;--m-surface:#faf7f0;--m-fg:#161411;--m-muted:#625c52;--m-line:#cfc6b5;--m-r:0px;--m-tint:#f1ebdf}
+.mock[data-gaya="editorial"] .m-h1{font-weight:500;font-style:italic;letter-spacing:-.03em}
+.mock[data-gaya="editorial"] .m-h1.big{font-size:80px}
+.mock[data-gaya="editorial"] .m-h2{font-weight:500;letter-spacing:-.02em;padding-bottom:12px;border-bottom:2px dotted var(--m-fg)}
+.mock[data-gaya="editorial"] .m-eyebrow{color:var(--m-fg);letter-spacing:.2em;padding-top:10px;border-top:3px double var(--m-fg)}
+.mock[data-gaya="editorial"] .m-lead::first-letter{float:left;font:600 58px/.8 var(--f-display);margin:6px 8px 0 0;color:var(--m-accent)}
+.mock[data-gaya="editorial"] .m-btn{border-radius:0;background:var(--m-fg);color:var(--m-bg);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.mock[data-gaya="editorial"] .m-btn.ghost{background:transparent;color:var(--m-fg);box-shadow:none;text-decoration:underline;text-underline-offset:4px}
+.mock[data-gaya="editorial"] .m-card{background:transparent;border-width:0;border-top:1px solid var(--m-fg);padding-inline:0}
+.mock[data-gaya="editorial"] .m-card h3{padding-bottom:6px;border-bottom:2px dotted var(--m-line)}
+.mock[data-gaya="editorial"] .m-img{filter:sepia(.35) saturate(.8)}
+.mock[data-gaya="editorial"] .m-sec+.m-sec{border-top:1px solid var(--m-fg)}
+.mock[data-gaya="editorial"] :is(.m-cta,.a-banner,.a-balance,.a-clock){background:var(--m-fg);color:var(--m-bg)}
+.mock-poster[data-gaya="editorial"]{background:#faf7f0}
+.mock-poster[data-gaya="editorial"] .mp-text b{font-style:italic;font-weight:500}
+.mock-poster[data-gaya="editorial"] .mp-text span{border-radius:0;background:#161411;color:#faf7f0}
+
+/* ==========================================================================
+   Halaman detail project: tab Gabungan, PRD, Design brief, dan Contoh tampilan.
+   ========================================================================== */
+
+/* ==========================================================================
+   Design brief sebagai papan gaya. Papan ini sebuah .mock, jadi variabel, huruf, dan aturan per gaya ikut berlaku.
+   ========================================================================== */
+.mock.db{--err:#b91c1c;width:auto;container-type:inline-size;font-size:15px}
+.mock.db:is([data-gaya="gelap"],[data-gaya="ukiran"]){--err:#f87171}
+.mock.db .db-hero{padding:clamp(28px,6cqi,64px) clamp(20px,5cqi,56px) clamp(24px,4cqi,44px);text-align:left}
+.mock.db .db-hero .m-h1{max-width:none;margin-inline:0;font-size:clamp(30px,6.4cqi,60px)}
+.mock.db .db-hero .m-lead{max-width:62ch;margin-inline:0;font-size:clamp(15px,1.9cqi,18px)}
+.db-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.db-sec{padding:clamp(22px,4cqi,40px) clamp(20px,5cqi,56px);border-top:var(--m-bw) solid var(--m-line)}
+.mock.db .db-h{display:flex;align-items:center;gap:10px;margin:0 0 18px;font:700 clamp(19px,2.4cqi,24px)/1.2 var(--f-display)}
+.db-h i{padding:5px 7px;border-radius:999px;background:var(--m-tint);color:var(--m-accent);font:600 11px/1 var(--f-mono);font-style:normal}
+.mock.db .db-note{max-width:70ch;margin:-6px 0 16px;color:var(--m-muted);font-size:14px}
+.mock.db .db-pal+.db-note{margin:16px 0 0}
+.db-comp b,.db-states b,.db-rules b,.db-sw b{display:block;font:700 15px/1.3 var(--f-display)}
+.db-pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.mock.db .db-sw{display:flex;flex-direction:column;gap:3px;padding:12px}
+.db-chip{position:relative;display:block;height:96px;margin-bottom:10px;border-radius:calc(var(--m-r)*.7);background:var(--c);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--m-fg) 14%,transparent)}
+.db-chip em{position:absolute;right:8px;top:8px;padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.94);color:#14171f;font:600 10px/1 var(--f-mono);font-style:normal}
+.db-chip em.ok::before{content:"✓ "}
+.db-sw code{color:var(--m-fg);font:500 12px/1.4 var(--f-mono)}
+.db-sw small{color:var(--m-muted);font-size:12px;line-height:1.4}
+.db-type{display:flex;flex-direction:column}
+.db-type>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 20px;align-items:baseline;padding:14px 0;border-top:1px solid var(--m-line)}
+.db-type>div:first-child{padding-top:0;border-top:0}
+.db-type small{color:var(--m-muted);font:500 11px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.db-type span{display:-webkit-box;overflow:hidden;line-height:1.35;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.db-type .db-disp{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.mock.db[data-gaya="ceria"] .db-disp{font-weight:600;letter-spacing:0}
+.mock.db[data-gaya="tegas"] .db-disp{text-transform:uppercase}
+/* Resmi: kepala papan berwarna merek seperti bilah navigasinya. */
+.mock.db[data-gaya="resmi"] .db-hero{background:linear-gradient(135deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 72%,#000));color:var(--m-on)}
+.mock.db[data-gaya="resmi"] .db-hero :is(.m-eyebrow,.m-lead){color:inherit;opacity:.85}
+.mock.db[data-gaya="resmi"] .db-hero .m-btn:not(.ghost){background:var(--m-on);color:var(--m-accent)}
+.mock.db[data-gaya="resmi"] .db-hero .m-btn.ghost{color:inherit;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--m-on) 50%,transparent)}
+.db-comp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.db-form{display:flex;flex-direction:column;gap:12px}
+.db-form label{display:flex;flex-direction:column;gap:6px}
+.db-form label small{font-size:12px;font-weight:600}
+.mock.db .db-focus{border-color:transparent;box-shadow:0 0 0 2px var(--m-accent);color:var(--m-fg)}
+.mock.db .db-err{border-color:var(--err);color:var(--m-fg)}
+.mock.db .db-errtxt{color:var(--err);font-weight:500}
+.db-stack{display:flex;flex-direction:column;gap:16px}
+.db-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding:6px;border-radius:calc(var(--m-r)*.8);background:var(--m-tint)}
+.db-nav span{padding:7px 12px;border-radius:calc(var(--m-r)*.6);color:var(--m-muted);font-size:13px}
+.db-nav .on{background:var(--m-accent);color:var(--m-on);font-weight:700}
+.db-st{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.db-st li{padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--st) 12%,var(--m-bg));color:var(--st);font-size:12px;font-weight:600}
+.db-shape>div{display:flex;gap:10px;margin-top:12px}
+.db-shape span{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;padding:12px;border:var(--m-bw) solid var(--m-accent);background:var(--m-tint);color:var(--m-fg);font:600 13px/1.2 var(--f-mono)}
+.db-shape i{color:var(--m-muted);font:500 11px/1 var(--f-body);font-style:normal}
+.db-shape .db-gap{border-style:dashed;border-radius:calc(var(--m-r)*.6)}
+.db-states{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.mock.db .db-states .m-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:200px}
+.db-states small{color:var(--m-accent);font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
+.db-states .m-card:last-child small{color:var(--err)}
+.mock.db .db-states p{color:var(--m-muted);font-size:13px}
+.db-empty{width:56px;height:56px;border:2px dashed color-mix(in srgb,var(--m-accent) 50%,transparent);border-radius:calc(var(--m-r)*.8 + 6px);background:var(--m-tint)}
+.db-skel{display:block;width:100%;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--m-tint) 30%,color-mix(in srgb,var(--m-accent) 16%,var(--m-tint)) 50%,var(--m-tint) 70%) 0 0/200% 100%;animation:db-kilau 1.4s linear infinite}
+.db-skel:first-of-type{height:72px;border-radius:calc(var(--m-r)*.6)}
+@keyframes db-kilau{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.db-skel{animation:none}}
+.db-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.mock.db .db-rules p{margin-top:6px;color:var(--m-muted);font-size:14px}
+.db-do b::before{content:"✓ ";color:var(--m-accent)}
+.db-dont b::before{content:"✕ ";color:var(--err)}
+@container (max-width:640px){
+  .db-comp{grid-template-columns:minmax(0,1fr)}
+  .db-type>div{grid-template-columns:minmax(0,1fr)}
+  .db-pal{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+  .db-chip{height:64px}
+}
+
+/* ==========================================================================
+   Kedalaman per gaya untuk layar aplikasi dan kartu papan design brief, supaya tiap gaya punya
+   permukaan sendiri: bayangan lembut, bayangan keras, cahaya, kaca, atau bingkai ganda. Minimal tetap datar.
+   ========================================================================== */
+.mock[data-gaya="bersih"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="bersih"] .m-card{box-shadow:0 1px 2px rgba(20,23,31,.05),0 10px 26px -16px rgba(20,23,31,.24)}
+.mock[data-gaya="bersih"] :is(.a-banner,.a-balance,.a-clock){background:linear-gradient(135deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 72%,#000));box-shadow:0 16px 30px -18px var(--m-accent)}
+.mock[data-gaya="bersih"] .a-tabs{box-shadow:0 -10px 24px -20px rgba(20,23,31,.35)}
+
+.mock[data-gaya="hangat"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="hangat"] .m-card{border-color:transparent;box-shadow:0 12px 28px -18px color-mix(in srgb,var(--m-accent) 65%,transparent)}
+.mock[data-gaya="hangat"] :is(.a-banner,.a-balance,.a-clock){background:radial-gradient(circle at 100% 0,rgba(255,255,255,.2) 0 70px,transparent 71px),radial-gradient(circle at 0 100%,rgba(255,255,255,.12) 0 46px,transparent 47px),var(--m-accent);box-shadow:0 14px 28px -16px var(--m-accent)}
+.mock[data-gaya="hangat"] :is(.a-cta,.a-actions .on){border-radius:999px;box-shadow:0 10px 20px -12px var(--m-accent)}
+
+.mock[data-gaya="tegas"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="tegas"] .m-card{box-shadow:4px 4px 0 var(--m-fg)}
+.mock[data-gaya="tegas"] :is(.a-banner,.a-balance,.a-clock){border:2px solid var(--m-fg);box-shadow:5px 5px 0 var(--m-fg)}
+.mock[data-gaya="tegas"] :is(.a-cta,.a-actions .on,.a-slots .on,.a-daysel .on){border:2px solid var(--m-fg);box-shadow:3px 3px 0 var(--m-fg)}
+.mock[data-gaya="tegas"] .a-hello b{text-transform:uppercase}
+
+.mock[data-gaya="gelap"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="gelap"] .m-card{background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 60%),var(--m-surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 30px -20px #000}
+.mock[data-gaya="gelap"] :is(.a-banner,.a-balance,.a-clock){background:radial-gradient(120% 90% at 100% 0,color-mix(in srgb,var(--m-accent) 70%,#fff) 0,transparent 55%),var(--m-accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--m-accent) 60%,transparent),0 16px 36px -14px var(--m-accent)}
+.mock[data-gaya="gelap"] :is(.a-cta,.a-actions .on){box-shadow:0 10px 26px -10px var(--m-accent)}
+.mock[data-gaya="gelap"] .a-tabs{background:rgba(23,26,35,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+
+.mock[data-gaya="ceria"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="ceria"] .m-card{box-shadow:0 5px 0 color-mix(in srgb,var(--m-accent) 30%,#e6e6ee)}
+.mock[data-gaya="ceria"] :is(.a-cta,.a-actions .on){border-radius:999px;box-shadow:0 5px 0 color-mix(in srgb,var(--m-accent) 60%,#000)}
+
+.mock[data-gaya="gradasi"] .a-screen{background:linear-gradient(165deg,color-mix(in srgb,var(--m-accent) 12%,#fff),color-mix(in srgb,#ec4899 9%,#fff))}
+.mock[data-gaya="gradasi"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="gradasi"] .m-card{background:rgba(255,255,255,.78);border-color:rgba(255,255,255,.95);box-shadow:0 20px 40px -26px color-mix(in srgb,var(--m-accent) 80%,transparent)}
+.mock[data-gaya="gradasi"] :is(.a-banner,.a-balance,.a-clock,.a-cta){box-shadow:0 16px 32px -16px color-mix(in srgb,var(--m-accent) 60%,#ec4899)}
+.mock[data-gaya="gradasi"] .a-tabs{background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.mock.db[data-gaya="gradasi"]{background:linear-gradient(165deg,color-mix(in srgb,var(--m-accent) 7%,#fff),color-mix(in srgb,#ec4899 6%,#fff))}
+
+.mock[data-gaya="resmi"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="resmi"] .m-card{box-shadow:0 1px 3px rgba(15,23,42,.08),0 8px 18px -12px rgba(15,23,42,.22)}
+.mock[data-gaya="resmi"] :is(.a-banner,.a-balance,.a-clock){background:linear-gradient(135deg,var(--m-accent),color-mix(in srgb,var(--m-accent) 72%,#000))}
+
+.mock[data-gaya="teknis"] .a-screen{background-image:linear-gradient(color-mix(in srgb,var(--m-line) 55%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--m-line) 55%,transparent) 1px,transparent 1px);background-size:24px 24px}
+.mock[data-gaya="teknis"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search),.mock.db[data-gaya="teknis"] .m-card{box-shadow:3px 3px 0 color-mix(in srgb,var(--m-accent) 22%,var(--m-line))}
+
+.mock[data-gaya="elegan"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket),.mock.db[data-gaya="elegan"] .m-card{box-shadow:0 0 0 4px var(--m-surface),0 0 0 5px var(--m-line),0 18px 32px -24px rgba(60,40,10,.35)}
+
+.mock[data-gaya="halftone"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket),.mock.db[data-gaya="halftone"] .m-card{box-shadow:4px 4px 0 var(--riso)}
+.mock[data-gaya="retro"] :is(.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket),.mock.db[data-gaya="retro"] .m-card{box-shadow:4px 4px 0 color-mix(in srgb,var(--m-fg) 85%,transparent)}
+
+/* ==========================================================================
+   Gaya dari data (katalog/gaya-situs.js dan gaya-aplikasi.js). Palet, huruf, sudut, dan garis datang dari
+   variabel di atribut style akar maket (lihat gayaProps di lib/mock.js). Atribut data-* menambah ciri:
+   bayangan kartu, pola latar pembuka, gaya judul, tombol kapsul, dan penyesuaian untuk latar gelap.
+   ========================================================================== */
+.mock[data-kapsul] :is(.m-btn,.a-cta){border-radius:999px}
+.mock[data-judul="kapital"] :is(.m-h1,.m-h2,.m-logo,.a-hello b,.a-h){text-transform:uppercase;letter-spacing:.03em}
+.mock[data-judul="miring"] :is(.m-h1,.m-h2,.a-hello b){font-style:italic}
+.mock[data-bayang="lembut"] :is(.m-card,.m-prod,.m-price,.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search){box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 24px -12px rgba(0,0,0,.2)}
+.mock[data-bayang="dalam"] :is(.m-card,.m-prod,.m-price,.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search){box-shadow:0 26px 48px -22px color-mix(in srgb,var(--m-fg) 40%,transparent);border-color:transparent}
+.mock[data-bayang="keras"] :is(.m-card,.m-prod,.m-price,.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search){box-shadow:4px 4px 0 var(--m-fg)}
+.mock[data-bayang="keras"] :is(.m-btn:not(.ghost),.a-cta){box-shadow:3px 3px 0 var(--m-fg)}
+.mock[data-bayang="cahaya"] :is(.m-card,.m-prod,.m-price,.a-card,.a-list,.a-prod,.a-media,.a-player,.a-ticket,.a-search){box-shadow:0 0 0 1px color-mix(in srgb,var(--m-accent) 30%,transparent),0 14px 34px -16px var(--m-accent)}
+.mock[data-bayang="cahaya"] :is(.m-btn:not(.ghost),.a-cta){box-shadow:0 10px 26px -10px var(--m-accent)}
+.mock[data-pola="titik"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio,.m-sec.tint,.a-banner,.a-balance){background-image:radial-gradient(color-mix(in srgb,var(--m-accent) 24%,transparent) 1.3px,transparent 1.7px);background-size:18px 18px}
+.mock[data-pola="kisi"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio,.m-sec.tint,.m-main){background-image:linear-gradient(color-mix(in srgb,var(--m-fg) 7%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--m-fg) 7%,transparent) 1px,transparent 1px);background-size:28px 28px}
+.mock[data-pola="garis"] :is(.m-hero,.m-hero-mid,.m-hero-cari,.m-hero-intro,.m-bio,.m-sec.tint,.a-banner,.a-balance){background-image:repeating-linear-gradient(135deg,color-mix(in srgb,var(--m-accent) 12%,transparent) 0 2px,transparent 2px 14px)}
+.mock[data-gelap] .m-img{background:color-mix(in srgb,var(--m-accent) 18%,var(--m-surface))}
+.mock[data-gelap] .a-tabs{background:color-mix(in srgb,var(--m-surface) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.mock.db[data-gelap]{--err:#f87171}
+.mock-poster[data-tok]{background:radial-gradient(70% 90% at 100% 100%,color-mix(in srgb,var(--m-accent) 22%,transparent),transparent 70%),var(--m-bg);color:var(--m-fg)}
+.mock-poster[data-tok] .mp-text p{color:var(--m-muted)}
+.mock-poster[data-tok][data-kapsul] .mp-text span{border-radius:999px}
+.mock-poster[data-tok]:not([data-kapsul]) .mp-text span{border-radius:var(--m-r)}
+.mock-poster[data-tok][data-judul="kapital"] .mp-text b{text-transform:uppercase;letter-spacing:.02em}
+.mock-poster[data-tok][data-judul="miring"] .mp-text b{font-style:italic}

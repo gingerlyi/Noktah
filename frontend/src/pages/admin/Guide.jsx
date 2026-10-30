@@ -99,7 +99,7 @@ export default function AdminGuide() {
         </div>
       </div>
 
-      <div className="ag-grid">
+      <div className="grid grid-cols-2 items-start gap-5.5 max-lg:grid-cols-1">
         <section className="sheet adm" aria-labelledby="ag-masuk">
           <h2 id="ag-masuk">Masuk dan keluar</h2>
           <ul className="ag-list">
@@ -160,7 +160,7 @@ export default function AdminGuide() {
       {TUGAS.map((t) => {
         const boleh = can(user, t.perm);
         return (
-          <section className={'sheet adm ag-task' + (boleh ? '' : ' is-locked')} key={t.perm} aria-labelledby={'ag-' + t.perm}>
+          <section className={'sheet adm' + (boleh ? '' : ' bg-field [&_h2]:text-muted')} key={t.perm} aria-labelledby={'ag-' + t.perm}>
             <div className="adm-head">
               <h2 id={'ag-' + t.perm}>{t.judul}</h2>
               {boleh ? (
@@ -172,7 +172,7 @@ export default function AdminGuide() {
                 <span className="tag">Hanya untuk {perannya(t.perm)}</span>
               )}
             </div>
-            <p className="ag-lead">{t.isi}</p>
+            <p className="m-0 max-w-[72ch] text-muted">{t.isi}</p>
             <ul className="ag-list">
               {t.poin.map((x, i) => (
                 <li key={i}>
@@ -187,7 +187,7 @@ export default function AdminGuide() {
 
       <section className="sheet adm" aria-labelledby="ag-bawaan">
         <h2 id="ag-bawaan">PRD bawaan dan pengembangan</h2>
-        <p className="ag-lead">
+        <p className="m-0 max-w-[72ch] text-muted">
           PRD bawaan ditulis di kode, satu berkas per PRD di folder <code>frontend/src/katalog</code>. Menambah atau mengubah PRD bawaan dilakukan
           oleh developer, dan langkahnya ada di README proyek. Untuk PRD yang cukup diubah dari dashboard, pakai <Ui>Tambah PRD</Ui> di halaman
           Perpustakaan.

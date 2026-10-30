@@ -1,6 +1,8 @@
 // Komponen kecil yang dipakai di banyak halaman.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { thumbHTML } from '../lib/mock.js';
+import { accentFor, thumbHTML } from '../lib/mock.js';
+import { GAYA, T } from '../lib/catalog.js';
+import { slug } from '../lib/prd.js';
 import { useApp } from '../lib/app.jsx';
 
 const SV = {
@@ -71,7 +73,7 @@ const ADEGAN = {
   },
 };
 
-export function Stipple({ scene = 'gunung' }) {
+export function Stipple({ scene = 'gunung', className = '' }) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
@@ -110,7 +112,7 @@ export function Stipple({ scene = 'gunung' }) {
     ro.observe(el);
     return () => ro.disconnect();
   }, [scene]);
-  return <div className="stipple" data-scene={scene} ref={ref} aria-hidden="true" />;
+  return <div className={'absolute inset-0 bg-ink [mask-size:100%_100%] forced-colors:hidden ' + className} data-scene={scene} ref={ref} aria-hidden="true" />;
 }
 
 // Logo Noktah: intan dari titik-titik yang mengecil ke tepi, seperti arsiran stipple; titik besar di tengah adalah "noktah"-nya.
@@ -288,13 +290,13 @@ export function ThemeButton({ withLabel = false }) {
 export function Avatar({ name, size = 30 }) {
   const initial = (String(name || '?').trim()[0] || '?').toUpperCase();
   return (
-    <span className="avatar" style={{ width: size, height: size, fontSize: size * 0.44 }} aria-hidden="true">
+    <span className="grid flex-none place-items-center rounded-full bg-accent-soft leading-none font-bold text-accent" style={{ width: size, height: size, fontSize: size * 0.44 }} aria-hidden="true">
       {initial}
     </span>
   );
 }
 
-export const Loading = ({ text = 'Memuat…' }) => <p className="loading">{text}</p>;
+export const Loading = ({ text = 'Memuat…' }) => <p className="m-0 py-14 text-center text-muted">{text}</p>;
 
 // Menggambar HTML maket pada lebar tetap (base) lalu memperkecilnya mengikuti lebar wadah.
 // --frame = tinggi wadah dalam satuan maket, dipakai CSS untuk "menggulir" maket sampai bawah.
@@ -318,7 +320,8 @@ export function ScaledHTML({ html, base = 1120, className }) {
   return <div className={className} ref={ref} aria-hidden="true" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-// Gambar kecil PRD (website atau poster aplikasi mobile) di dalam bingkai berlatar gradasi tipis.
+// Gambar kecil PRD: website di jendela peramban, aplikasi mobile sebagai poster selebar kartu. Latarnya diwarnai
+// dengan warna merek dan latar gaya PRD itu (lihat .tpl-thumb di app.css).
 // lazy: maket baru digambar saat kartunya mendekati layar, supaya perpustakaan yang panjang tetap ringan.
 export function MockThumb({ state, className = 'tpl-thumb', lazy = false }) {
   const ref = useRef(null);
@@ -343,16 +346,49 @@ export function MockThumb({ state, className = 'tpl-thumb', lazy = false }) {
     return () => io.disconnect();
   }, [show]);
   const html = useMemo(() => (show ? thumbHTML(state) : ''), [state, show]);
+  const poster = T[state.tpl]?.platform === 'mobile';
+  const view = show ? <ScaledHTML className="thumb-view" html={html} /> : <div className="thumb-view is-wait" />;
   return (
-    <div className={className} ref={ref} aria-hidden="true">
-      {show ? <ScaledHTML className="thumb-view" html={html} /> : <div className="thumb-view is-wait" />}
+    <div
+      className={className + (poster ? ' is-poster' : '')}
+      style={{ '--th-a': accentFor(state).a, '--th-bg': GAYA[state.gaya]?.latar || '#ffffff' }}
+      ref={ref}
+      aria-hidden="true"
+    >
+      {poster ? (
+        view
+      ) : (
+        <div className="thumb-win">
+          <div className="thumb-bar">
+            <i />
+            <i />
+            <i />
+            <span>{slug(state) + (T[state.tpl]?.app ? '.app' : '.id')}</span>
+          </div>
+          {view}
+        </div>
+      )}
     </div>
   );
 }
 
 // Contoh huruf dan bentuk sebuah gaya desain (lihat .gy-swatch di CSS).
-export const GayaSwatch = ({ gaya, big = false }) => (
-  <i className={'gy-swatch' + (big ? ' big' : '')} data-gaya={gaya} aria-hidden="true">
-    Aa
-  </i>
-);
+// Gaya dari data memakai warna, huruf, garis, dan sudutnya sendiri lewat style.
+export function GayaSwatch({ gaya, big = false }) {
+  const g = GAYA[gaya];
+  const style = g?.t && {
+    background: g.latar,
+    color: g.teks,
+    borderColor: g.t.line,
+    borderWidth: g.garis,
+    borderRadius: g.kapsul ? 999 : Math.min(g.sudut, 12),
+    fontFamily: g.t.fd,
+    fontStyle: g.t.judul === 'miring' ? 'italic' : undefined,
+    boxShadow: g.t.bayang === 'keras' ? '2px 2px 0 ' + g.teks : undefined,
+  };
+  return (
+    <i className={'gy-swatch' + (big ? ' big' : '')} data-gaya={gaya} style={style || undefined} aria-hidden="true">
+      Aa
+    </i>
+  );
+}

@@ -74,6 +74,11 @@ function Inner({ id }) {
   );
 }
 
+// Dialog riwayat versi dan bagikan memakai bingkai yang sama.
+const DIALOG = 'sheet max-h-[min(640px,calc(100vh_-_48px))] w-[min(560px,calc(100vw_-_32px))] p-5.5 text-ink backdrop:bg-black/60';
+const KEPALA = 'flex items-center justify-between gap-3';
+const JUDUL = 'm-0 font-display text-[1.4rem]/[1.2] font-medium';
+
 const waktu = (iso) => new Date(iso).toLocaleString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
 // Riwayat versi: server menyimpan isi lama paling sering tiap 10 menit saat PRD diubah. Daftarnya terbuka
@@ -113,17 +118,22 @@ function Riwayat({ id, busy, onRestore }) {
       <button type="button" className="btn quiet" onClick={buka}>
         Riwayat
       </button>
-      <dialog ref={ref} className="sheet versi" aria-labelledby="versi-judul">
-        <div className="versi-head">
-          <h2 id="versi-judul">Riwayat versi</h2>
+      <dialog ref={ref} className={DIALOG} aria-labelledby="versi-judul">
+        <div className={KEPALA}>
+          <h2 id="versi-judul" className={JUDUL}>
+            Riwayat versi
+          </h2>
           <button type="button" className="btn quiet" onClick={() => ref.current.close()}>
             Tutup
           </button>
         </div>
         <p className="hint">Versi disimpan otomatis saat kamu mengedit, paling sering tiap 10 menit, sampai 50 versi terakhir.</p>
         {!user?.premium && (
-          <p className="versi-lock">
-            Memulihkan versi lama adalah fitur Premium. <Link to="/harga">Lihat Premium</Link>
+          <p className="my-2.5 border border-dashed border-line px-3 py-2.5 text-[.92rem]">
+            Memulihkan versi lama adalah fitur Premium.{' '}
+            <Link className="text-ink" to="/harga">
+              Lihat Premium
+            </Link>
           </p>
         )}
         {items === null ? (
@@ -131,12 +141,12 @@ function Riwayat({ id, busy, onRestore }) {
         ) : items.length === 0 ? (
           <p className="hint">Belum ada versi lama. Versi pertama muncul setelah kamu mengubah PRD ini.</p>
         ) : (
-          <ol className="versi-list">
+          <ol className="mt-3 mb-0 flex list-none flex-col p-0">
             {items.map((v) => (
-              <li key={v.id}>
+              <li key={v.id} className="flex items-center justify-between gap-3 border-t border-line py-2.5">
                 <span>
                   <b>{waktu(v.createdAt)}</b>
-                  <small>{v.name || 'Tanpa nama'}</small>
+                  <small className="block text-muted">{v.name || 'Tanpa nama'}</small>
                 </span>
                 {user?.premium && (
                   <button type="button" className="btn quiet" disabled={kerja || busy} onClick={() => pulihkan(v)}>
@@ -195,9 +205,11 @@ function Bagikan({ id }) {
       <button type="button" className="btn quiet" onClick={buka}>
         Bagikan
       </button>
-      <dialog ref={ref} className="sheet versi" aria-labelledby="bagi-judul">
-        <div className="versi-head">
-          <h2 id="bagi-judul">Bagikan PRD</h2>
+      <dialog ref={ref} className={DIALOG} aria-labelledby="bagi-judul">
+        <div className={KEPALA}>
+          <h2 id="bagi-judul" className={JUDUL}>
+            Bagikan PRD
+          </h2>
           <button type="button" className="btn quiet" onClick={() => ref.current.close()}>
             Tutup
           </button>
@@ -207,7 +219,7 @@ function Bagikan({ id }) {
         ) : data.token ? (
           <>
             <p className="hint">Siapa pun yang punya tautan ini bisa membaca PRD, melihat pratinjaunya, dan berkomentar tanpa akun. Perubahanmu langsung ikut terlihat.</p>
-            <input type="text" readOnly value={url} aria-label="Tautan bagikan" onFocus={(ev) => ev.target.select()} />
+            <input type="text" className="my-2.5" readOnly value={url} aria-label="Tautan bagikan" onFocus={(ev) => ev.target.select()} />
             <div className="row">
               <button type="button" className="btn" onClick={salin}>
                 Salin tautan
@@ -219,7 +231,7 @@ function Bagikan({ id }) {
                 Cabut tautan
               </button>
             </div>
-            <h3 className="bagi-sub">Komentar ({data.comments.length})</h3>
+            <h3 className="mt-4.5 mb-0 font-display text-[1.05rem]/[1.2] font-medium">Komentar ({data.comments.length})</h3>
             {data.comments.length === 0 ? (
               <p className="hint">Belum ada komentar.</p>
             ) : (

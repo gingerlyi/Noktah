@@ -1,6 +1,8 @@
 // Katalog perpustakaan: bagian halaman atau layar, kebutuhan non-fungsional, pilihan teknologi, gaya desain,
 // dan daftar PRD bawaan. Isi tiap PRD ada di folder src/katalog, satu berkas per PRD.
 import {PRD} from '../katalog/index.js';
+import gayaSitus from '../katalog/gaya-situs.js';
+import gayaAplikasi from '../katalog/gaya-aplikasi.js';
 
 export const BLOK={hero:'Hero pembuka',menu:'Daftar menu',lokasi:'Lokasi dan jam buka',hitung:'Hitung mundur',acara:'Rangkaian acara',rsvp:'Konfirmasi kehadiran',hadiah:'Amplop digital',tim:'Tim atau pembicara',agenda:'Jadwal atau rencana per hari',listing:'Kartu pilihan (properti, kamar, paket)',kalkulator:'Simulasi biaya',lowongan:'Daftar lowongan',kampanye:'Kampanye donasi',laporan:'Laporan dana',waktu:'Jadwal harian',profil:'Profil singkat',tautan:'Daftar tautan',topik:'Topik bantuan',logos:'Logo klien',fitur:'Daftar fitur',unggul:'Keunggulan',stat:'Angka pencapaian',harga:'Paket harga',testi:'Testimoni',faq:'FAQ',cta:'Ajakan penutup',kategori:'Kategori',produk:'Produk unggulan',nawala:'Langganan email',galeri:'Galeri foto atau karya',tentang:'Tentang',layanan:'Layanan dan tarif',kontak:'Formulir kontak',artikel:'Daftar artikel',booking:'Formulir reservasi',kursus:'Daftar kelas',kpi:'Kartu KPI',grafik:'Grafik tren',tabel:'Tabel data',aktivitas:'Aktivitas terbaru',
  'a-sapa':'Sapaan dan profil','a-cari':'Kolom pencarian','a-banner':'Banner promo','a-kategori':'Ikon kategori','a-produk':'Kisi produk','a-saldo':'Kartu ringkasan angka','a-aksi':'Tombol aksi cepat','a-grafik':'Grafik mini','a-daftar':'Daftar item','a-jadwal':'Pilihan jadwal','a-progres':'Kartu progres','a-peta':'Peta pelacakan',
@@ -34,8 +36,10 @@ export const stackFor=platform=>platform==='mobile'?STACK_MOBILE:STACK_WEB;
 // Gaya desain. "ciri", "huruf", "latar", "teks", "gambar", dan "hindari" menjadi design brief di bagian Desain PRD;
 // skala (px: judul halaman, judul bagian, subjudul, isi, keterangan), sudut, garis, jarak antarbagian, dan kapsul
 // (tombol berbentuk kapsul) menjadi ukuran di design brief. "cocok" membantu memilih gaya.
-// latar, teks, sudut, dan garis sama dengan nilai pratinjaunya di styles.css.
-export const GAYA={
+// latar, teks, sudut, dan garis sama dengan nilai pratinjaunya di mock.css.
+// 14 gaya pertama punya CSS sendiri di mock.css; gaya lainnya dibangun dari data di katalog/gaya-situs.js dan
+// katalog/gaya-aplikasi.js (lihat katalog/gaya-dasar.js), sehingga setiap PRD bawaan punya gayanya sendiri.
+const GAYA_DASAR={
  bersih:{nama:'Bersih dan modern',pendek:'Bersih',ciri:'Latar putih, banyak ruang kosong, sudut membulat sedang, dan satu warna aksen.',huruf:'Sans-serif modern seperti Plus Jakarta Sans atau Inter untuk judul dan isi.',nada:'Jelas, ringkas, langsung ke inti.',latar:'#ffffff',teks:'#14171f',gambar:'Foto produk atau tangkapan layar yang terang dengan latar polos, dan ikon garis yang seragam.',hindari:'Lebih dari satu warna aksen, bayangan tebal, dan teks di atas foto yang ramai.',skala:[48,32,20,16,13],sudut:12,garis:1,jarak:80,cocok:'Startup dan layanan digital, toko online, marketplace, rekrutmen, aplikasi bisnis, dan dashboard.'},
  hangat:{nama:'Hangat dan ramah',pendek:'Hangat',ciri:'Latar bernuansa warna merek, sudut sangat membulat, dan bentuk yang lembut.',huruf:'Sans-serif yang membulat dan ramah, misalnya Nunito atau Plus Jakarta Sans.',nada:'Akrab dan menenangkan.',latar:'#fffdfa',teks:'#14171f',gambar:'Foto orang dan suasana asli dengan cahaya hangat, dan ilustrasi berbentuk lembut.',hindari:'Sudut siku, warna dingin yang pucat, dan bahasa yang kaku.',skala:[44,30,20,17,14],sudut:22,garis:1,jarak:80,cocok:'Restoran dan kafe, klinik keluarga, donasi, booking jasa, pesan antar, dan wisata lokal.'},
  tegas:{nama:'Tegas dan berani',pendek:'Tegas',ciri:'Huruf besar dan tebal, garis hitam, sudut siku, dan bayangan keras.',huruf:'Sans-serif tebal atau condensed untuk judul, misalnya Archivo atau Anton.',nada:'Percaya diri dan lugas.',latar:'#ffffff',teks:'#14171f',gambar:'Foto kontras tinggi dengan potongan rapat, dan ikon tebal yang berisi.',hindari:'Huruf tipis, warna pastel, dan sudut membulat.',skala:[64,40,22,16,13],sudut:0,garis:2,jarak:72,cocok:'Bengkel dan jasa servis, rental kendaraan, ojek dan antar jemput, komunitas olahraga, dan brand streetwear.'},
@@ -51,6 +55,7 @@ export const GAYA={
  retro:{nama:'Retro piksel',pendek:'Retro',ciri:'Latar dengan kisi titik seperti layar dot matrix, huruf piksel, gambar berpola dither, tepi bertitik tebal, dan sudut siku.',huruf:'Huruf piksel seperti Pixelify Sans atau Silkscreen untuk judul dan angka, monospace untuk isi.',nada:'Main-main, nostalgia, dan ringkas.',latar:'#e9e6da',teks:'#1c1b17',gambar:'Ikon dan ilustrasi piksel, dan gambar berpola dither.',hindari:'Foto beresolusi tinggi, gradasi halus, dan sudut membulat.',skala:[44,30,20,15,12],sudut:0,garis:2,jarak:64,cocok:'Turnamen gim, aplikasi belajar, aplikasi kasir, alat sales lapangan, dan helpdesk.'},
  editorial:{nama:'Editorial majalah',pendek:'Editorial',ciri:'Kertas krem, judul serif sangat besar, kolom rapi seperti majalah, huruf awal yang besar, dan garis titik-titik di antara nama dan angka.',huruf:'Serif dengan kontras tinggi seperti Fraunces atau Playfair Display untuk judul, sans-serif yang tenang untuk isi.',nada:'Bercerita, cermat, dan berwibawa.',latar:'#faf7f0',teks:'#161411',gambar:'Foto bergaya majalah dengan keterangan foto, dan ilustrasi tinta.',hindari:'Ikon kartun, tombol kapsul berwarna cerah, dan paragraf panjang rata tengah.',skala:[72,40,24,18,14],sudut:0,garis:1,jarak:96,cocok:'Media berita, blog, katering dan menu restoran, buku resep, dan portal lowongan.'},
 };
+export const GAYA={...GAYA_DASAR,...gayaSitus,...gayaAplikasi};
 export const WARNA=['#2456e6','#0e7490','#0f766e','#4d7c0f','#c2410c','#be185d','#6d28d9','#9a4f1f','#1f2937'];
 
 

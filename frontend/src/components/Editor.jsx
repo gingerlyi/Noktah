@@ -5,11 +5,13 @@ import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, use
 import { Link } from 'react-router-dom';
 import { BLOK, GAYA, T, WARNA, nfrFor, stackFor } from '../lib/catalog.js';
 import { bentukPeran, mockHTML } from '../lib/mock.js';
-import { SEMUA, STRUKTUR, checkPrd, countLevel, genMd, halamanPeran, isMobile, md, peranAktif, rid, slug } from '../lib/prd.js';
+import { SEMUA, STRUKTUR, briefMd, checkPrd, countLevel, genMd, halamanPeran, isMobile, md, peranAktif, rid, slug } from '../lib/prd.js';
 import { DEMO, useApp } from '../lib/app.jsx';
 import { ALAT, buatChecklist, buatPrompt, namaBerkas } from '../lib/prompts.js';
 import { zip } from '../lib/zip.js';
 import { nilaiPrd } from '../lib/nilai.js';
+import { DesignBrief } from './DesignBrief.jsx';
+import { GayaSwatch } from './ui.jsx';
 
 // Menyimpan otomatis 0,7 detik setelah perubahan terakhir, satu permintaan pada satu waktu.
 export function useAutosave(save) {
@@ -61,7 +63,7 @@ export function useAutosave(save) {
   return { status, queue };
 }
 
-async function copyText(text) {
+export async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);
     return true;
@@ -99,8 +101,8 @@ export function useCopyPrd() {
   );
 }
 
-export async function downloadMd(text, state, toast) {
-  const filename = 'prd-' + slug(state) + '.md';
+export async function downloadMd(text, state, toast, awalan = 'prd') {
+  const filename = awalan + '-' + slug(state) + '.md';
   if (DEMO) {
     // Pratinjau berjalan di dalam Claude, yang hanya mengizinkan unduhan lewat izin khususnya.
     try {
@@ -134,25 +136,25 @@ export function checkSummary(issues) {
 // Nilai mutu PRD dengan rincian kriteria dan saran perbaikan (hanya di editor PRD Saya).
 function NilaiPanel({ nilai }) {
   return (
-    <div className="nilai" role="status">
-      <div className="nilai-head">
-        <b className="nilai-angka">{nilai.nilai}</b>
+    <div className="mb-4.5 flex flex-col gap-3 border border-line bg-field px-4.5 py-4" role="status">
+      <div className="flex items-center gap-4">
+        <b className="min-w-[2.2ch] font-display text-[2.6rem]/none font-medium">{nilai.nilai}</b>
         <span>
           <b>Nilai PRD: {nilai.tingkat}</b>
-          <small>Seberapa siap PRD ini dipakai AI builder tanpa banyak menebak.</small>
+          <small className="block text-[.88rem] text-muted">Seberapa siap PRD ini dipakai AI builder tanpa banyak menebak.</small>
         </span>
       </div>
-      <div className="nilai-bar" aria-hidden="true">
-        <i style={{ width: nilai.nilai + '%' }} />
+      <div className="h-2 bg-line" aria-hidden="true">
+        <i className="block h-full bg-ink transition-[width] duration-300 ease-(--ease-out)" style={{ width: nilai.nilai + '%' }} />
       </div>
-      <ul>
+      <ul className="m-0 flex list-none flex-col gap-2 p-0 text-[.92rem]">
         {nilai.kriteria.map((k) => (
-          <li key={k.label} className={k.ok ? 'is-ok' : ''}>
+          <li key={k.label} className={'flex justify-between gap-3' + (k.ok ? ' text-muted' : '')}>
             <span>
               {k.ok ? '✓' : '○'} {k.label}
-              {!k.ok && <small>{k.tip}</small>}
+              {!k.ok && <small className="mt-0.5 ml-[1.3em] block text-muted">{k.tip}</small>}
             </span>
-            <em>
+            <em className="font-mono text-[.82rem]/[1.6] font-medium whitespace-nowrap not-italic">
               {k.poin}/{k.bobot}
             </em>
           </li>
@@ -162,17 +164,20 @@ function NilaiPanel({ nilai }) {
   );
 }
 
+const NADA = { ok: 'bg-(--ok-soft)', warn: 'bg-(--warn-soft)', bad: 'bg-danger-soft' };
 function CheckPanel({ issues }) {
   const sum = checkSummary(issues);
   return (
-    <div className={'check ' + sum.tone} role="status">
+    <div className={'mb-4.5 flex flex-col gap-2 rounded-xl px-4 py-3.5 text-[.94rem] ' + NADA[sum.tone]} role="status">
       <div>
         <b>{sum.tone === 'bad' ? 'Belum sesuai struktur baku' : 'Sesuai struktur baku'}</b> ({STRUKTUR}).{' '}
         {sum.tone === 'ok' && 'AI builder bisa membaca dokumen ini tanpa menebak letak informasinya. '}
-        <Link to="/struktur">Lihat ketentuannya</Link>
+        <Link className="font-semibold text-inherit" to="/struktur">
+          Lihat ketentuannya
+        </Link>
       </div>
       {issues.length > 0 && (
-        <ul>
+        <ul className="m-0 flex flex-col gap-1 pl-5">
           {issues.map((x, i) => (
             <li key={i}>
               <b>{x.level === 'wajib' ? 'Wajib: ' : 'Saran: '}</b>
@@ -215,17 +220,30 @@ function Stage({ state, mobile, role }) {
   const utama = peranAktif(state)[0];
   const path = role && utama && role.id !== utama.id ? rid(role.n) : '';
   return (
-    <div className="stage" ref={stageRef}>
-      <div className={'frame' + (mobile ? ' is-mobile' : '')}>
-        <div className="frame-bar">
-          <i />
-          <i />
-          <i />
-          <span className="frame-url">{slug(state) + (T[state.tpl].app ? '.app/' : '.id/') + path}</span>
-        </div>
-        <div className="frame-view" ref={viewRef} aria-hidden="true" dangerouslySetInnerHTML={{ __html: html }} />
+    <div className="rounded-b-2xl bg-(--grad-soft) p-4.5 max-md:p-2.5" ref={stageRef}>
+      <div
+        className={
+          'mx-auto max-w-full overflow-hidden border bg-surface ' + (mobile ? 'w-98 rounded-[28px] border-6 border-ink' : 'rounded-xl border-line')
+        }
+      >
+        {!mobile && (
+          <div className="flex items-center gap-1.5 border-b border-line px-3 py-2">
+            {[0, 1, 2].map((k) => (
+              <i key={k} className="size-2.25 rounded-full bg-line" />
+            ))}
+            <span className="ml-2 min-w-0 flex-1 truncate rounded-full bg-field px-3 py-1.5 font-mono text-[.76rem]/none text-muted">
+              {slug(state) + (T[state.tpl].app ? '.app/' : '.id/') + path}
+            </span>
+          </div>
+        )}
+        <div
+          className="frame-view max-h-[min(640px,72vh)] overflow-x-hidden overflow-y-auto"
+          ref={viewRef}
+          aria-hidden="true"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
-      <p className="stage-note">
+      <p className="mt-3 mb-0 text-center text-[.84rem] text-muted">
         Teks, harga, dan nama orang di pratinjau adalah contoh.{' '}
         {bentuk === 'situs'
           ? 'Susunan, halaman, warna, dan gaya mengikuti PRD.'
@@ -237,9 +255,15 @@ function Stage({ state, mobile, role }) {
   );
 }
 
-// Panel hasil: pratinjau dan dokumen PRD. onEditText diisi bila dokumen boleh diedit langsung.
+// Panel hasil: dokumen PRD, design brief, pratinjau, dan prompt. onEditText diisi bila dokumen boleh diedit langsung.
 // pick ({ id, mobile }) memilih peran dan ukuran layar pratinjau dari luar, misalnya dari galeri gambaran hasil.
-export function ResultPanel({ state, text, issues, nilai, tab, onTab, onEditText, onResetManual, pick }) {
+// tabs membatasi tab yang tampil, misalnya hanya pratinjau di tab "Contoh tampilan" halaman detail.
+const TAB = { doc: 'Dokumen PRD', brief: 'Design brief', prev: 'Contoh tampilan', ai: 'Prompt AI' };
+const KANAN = 'ml-auto flex flex-wrap items-center gap-2';
+const DAFTAR = 'm-0 flex list-none flex-col gap-2.5 p-0';
+const DAFTAR_HAK = 'min-h-30 text-[.92rem]';
+const DOCWRAP = 'px-6 pt-5 pb-6.5 max-md:p-4';
+export function ResultPanel({ state, text, issues, nilai, tab, onTab, onEditText, onResetManual, pick, tabs = Object.keys(TAB), className = '' }) {
   const { toast } = useApp();
   const copyPrd = useCopyPrd();
   const [wide, setWide] = useState(false); // false = desktop, true = ponsel (hanya untuk tampilan web)
@@ -258,28 +282,35 @@ export function ResultPanel({ state, text, issues, nilai, tab, onTab, onEditText
   const appView = role ? bentukPeran(preview, role.id) === 'app' : app;
   const mobile = appView || wide;
   const docHtml = useMemo(() => (tab === 'doc' && !edit ? md(text) : ''), [tab, edit, text]);
+  const copyBrief = async () =>
+    toast((await copyText(briefMd(state, text))) ? 'Design brief disalin sebagai Markdown.' : 'Tidak bisa menyalin otomatis. Pakai tombol Unduh .md.');
 
   return (
-    <div className="sheet panel">
-      <div className="tabs">
-        <div role="tablist" aria-label="Hasil">
-          <button className="tab" role="tab" type="button" aria-selected={tab === 'doc'} onClick={() => onTab('doc')}>
-            Dokumen PRD
-          </button>
-          <button className="tab" role="tab" type="button" aria-selected={tab === 'prev'} onClick={() => onTab('prev')}>
-            {app ? 'Pratinjau aplikasi' : 'Pratinjau website'}
-          </button>
-          <button className="tab" role="tab" type="button" aria-selected={tab === 'ai'} onClick={() => onTab('ai')}>
-            Prompt AI
-          </button>
-        </div>
+    <div className={'sheet sticky top-(--stick) max-xl:static ' + className}>
+      <div className="flex flex-wrap items-center gap-2 border-b border-line px-3.5 py-3">
+        {tabs.length === 1 ? (
+          <h2 className="m-0 px-1.5 py-0 font-display text-[1.05rem]/[1.2] font-bold">{TAB[tabs[0]]}</h2>
+        ) : (
+          <div role="tablist" aria-label="Hasil">
+            {tabs.map((k) => (
+              <button key={k} className="tab" role="tab" type="button" aria-selected={tab === k} onClick={() => onTab(k)}>
+                {TAB[k]}
+              </button>
+            ))}
+          </div>
+        )}
         {tab === 'prev' ? (
           (roles.length > 1 || !appView) && (
-            <div className="tabs-right">
+            <div className={KANAN}>
               {roles.length > 1 && (
-                <label className="role-pick">
+                <label className="flex items-center gap-2 text-[.86rem] text-muted">
                   <span>Lihat sebagai</span>
-                  <select value={role.id} aria-label="Lihat pratinjau sebagai peran" onChange={(ev) => setRoleId(ev.target.value)}>
+                  <select
+                    className="w-auto max-w-55 px-2.5 py-2 font-semibold text-ink"
+                    value={role.id}
+                    aria-label="Lihat pratinjau sebagai peran"
+                    onChange={(ev) => setRoleId(ev.target.value)}
+                  >
                     {roles.map((r) => (
                       <option key={r.id} value={r.id}>
                         {r.n}
@@ -300,8 +331,17 @@ export function ResultPanel({ state, text, issues, nilai, tab, onTab, onEditText
               )}
             </div>
           )
-        ) : tab === 'ai' ? null : (
-          <div className="tabs-right">
+        ) : tab === 'ai' ? null : tab === 'brief' ? (
+          <div className={KANAN}>
+            <button className="btn quiet" type="button" onClick={() => downloadMd(briefMd(state, text), state, toast, 'design-brief')}>
+              Unduh .md
+            </button>
+            <button className="btn" type="button" onClick={copyBrief}>
+              Salin design brief
+            </button>
+          </div>
+        ) : (
+          <div className={KANAN}>
             {onEditText && (
               <div className="seg" role="group" aria-label="Mode dokumen">
                 <button type="button" aria-pressed={!edit} onClick={() => setEdit(false)}>
@@ -326,13 +366,17 @@ export function ResultPanel({ state, text, issues, nilai, tab, onTab, onEditText
         <Stage state={preview} mobile={mobile} role={role} />
       ) : tab === 'ai' ? (
         <PromptPanel state={preview} text={text} />
+      ) : tab === 'brief' ? (
+        <div className={DOCWRAP}>
+          <DesignBrief state={preview} className="rounded-[14px] border border-line" />
+        </div>
       ) : (
-        <div className="docwrap">
+        <div className={DOCWRAP}>
           {nilai && <NilaiPanel nilai={nilai} />}
           <CheckPanel issues={issues} />
           {onResetManual && state.manual != null && (
-            <div className="manual">
-              <span>Dokumen ini sudah kamu edit langsung, jadi perubahan di formulir tidak ikut masuk.</span>
+            <div className="mb-4 flex flex-wrap items-center gap-2.5 rounded-xl bg-accent-soft px-3.5 py-3 text-[.9rem]">
+              <span className="min-w-50 flex-1">Dokumen ini sudah kamu edit langsung, jadi perubahan di formulir tidak ikut masuk.</span>
               <button className="btn quiet" type="button" onClick={onResetManual}>
                 Pakai lagi hasil formulir
               </button>
@@ -346,6 +390,7 @@ export function ResultPanel({ state, text, issues, nilai, tab, onTab, onEditText
               </p>
               <textarea
                 id="mdEdit"
+                className="min-h-[min(600px,68vh)] font-mono text-[.88rem]/[1.6]"
                 aria-label="Teks PRD dalam Markdown"
                 spellCheck={false}
                 value={text}
@@ -395,9 +440,9 @@ function PromptPanel({ state, text }) {
   };
 
   return (
-    <div className="pr">
-      <div className="pr-head">
-        <div className="seg" role="group" aria-label="AI builder">
+    <div className="flex flex-col gap-3.5 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
+        <div className="seg flex-wrap" role="group" aria-label="AI builder">
           {Object.entries(ALAT).map(([k, a]) => (
             <button type="button" key={k} aria-pressed={alat === k} onClick={() => setAlat(k)}>
               {a.nama}
@@ -418,12 +463,12 @@ function PromptPanel({ state, text }) {
         Lampirkan dokumen PRD ke {ALAT[alat].nama}, lalu tempel prompt di bawah satu per satu sesuai urutan. Tiap fase ditutup dengan
         pemeriksaan kriteria penerimaan, jadi kamu tahu kapan boleh lanjut.
       </p>
-      <ol className="pr-list">
+      <ol className="m-0 flex list-none flex-col gap-2.5 p-0">
         {fase.map((f, i) => {
           const kunci = !premium && i > 0;
           return (
-            <li key={f.judul} className={kunci ? 'is-locked' : ''}>
-              <div className="pr-row">
+            <li key={f.judul} className={'flex flex-col gap-2 border border-line bg-field px-3.5 py-3' + (kunci ? ' opacity-60' : '')}>
+              <div className="flex items-center justify-between gap-2.5">
                 <b>
                   Fase {i + 1}: {f.judul}
                 </b>
@@ -437,8 +482,10 @@ function PromptPanel({ state, text }) {
               </div>
               {!kunci && (
                 <details open={i === 0}>
-                  <summary>Lihat isi prompt</summary>
-                  <pre>{f.isi}</pre>
+                  <summary className="cursor-pointer text-[.88rem] text-muted">Lihat isi prompt</summary>
+                  <pre className="mt-2 mb-0 max-h-90 overflow-auto border border-line bg-surface p-3 font-mono text-[.82rem]/[1.55] whitespace-pre-wrap text-ink">
+                    {f.isi}
+                  </pre>
                 </details>
               )}
             </li>
@@ -610,23 +657,23 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
 
   return (
     <main className="view tight" ref={topRef}>
-      <div className="ed-bar">
+      <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2.5">
         <Link className="btn quiet" to={backTo}>
           ← {backLabel}
         </Link>
-        <div className="ed-title">
+        <div className="mr-auto flex min-w-0 items-baseline gap-2.5">
           <span className="step">{isLib ? 'PRD perpustakaan' : 'PRD'}</span>
-          <h1>{title}</h1>
+          <h1 className="m-0 truncate font-display text-[1.35rem]/[1.25] font-extrabold tracking-[-.015em]">{title}</h1>
         </div>
         <button type="button" className={'badge ' + sum.tone} onClick={showCheck} title="Buka hasil pemeriksaan struktur">
           {sum.label}
         </button>
         {nilai && (
-          <button type="button" className="badge nilai-badge" onClick={showCheck} title="Lihat rincian nilai PRD">
+          <button type="button" className="badge border border-line bg-field font-mono text-ink" onClick={showCheck} title="Lihat rincian nilai PRD">
             Nilai {nilai.nilai}
           </button>
         )}
-        <span className={'ed-status' + (status === 'error' ? ' err' : '')} role="status">
+        <span className={'text-[.86rem] ' + (status === 'error' ? 'text-danger' : 'text-muted')} role="status">
           {STATUS_TEXT[status] || 'Tersimpan'}
         </span>
         {tools}
@@ -636,7 +683,11 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
           </button>
         )}
       </div>
-      <div className="pane-switch seg" role="group" aria-label="Bagian editor">
+      <div
+        className="seg hidden max-xl:sticky max-xl:top-(--stick) max-xl:z-6 max-xl:flex [&>button]:min-h-11 [&>button]:flex-1 [&>button]:text-[.95rem]"
+        role="group"
+        aria-label="Bagian editor"
+      >
         <button type="button" aria-pressed={pane === 'form'} onClick={() => switchPane('form')}>
           Isi PRD
         </button>
@@ -645,13 +696,11 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
         </button>
       </div>
 
-      <section className="work" data-pane={pane}>
-        <div className="sheet" id="form">
-          <div className="sheet-head">
-            <div className="sec-head">
-              <h2>Isi PRD</h2>
-            </div>
-            <p>Isinya bebas kamu ubah. Susunan dokumennya tetap mengikuti struktur baku supaya mudah dibaca AI.</p>
+      <section className="grid grid-cols-[minmax(0,450px)_minmax(0,1fr)] items-start gap-7 max-xl:grid-cols-1">
+        <div className={'sheet' + (pane === 'hasil' ? ' max-xl:hidden' : '')} id="form">
+          <div className="border-b border-line px-5.5 pt-5 pb-4">
+            <h2 className="m-0 font-display text-[1.3rem]/[1.2] font-medium">Isi PRD</h2>
+            <p className="mt-1 mb-0 text-[.9rem] text-muted">Isinya bebas kamu ubah. Susunan dokumennya tetap mengikuti struktur baku supaya mudah dibaca AI.</p>
           </div>
 
           {metaGroup}
@@ -692,10 +741,10 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                 Siapa saja yang memakai {app ? 'aplikasi' : 'website'} ini dan apa yang boleh mereka lakukan. Peran pertama adalah peran utama. Peran
                 yang dimatikan tidak masuk dokumen, begitu juga {unit}, fitur, dan alur miliknya.
               </span>
-              <ul className="roles">
+              <ul className={DAFTAR}>
                 {state.peran.map((r, i) => (
-                  <li className={'role' + (r.on ? '' : ' off')} key={r.id}>
-                    <div className="role-head">
+                  <li className={'isian flex flex-col gap-2' + (r.on ? '' : ' off')} key={r.id}>
+                    <div className="grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-2">
                       <input
                         type="checkbox"
                         id={'pr-on-' + i}
@@ -705,6 +754,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                       />
                       <input
                         type="text"
+                        className="font-semibold"
                         id={'pr-n-' + i}
                         value={r.n}
                         placeholder="Nama peran, misalnya Admin"
@@ -749,10 +799,11 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                         onChange={(ev) => setRole(i, { m: ev.target.value })}
                       />
                     </label>
-                    <div className="role-lists">
+                    <div className="grid grid-cols-2 gap-2 max-hp:grid-cols-1">
                       <label className="rf" htmlFor={'pr-b-' + i}>
                         <span>Bisa</span>
                         <textarea
+                          className={DAFTAR_HAK}
                           id={'pr-b-' + i}
                           value={r.b}
                           placeholder="Satu per baris"
@@ -763,6 +814,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                       <label className="rf" htmlFor={'pr-t-' + i}>
                         <span>Tidak bisa</span>
                         <textarea
+                          className={DAFTAR_HAK}
                           id={'pr-t-' + i}
                           value={r.t}
                           placeholder="Satu per baris, boleh kosong"
@@ -796,8 +848,8 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                   : 'Dikelompokkan per peran. Halaman peran utama menjadi menu di bagian atas website.'}
               </span>
               {aktif.map((r) => (
-                <div className="pg-group" key={r.id}>
-                  <span className="lbl">
+                <div className="flex flex-col gap-2" key={r.id}>
+                  <span className="text-[.86rem] font-bold text-muted">
                     {r.n}
                     {app && r.w === 'web' ? ' · panel web' : ''}
                   </span>
@@ -849,9 +901,9 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
             </summary>
             <div className="grp-body">
               <span className="hint">Langkah yang dijalani satu peran dari awal sampai selesai. AI memakai alur ini untuk menguji hasilnya.</span>
-              <ul className="flows">
+              <ul className={DAFTAR}>
                 {state.alur.map((a, i) => (
-                  <li className={'flow' + (a.on ? '' : ' off')} key={i}>
+                  <li className={'isian grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2' + (a.on ? '' : ' off')} key={i}>
                     <input
                       type="checkbox"
                       id={'al-on-' + i}
@@ -870,7 +922,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                     <button type="button" className="x" aria-label={'Hapus alur ' + a.n} onClick={() => removeFlow(i)}>
                       ×
                     </button>
-                    <label className="rf flow-r" htmlFor={'al-r-' + i}>
+                    <label className="rf col-span-full flex-row items-center gap-2.5 [&>span]:whitespace-nowrap" htmlFor={'al-r-' + i}>
                       <span>Dijalankan oleh</span>
                       <select id={'al-r-' + i} value={a.r} aria-label="Peran yang menjalankan alur" onChange={(ev) => setFlow(i, { r: ev.target.value })}>
                         {state.peran.map((r) => (
@@ -880,10 +932,10 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                         ))}
                       </select>
                     </label>
-                    <label className="rf flow-lw" htmlFor={'al-l-' + i}>
+                    <label className="rf col-span-full" htmlFor={'al-l-' + i}>
                       <span>Langkah, satu per baris</span>
                       <textarea
-                        className="flow-l"
+                        className="min-h-27.5 text-[.92rem]"
                         id={'al-l-' + i}
                         value={a.l}
                         placeholder="Misalnya: Membuka halaman Reservasi"
@@ -914,9 +966,9 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                 P0 wajib ada di rilis pertama, P1 menyusul, P2 bila ada waktu. Kriteria penerimaan memberi tahu AI kapan sebuah fitur dianggap
                 selesai.
               </span>
-              <ul className="feats">
+              <ul className={DAFTAR}>
                 {state.fitur.map((f, i) => (
-                  <li className={'feat' + (f.on ? '' : ' off')} key={i}>
+                  <li className={'isian grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-2' + (f.on ? '' : ' off')} key={i}>
                     <input
                       type="checkbox"
                       id={'fi-on-' + i}
@@ -932,7 +984,13 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                       aria-label="Nama fitur"
                       onChange={(ev) => setFeat(i, { n: ev.target.value })}
                     />
-                    <select id={'fi-p-' + i} value={f.p} aria-label="Prioritas" onChange={(ev) => setFeat(i, { p: ev.target.value })}>
+                    <select
+                      className="max-w-none font-semibold"
+                      id={'fi-p-' + i}
+                      value={f.p}
+                      aria-label="Prioritas"
+                      onChange={(ev) => setFeat(i, { p: ev.target.value })}
+                    >
                       <option>P0</option>
                       <option>P1</option>
                       <option>P2</option>
@@ -941,7 +999,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                       ×
                     </button>
                     {aktif.length > 1 && (
-                      <div className="feat-r" role="group" aria-label={'Peran untuk fitur ' + f.n}>
+                      <div className="col-span-full flex flex-wrap gap-1.5" role="group" aria-label={'Peran untuk fitur ' + f.n}>
                         {aktif.map((r) => (
                           <button
                             type="button"
@@ -957,7 +1015,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                     )}
                     <input
                       type="text"
-                      className="feat-d"
+                      className="col-span-full text-[.92rem]"
                       id={'fi-d-' + i}
                       value={f.d}
                       placeholder="Deskripsi singkat"
@@ -965,7 +1023,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                       onChange={(ev) => setFeat(i, { d: ev.target.value })}
                     />
                     <textarea
-                      className="feat-k"
+                      className="col-span-full min-h-16 text-[.92rem] text-ink"
                       id={'fi-k-' + i}
                       value={f.k}
                       placeholder="Kriteria penerimaan, satu per baris"
@@ -1018,22 +1076,32 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
                     />
                   ))}
                   <input type="color" id="f-warna" value={state.warna} aria-label="Warna lain" onChange={(ev) => set({ warna: ev.target.value })} />
-                  <span className="hex">{state.warna}</span>
+                  <span className="font-mono text-[.86rem]/none text-muted">{state.warna}</span>
                 </div>
               </div>
               <div className="fld">
                 <span className="lbl">Gaya</span>
-                <div className="gaya">
+                <div className="grid max-h-105 grid-cols-2 gap-2.5 overflow-y-auto pr-1 max-hp:grid-cols-1">
                   {Object.entries(GAYA).map(([k, g]) => (
-                    <label key={k} title={g.ciri}>
-                      <input type="radio" name="gaya" id={'gy-' + k} value={k} checked={k === state.gaya} onChange={() => set({ gaya: k })} />
-                      <b>
-                        <i className="gy-swatch" data-gaya={k} aria-hidden="true">
-                          Aa
-                        </i>
+                    <label
+                      key={k}
+                      title={g.ciri}
+                      className="flex cursor-pointer flex-col gap-0.75 rounded-xl border border-line bg-field p-3 hover:border-accent has-checked:border-accent has-checked:bg-accent-soft has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent"
+                    >
+                      <input
+                        type="radio"
+                        className="pointer-events-none absolute opacity-0"
+                        name="gaya"
+                        id={'gy-' + k}
+                        value={k}
+                        checked={k === state.gaya}
+                        onChange={() => set({ gaya: k })}
+                      />
+                      <b className="flex items-center gap-2 text-[.94rem]">
+                        <GayaSwatch gaya={k} />
                         {g.nama}
                       </b>
-                      <span>Cocok untuk {g.cocok.charAt(0).toLowerCase() + g.cocok.slice(1)}</span>
+                      <span className="text-[.82rem]/[1.4] text-muted">Cocok untuk {g.cocok.charAt(0).toLowerCase() + g.cocok.slice(1)}</span>
                     </label>
                   ))}
                 </div>
@@ -1078,6 +1146,7 @@ export function EditorShell({ kind, title, backTo, backLabel, status, state, onC
         </div>
 
         <ResultPanel
+          className={pane === 'form' ? 'max-xl:hidden' : ''}
           state={state}
           text={text}
           issues={issues}

@@ -52,6 +52,7 @@ import katering from './katering.js';
 import berita from './berita.js';
 import salon from './salon.js';
 import invoice from './invoice.js';
+import apotek from './apotek.js';
 import mToko from './m-toko.js';
 import mAntar from './m-antar.js';
 import mKeuangan from './m-keuangan.js';
@@ -82,6 +83,37 @@ import mJemput from './m-jemput.js';
 import mNikah from './m-nikah.js';
 import mArisan from './m-arisan.js';
 import mEsports from './m-esports.js';
+import kafe from './kafe.js';
+import coworking from './coworking.js';
+import lesprivat from './lesprivat.js';
+import percetakan from './percetakan.js';
+import umrah from './umrah.js';
+import pengaduan from './pengaduan.js';
+import banksampah from './banksampah.js';
+import hukum from './hukum.js';
+import petshop from './petshop.js';
+import renovasi from './renovasi.js';
+import podcast from './podcast.js';
+import lari from './lari.js';
+import lelang from './lelang.js';
+import aset from './aset.js';
+import busantar from './busantar.js';
+import mApotek from './m-apotek.js';
+import mServis from './m-servis.js';
+import mParkir from './m-parkir.js';
+import mDaycare from './m-daycare.js';
+import mSampah from './m-sampah.js';
+import mDonor from './m-donor.js';
+import mKajian from './m-kajian.js';
+import mBengkel from './m-bengkel.js';
+import mPasar from './m-pasar.js';
+import mHewan from './m-hewan.js';
+import mSewamotor from './m-sewamotor.js';
+import mTernak from './m-ternak.js';
+import mNgaji from './m-ngaji.js';
+import mKopi from './m-kopi.js';
+import mRelawan from './m-relawan.js';
+import mKampus from './m-kampus.js';
 
 export const PRD = [
   // Website
@@ -124,6 +156,22 @@ export const PRD = [
   berita,
   salon,
   invoice,
+  apotek,
+  kafe,
+  coworking,
+  lesprivat,
+  percetakan,
+  umrah,
+  pengaduan,
+  banksampah,
+  hukum,
+  petshop,
+  renovasi,
+  podcast,
+  lari,
+  lelang,
+  aset,
+  busantar,
   // Aplikasi mobile
   mToko,
   mAntar,
@@ -155,4 +203,20 @@ export const PRD = [
   mNikah,
   mArisan,
   mEsports,
+  mApotek,
+  mServis,
+  mParkir,
+  mDaycare,
+  mSampah,
+  mDonor,
+  mKajian,
+  mBengkel,
+  mPasar,
+  mHewan,
+  mSewamotor,
+  mTernak,
+  mNgaji,
+  mKopi,
+  mRelawan,
+  mKampus,
 ];

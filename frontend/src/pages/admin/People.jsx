@@ -42,7 +42,7 @@ export function Users() {
       if (u.role !== 'user') return <span className="hint">Staf (semua fitur)</span>;
       const aktif = u.premiumUntil && new Date(u.premiumUntil) > new Date();
       return (
-        <span className="row plan-cell">
+        <span className="row gap-x-3 gap-y-1">
           <span>{aktif ? 'Premium s/d ' + tanggal(u.premiumUntil) : 'Gratis'}</span>
           <button type="button" className="link" onClick={() => setPremium(u, 30)}>
             +30 hari

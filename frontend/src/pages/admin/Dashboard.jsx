@@ -21,21 +21,21 @@ function DayChart({ days }) {
   const labelAt = days.findIndex((d) => d.count === max);
   return (
     <>
-      <div className="chart">
-        <div className="c-plot">
-          <div className="c-grid">
+      <div className="pt-5 pl-8.5">
+        <div className="relative h-47.5">
+          <div>
             {[top, step, 0].map((v, i) => (
-              <span key={v} style={{ top: i * 50 + '%' }}>
-                <b>{fmt(v)}</b>
+              <span key={v} className="absolute inset-x-0 h-0 border-t border-line" style={{ top: i * 50 + '%' }}>
+                <b className="absolute right-[calc(100%+8px)] -top-[.5em] font-body text-[.76rem]/none font-medium text-muted tabular-nums">{fmt(v)}</b>
               </span>
             ))}
           </div>
-          <div className="c-cols" onPointerLeave={() => setTip(-1)}>
+          <div className="absolute inset-0 flex" onPointerLeave={() => setTip(-1)}>
             {days.map((d, i) => {
               const h = (d.count / top) * 100;
               return (
                 <div
-                  className="c-col"
+                  className="relative min-w-0 flex-1 rounded-t-sm hover:bg-[color-mix(in_srgb,var(--chart)_10%,transparent)] focus-visible:bg-[color-mix(in_srgb,var(--chart)_10%,transparent)] focus-visible:-outline-offset-2"
                   key={d.date}
                   tabIndex={0}
                   aria-label={`${dayLabel(d.date)}: ${fmt(d.count)} PRD`}
@@ -43,15 +43,19 @@ function DayChart({ days }) {
                   onFocus={() => setTip(i)}
                   onBlur={() => setTip(-1)}
                 >
-                  <i style={{ height: h + '%' }} />
-                  {i === labelAt && tip !== i && <em style={{ bottom: h + '%' }}>{fmt(d.count)}</em>}
+                  <i className="absolute bottom-0 left-1/2 w-[min(24px,calc(100%-2px))] -translate-x-1/2 rounded-t-sm bg-(--grad-v)" style={{ height: h + '%' }} />
+                  {i === labelAt && tip !== i && (
+                    <em className="absolute left-1/2 -translate-x-1/2 -translate-y-1 font-body text-[.78rem]/none font-bold text-ink not-italic" style={{ bottom: h + '%' }}>
+                      {fmt(d.count)}
+                    </em>
+                  )}
                 </div>
               );
             })}
           </div>
           {tip >= 0 && (
             <div
-              className="c-tip"
+              className="pointer-events-none absolute z-2 -translate-x-1/2 -translate-y-full rounded-[7px] border border-line bg-surface px-2.5 py-1.5 text-[.82rem] whitespace-nowrap text-ink"
               style={{
                 left: `clamp(48px, ${((tip + 0.5) / days.length) * 100}%, calc(100% - 48px))`,
                 top: `calc(${100 - (days[tip].count / top) * 100}% - 8px)`,
@@ -61,15 +65,17 @@ function DayChart({ days }) {
             </div>
           )}
         </div>
-        <div className="c-x" aria-hidden="true">
+        <div className="mt-1.5 flex" aria-hidden="true">
           {days.map((d) => (
-            <span key={d.date}>{Number(d.date.slice(8))}</span>
+            <span key={d.date} className="flex-1 text-center font-body text-[.74rem]/[1.2] font-medium text-muted tabular-nums">
+              {Number(d.date.slice(8))}
+            </span>
           ))}
         </div>
       </div>
-      <details className="tv">
-        <summary>Lihat sebagai tabel</summary>
-        <div className="utbl">
+      <details className="mt-3 text-[.9rem]">
+        <summary className="cursor-pointer font-semibold text-accent">Lihat sebagai tabel</summary>
+        <div className="utbl mt-2">
           <table>
             <thead>
               <tr>
@@ -195,7 +201,7 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
-      <div className="dash-grid">
+      <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start gap-5.5 max-lg:grid-cols-1">
         <div className="sheet adm">
           <h2>PRD dibuat, 14 hari terakhir</h2>
           {days.length > 0 && (
@@ -211,12 +217,15 @@ export default function Dashboard() {
           {st.byTemplate.length ? (
             <div>
               {st.byTemplate.map((t) => (
-                <div className="hb" key={t.key}>
-                  <span className="hb-l">{tplName(t.key)}</span>
-                  <span className="hb-t">
-                    <i style={{ width: (t.count / topCount) * 100 + '%' }} />
+                <div
+                  className="grid grid-cols-[minmax(0,10.5em)_minmax(0,1fr)_auto] items-center gap-2.5 py-2 text-[.92rem] max-md:grid-cols-[minmax(0,7.5em)_minmax(0,1fr)_auto]"
+                  key={t.key}
+                >
+                  <span className="truncate">{tplName(t.key)}</span>
+                  <span>
+                    <i className="block h-2.5 min-w-0.5 rounded-r-sm bg-(--grad)" style={{ width: (t.count / topCount) * 100 + '%' }} />
                   </span>
-                  <span className="hb-v">{fmt(t.count)}</span>
+                  <span className="font-bold tabular-nums">{fmt(t.count)}</span>
                 </div>
               ))}
             </div>

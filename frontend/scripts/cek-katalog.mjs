@@ -11,6 +11,16 @@ for (const [k, g] of Object.entries(GAYA)) {
   if (!/^#[0-9a-f]{6}$/i.test(g.latar) || !/^#[0-9a-f]{6}$/i.test(g.teks)) salah.push(`gaya ${k}: latar atau teks bukan warna hex`);
 }
 
+// Gaya dari data: teks harus sangat terbaca di latar, teks redup minimal 4,5:1 di latar dan di kartu.
+for (const [k, g] of Object.entries(GAYA)) {
+  if (!g.t) continue;
+  if (kontras(g.teks, g.latar) < 7) salah.push(`gaya ${k}: teks di latar hanya ${kontras(g.teks, g.latar).toFixed(2)}:1, minimal 7`);
+  for (const [n, w] of [['latar', g.latar], ['kartu', g.t.surface]]) {
+    const r = kontras(g.t.muted, w);
+    if (r < 4.5) salah.push(`gaya ${k}: teks redup di ${n} hanya ${r.toFixed(2)}:1`);
+  }
+}
+
 // Label status: teks berwarna di atas latar warna yang sama 12% harus kontras minimal 4,5:1 di latar tiap gaya.
 const hex = (n) => n.toString(16).padStart(2, '0');
 const campur = (a, b, k) => '#' + [1, 3, 5].map((i) => hex(Math.round(parseInt(a.slice(i, i + 2), 16) * k + parseInt(b.slice(i, i + 2), 16) * (1 - k)))).join('');

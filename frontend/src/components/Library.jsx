@@ -62,7 +62,7 @@ export function Library({ batas = 0, utama = NONE, awal = KOSONG }) {
 
   return (
     <>
-      <div className="lib-bar">
+      <div className="mb-4.5 flex flex-wrap items-center gap-x-3.5 gap-y-2.5 [&>input]:w-auto [&>input]:shrink [&>input]:grow [&>input]:basis-60 max-hp:[&>input]:basis-full [&>select]:min-h-10.5 [&>select]:w-auto [&>select]:flex-none max-md:[&>select]:shrink max-md:[&>select]:grow max-md:[&>select]:basis-[40%]">
         <div className="seg" role="group" aria-label="Platform">
           {FILTERS.map(([k, label]) => (
             <button type="button" key={k} aria-pressed={platform === k} onClick={() => setPlatform(k)}>
@@ -92,7 +92,7 @@ export function Library({ batas = 0, utama = NONE, awal = KOSONG }) {
           value={query}
           onChange={(ev) => setQuery(ev.target.value)}
         />
-        <span className="lib-count" role="status">
+        <span className="text-[.9rem] text-muted" role="status">
           {items.length} dari {all.length} PRD
         </span>
       </div>
@@ -104,7 +104,7 @@ export function Library({ batas = 0, utama = NONE, awal = KOSONG }) {
           </button>
         </div>
       ) : (
-        <div className="tpl-grid">
+        <div className="grid grid-cols-4 gap-5 max-md:grid-cols-2 max-md:gap-3">
           {shown.map((t, i) => (
             <Link className={'tpl is-' + t.platform} key={t.id} to={'/perpustakaan/' + t.id} data-reveal="up" data-reveal-delay={i % 4}>
               <MockThumb state={t.state} lazy={!batas} />
@@ -121,7 +121,7 @@ export function Library({ batas = 0, utama = NONE, awal = KOSONG }) {
                     {t.platform === 'mobile' ? Icon.phone : Icon.web}
                     {PLATFORM[t.platform]}
                   </span>
-                  <span className="tag tag-peran" title={'Peran: ' + t.peran.join(', ')}>
+                  <span className="tag" title={'Peran: ' + t.peran.join(', ')}>
                     {t.peran.length} peran
                   </span>
                   <span className="tag tag-gaya" title={'Gaya ' + GAYA[t.gaya].nama.toLowerCase()}>
@@ -135,7 +135,7 @@ export function Library({ batas = 0, utama = NONE, awal = KOSONG }) {
         </div>
       )}
       {batas > 0 && items.length > shown.length && (
-        <div className="lib-more">
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-[14px] border border-dashed border-line px-4.5 py-3.5 text-[.94rem] text-muted">
           <span>
             Menampilkan {shown.length} dari {items.length} PRD{items.length < all.length ? ' yang cocok' : ''}.
           </span>

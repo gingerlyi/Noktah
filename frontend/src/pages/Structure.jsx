@@ -54,10 +54,10 @@ export default function Structure() {
         </Link>
       </div>
 
-      <div className="rules">
+      <div className="grid grid-cols-2 items-start gap-5.5 max-lg:grid-cols-1">
         <div className="sheet adm">
           <h2>Yang boleh kamu ubah</h2>
-          <ul>
+          <ul className="m-0 flex flex-col gap-1.5 pl-5.5">
             <li>Semua isi: nama, deskripsi, target pengguna, tujuan, dan ruang lingkup.</li>
             <li>Peran beserta hak aksesnya, halaman atau layar tiap peran, dan alur utama.</li>
             <li>Fitur, perannya, prioritas, dan kriteria penerimaannya.</li>
@@ -66,7 +66,7 @@ export default function Structure() {
         </div>
         <div className="sheet adm">
           <h2>Yang harus tetap</h2>
-          <ul>
+          <ul className="m-0 flex flex-col gap-1.5 pl-5.5">
             <li>Blok metadata di awal dokumen dan judul "# PRD: Nama proyek".</li>
             <li>{jumlah} bagian di bawah, dengan nomor, judul, dan urutan yang sama.</li>
             <li>Tiap peran punya blok sendiri dengan daftar "Bisa", dan namanya dipakai sama persis di halaman, alur, dan fitur.</li>
@@ -81,18 +81,18 @@ export default function Structure() {
           Untuk aplikasi mobile, bagian {NO['Struktur halaman']} berjudul "Daftar layar" dan bagian {NO['Susunan halaman utama']} berjudul "Susunan layar
           utama".
         </span>
-        <ol className="sec-list">
+        <ol className="m-0 grid list-none grid-cols-2 gap-x-7 p-0 max-lg:grid-cols-1">
           {SECTIONS.map((sec) => (
-            <li key={sec.n}>
-              <i>{String(sec.n).padStart(2, '0')}</i>
-              <b>{sec.tm ? `${sec.t} / ${sec.tm}` : sec.t}</b>
-              <span>{sec.d}</span>
+            <li key={sec.n} className="grid grid-cols-[2.2em_minmax(0,1fr)] gap-x-1.5 gap-y-1 border-t border-line py-2.5">
+              <i className="font-mono text-[.86rem]/[1.6] font-semibold text-accent not-italic">{String(sec.n).padStart(2, '0')}</i>
+              <b className="col-start-2">{sec.tm ? `${sec.t} / ${sec.tm}` : sec.t}</b>
+              <span className="col-start-2 text-[.9rem] text-muted">{sec.d}</span>
             </li>
           ))}
         </ol>
       </div>
 
-      <div className="rules">
+      <div className="grid grid-cols-2 items-start gap-5.5 max-lg:grid-cols-1">
         <div className="sheet adm">
           <h2>Metadata dan judul</h2>
           <span className="hint">Baris "platform" berisi website atau aplikasi-mobile. Baris "peran" berisi semua peran di bagian {NO['Peran dan hak akses']}.</span>
@@ -121,10 +121,10 @@ export default function Structure() {
 
       <div className="sheet adm">
         <h2>Pemeriksa struktur</h2>
-        <p style={{ margin: 0 }}>
+        <p className="m-0">
           Editor memeriksa dokumen setiap kali isinya berubah, termasuk saat kamu mengedit teksnya langsung. Hasilnya ada dua tingkat:
         </p>
-        <ul style={{ margin: 0, paddingLeft: 22 }}>
+        <ul className="m-0 pl-5.5">
           <li>
             <b>Wajib:</b> dokumen melanggar struktur, misalnya ada bagian yang hilang, urutannya tertukar, isinya masih kosong, peran tanpa daftar
             "Bisa", atau alur dan kebutuhan yang memakai peran yang tidak ada.

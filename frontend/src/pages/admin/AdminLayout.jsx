@@ -8,6 +8,11 @@ import { DEMO, ROLES, can, isAdmin, useApp } from '../../lib/app.jsx';
 import { DemoBar, UserMenu, useScrollTop } from '../../components/Layout.jsx';
 import { Avatar, Icon, Loading, Logo, ThemeButton } from '../../components/ui.jsx';
 
+// Tautan menu samping; halaman yang sedang dibuka diberi garis aksen di tepi kiri.
+const SIDE =
+  "relative flex items-center gap-2.75 whitespace-nowrap rounded-[10px] px-3 py-2.25 text-[.94rem] font-semibold text-muted no-underline hover:bg-field hover:text-ink motion-safe:transition-colors aria-[current=page]:bg-accent-soft aria-[current=page]:text-accent aria-[current=page]:before:absolute aria-[current=page]:before:inset-y-1.75 aria-[current=page]:before:-left-3.5 aria-[current=page]:before:w-0.75 aria-[current=page]:before:rounded-r-[3px] aria-[current=page]:before:bg-(--grad-v) aria-[current=page]:before:content-[''] [&>span]:flex-1";
+const AKUN = 'flex w-full min-w-0 items-center gap-3 rounded-xl border border-line bg-field p-3.5';
+
 // Menu admin per kelompok. Item yang tidak boleh dibuka peran pengguna tidak ditampilkan.
 export const MENU = [
   { grup: 'Ringkasan', items: [{ to: '/admin', end: true, perm: 'dash', label: 'Dashboard', icon: Icon.dash }] },
@@ -133,7 +138,7 @@ function SideLayout({ area }) {
     const html = document.documentElement;
     const prev = html.style.overflow;
     html.style.overflow = 'hidden';
-    side.current?.querySelector('.adm-nav a')?.focus();
+    side.current?.querySelector('nav a')?.focus();
     return () => {
       document.removeEventListener('keydown', key);
       html.style.overflow = prev;
@@ -166,28 +171,38 @@ function SideLayout({ area }) {
   const crumbs = lokasi(pathname, a.menu);
 
   return (
-    <div className={'adm-page' + (open ? ' nav-open' : '')}>
-      <aside className="adm-side" id="adm-side" ref={side} aria-label={a.nama}>
-        <div className="adm-side-top">
-          <Link className="brand" to={a.home}>
+    <div className="grid min-h-dvh grid-cols-[264px_minmax(0,1fr)] bg-paper [--stick:calc(env(safe-area-inset-top,0px)+80px)] max-[1000px]:block max-[1000px]:[--stick:calc(env(safe-area-inset-top,0px)+74px)]">
+      <aside
+        className={
+          'sticky top-0 flex h-dvh flex-col gap-5.5 overflow-y-auto overscroll-contain border-r border-line bg-surface px-3.5 pt-4.5 pb-4 max-[1000px]:fixed max-[1000px]:inset-y-0 max-[1000px]:left-0 max-[1000px]:z-50 max-[1000px]:h-auto max-[1000px]:w-[min(300px,86vw)] motion-reduce:transition-none! ' +
+          (open
+            ? 'max-[1000px]:[transition:transform_.26s_var(--ease-out)]'
+            : 'max-[1000px]:invisible max-[1000px]:[transform:translateX(-102%)] max-[1000px]:[transition:transform_.26s_var(--ease-out),visibility_0s_linear_.26s]')
+        }
+        id="adm-side"
+        ref={side}
+        aria-label={a.nama}
+      >
+        <div className="flex items-center justify-between gap-2 px-1.5 pt-0.5">
+          <Link className="brand text-[1.04rem]" to={a.home}>
             <Logo />
             <span>
-              Noktah<small>{a.sub}</small>
+              Noktah<small className="mt-1 block font-body text-[.68rem]/none font-semibold tracking-[.07em] text-muted uppercase">{a.sub}</small>
             </span>
           </Link>
-          <button type="button" className="icon-btn adm-close" aria-label={'Tutup ' + a.nama.toLowerCase()} onClick={tutup}>
+          <button type="button" className="icon-btn hidden max-[1000px]:grid" aria-label={'Tutup ' + a.nama.toLowerCase()} onClick={tutup}>
             {Icon.close}
           </button>
         </div>
-        <nav className="adm-nav" aria-label={a.nama}>
+        <nav className="flex flex-col gap-4.5" aria-label={a.nama}>
           {a.menu.map((g) => {
             const items = g.items.filter((m) => !m.perm || can(user, m.perm));
             if (!items.length) return null;
             return (
-              <div className="adm-group" key={g.grup}>
-                <span className="adm-group-t">{g.grup}</span>
+              <div className="flex flex-col gap-0.5" key={g.grup}>
+                <span className="px-3 pb-1.5 font-body text-[.68rem]/[1.2] font-bold tracking-[.08em] text-muted uppercase">{g.grup}</span>
                 {items.map((m) => (
-                  <NavLink className="side-link" to={m.to} end={m.end} key={m.to}>
+                  <NavLink className={SIDE} to={m.to} end={m.end} key={m.to}>
                     {m.icon}
                     <span>{m.label}</span>
                   </NavLink>
@@ -196,28 +211,28 @@ function SideLayout({ area }) {
             );
           })}
         </nav>
-        <div className="adm-side-foot">
-          <Link className="side-link" to="/">
+        <div className="mt-auto flex flex-col gap-2.5 border-t border-line pt-3.5">
+          <Link className={SIDE} to="/">
             {Icon.ext}
             <span>Lihat situs</span>
           </Link>
-          <div className="adm-me">
+          <div className="flex min-w-0 items-center gap-2.5 px-2 py-0.5">
             <Avatar name={user.name} size={36} />
-            <div>
-              <b>{user.name}</b>
-              <small>{peran}</small>
+            <div className="min-w-0">
+              <b className="block truncate text-[.92rem]/[1.3]">{user.name}</b>
+              <small className="text-[.8rem] text-muted">{peran}</small>
             </div>
           </div>
         </div>
       </aside>
-      <div className="adm-scrim" hidden={!open} onClick={tutup} />
-      <div className="adm-body" inert={open || undefined}>
-        <DemoBar />
-        <header className="adm-top">
+      <div className="fixed inset-0 z-40 bg-[rgba(9,13,24,.45)] backdrop-blur-[2px]" hidden={!open} onClick={tutup} />
+      <div className="flex min-w-0 flex-col" inert={open || undefined}>
+        <DemoBar className="mx-[clamp(16px,3vw,32px)] mt-3" />
+        <header className="sticky top-0 z-30 flex min-h-16.5 items-center gap-3 border-b border-line bg-[color-mix(in_srgb,var(--paper)_92%,transparent)] px-[clamp(16px,3vw,32px)] py-3 backdrop-blur-[16px] backdrop-saturate-[1.6] max-[1000px]:min-h-15.5 max-[1000px]:gap-2.5 max-[1000px]:px-4 max-[1000px]:py-2.5">
           <button
             ref={burger}
             type="button"
-            className="icon-btn adm-burger"
+            className="icon-btn hidden max-[1000px]:grid"
             aria-label={'Buka ' + a.nama.toLowerCase()}
             aria-controls="adm-side"
             aria-expanded={open}
@@ -225,28 +240,33 @@ function SideLayout({ area }) {
           >
             {Icon.menu}
           </button>
-          <nav className="crumbs" aria-label="Lokasi halaman">
-            <span className="crumb-root">{a.root}</span>
+          <nav className="flex min-w-0 items-center gap-2 text-[.94rem] text-muted" aria-label="Lokasi halaman">
+            <span className="max-[641px]:hidden">{a.root}</span>
             {crumbs.map((c, i) => (
               <Fragment key={c.label}>
-                <span className={'crumb-sep' + (i ? '' : ' first')} aria-hidden="true">
+                <span className={'opacity-45' + (i ? '' : ' max-[641px]:hidden')} aria-hidden="true">
                   /
                 </span>
                 {c.to ? (
-                  <Link to={c.to}>{c.label}</Link>
+                  <Link className="whitespace-nowrap text-muted no-underline hover:text-accent" to={c.to}>
+                    {c.label}
+                  </Link>
                 ) : (
-                  <b aria-current="page">{c.label}</b>
+                  <b className="truncate font-bold text-ink" aria-current="page">
+                    {c.label}
+                  </b>
                 )}
               </Fragment>
             ))}
           </nav>
-          <div className="adm-tools">
+          <div className="ml-auto flex flex-none items-center gap-2">
             <ThemeButton />
-            <Link className="btn quiet adm-site" to="/">
+            <Link className="btn quiet max-[641px]:hidden" to="/">
               {Icon.ext}
               <span>Lihat situs</span>
             </Link>
             <UserMenu
+              nameClass="max-[641px]:hidden"
               user={user}
               sub={peran + ' · ' + user.email}
               items={a.akun}
@@ -254,7 +274,7 @@ function SideLayout({ area }) {
             />
           </div>
         </header>
-        <Main className="adm-main">
+        <Main className="mx-auto flex w-full max-w-310 min-w-0 flex-col gap-5.5 px-[clamp(16px,3vw,32px)] pt-6.5 pb-18 max-[1000px]:px-4 max-[1000px]:pt-5 max-[1000px]:pb-16">
           <Outlet />
         </Main>
       </div>
@@ -303,11 +323,11 @@ export function AdminLogin() {
   } else if (user && isAdmin(user)) {
     body = (
       <>
-        <div className="login-acct">
+        <div className={AKUN}>
           <Avatar name={user.name} size={42} />
           <div>
-            <b>{user.name}</b>
-            <small>Peran: {ROLES[user.role]?.nama}</small>
+            <b className="block">{user.name}</b>
+            <small className="text-[.86rem] text-muted">Peran: {ROLES[user.role]?.nama}</small>
           </div>
         </div>
         <Link className="btn big" to="/admin">
@@ -318,11 +338,11 @@ export function AdminLogin() {
   } else if (user) {
     body = (
       <>
-        <div className="login-acct">
+        <div className={AKUN}>
           <Avatar name={user.name} size={42} />
           <div>
-            <b>{user.name}</b>
-            <small>{user.email}</small>
+            <b className="block">{user.name}</b>
+            <small className="text-[.86rem] text-muted">{user.email}</small>
           </div>
         </div>
         <p className="form-err" role="alert">
@@ -379,7 +399,7 @@ export function AdminLogin() {
 
   return (
     <div className="page">
-      <div className="page-bg" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-1 h-190 overflow-hidden" aria-hidden="true" />
       <DemoBar />
       <main className="login">
         <div className="sheet login-card">

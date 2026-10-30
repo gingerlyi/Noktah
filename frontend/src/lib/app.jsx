@@ -98,10 +98,14 @@ export function AppProvider({ children }) {
     <Ctx.Provider value={value}>
       {children}
       {toastState && (
-        <div className="toast" role="status" aria-live="polite">
+        <div
+          className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+20px)] left-1/2 z-20 flex max-w-[calc(100vw-32px)] items-center gap-3.5 rounded-[14px] border border-line bg-surface px-4 py-3 text-[.92rem] text-ink [transform:translateX(-50%)] motion-safe:animate-[toast-in_.4s_var(--ease-spring)_both]"
+          role="status"
+          aria-live="polite"
+        >
           <span>{toastState.message}</span>
           {toastState.undo && (
-            <button type="button" onClick={runUndo}>
+            <button type="button" className="cursor-pointer border-0 bg-transparent p-0 font-bold text-accent underline" onClick={runUndo}>
               Urungkan
             </button>
           )}

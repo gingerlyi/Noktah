@@ -9,6 +9,14 @@ import { Icon } from '../components/ui.jsx';
 
 // Nama tombol atau label yang disebut di panduan, ditulis seperti tombol supaya mudah dicari di layar.
 const Ui = ({ children }) => <span className="ui-ref">{children}</span>;
+const TOC =
+  'flex items-baseline gap-2.5 rounded-[9px] px-3 py-2 text-[.92rem]/[1.35] font-semibold no-underline';
+const TOC_ON = ' bg-accent-soft text-accent';
+const TOC_OFF = ' text-muted hover:bg-field hover:text-ink';
+const TOC_I = 'w-[1.6em] flex-none font-mono text-[.78rem]/none font-semibold text-accent not-italic';
+const LANGKAH_KARTU = 'sheet grid grid-cols-[auto_minmax(0,1fr)] gap-4.5 px-7 py-6.5 max-hp:grid-cols-1 max-hp:gap-3 max-hp:p-5';
+const NOMOR =
+  'grid size-11.5 place-items-center rounded-[13px] bg-(--grad) font-display text-[1.1rem]/none font-extrabold text-on-accent max-hp:size-10 max-hp:text-base';
 
 const contohPrd = ['klinik', 'marketplace', 'restoran'].find((id) => T[id]) || TPL_IDS[0];
 
@@ -228,25 +236,30 @@ export default function Guide() {
         </div>
       </div>
 
-      <div className="guide">
-        <nav className="guide-toc" aria-label="Langkah">
-          <b>Langkah</b>
+      <div className="grid grid-cols-[230px_minmax(0,1fr)] items-start gap-7 max-lg:grid-cols-1 max-lg:gap-4.5">
+        <nav
+          className="sticky top-(--stick) flex flex-col gap-0.5 max-lg:static max-lg:grid max-lg:grid-cols-2 max-lg:gap-1 max-lg:rounded-[14px] max-lg:border max-lg:border-line max-lg:bg-surface max-lg:p-2.5 max-hp:grid-cols-1"
+          aria-label="Langkah"
+        >
+          <b className="px-3 pb-2 font-body text-[.7rem]/[1.2] font-bold tracking-[.08em] text-muted uppercase max-lg:col-span-full max-lg:px-2 max-lg:pt-1 max-lg:pb-1.5">
+            Langkah
+          </b>
           {LANGKAH.map((l, i) => (
-            <a key={l.id} href={'#langkah-' + l.id} className={aktif === l.id ? 'on' : ''} aria-current={aktif === l.id ? 'step' : undefined}>
-              <i>{String(i + 1).padStart(2, '0')}</i>
+            <a key={l.id} href={'#langkah-' + l.id} className={TOC + (aktif === l.id ? TOC_ON : TOC_OFF)} aria-current={aktif === l.id ? 'step' : undefined}>
+              <i className={TOC_I}>{String(i + 1).padStart(2, '0')}</i>
               {l.judul.replace(/"/g, '')}
             </a>
           ))}
-          <a href="#tanya-jawab" className={aktif === 'faq' ? 'on' : ''} aria-current={aktif === 'faq' ? 'step' : undefined}>
-            <i>?</i>
+          <a href="#tanya-jawab" className={TOC + (aktif === 'faq' ? TOC_ON : TOC_OFF)} aria-current={aktif === 'faq' ? 'step' : undefined}>
+            <i className={TOC_I}>?</i>
             Tanya jawab
           </a>
         </nav>
 
-        <div className="guide-body" ref={bodyRef}>
+        <div className="flex min-w-0 flex-col gap-4.5" ref={bodyRef}>
           {LANGKAH.map((l, i) => (
-            <section className="sheet g-step" id={'langkah-' + l.id} data-step={l.id} key={l.id} aria-labelledby={'gj-' + l.id}>
-              <span className="g-num" aria-hidden="true">
+            <section className={LANGKAH_KARTU} id={'langkah-' + l.id} data-step={l.id} key={l.id} aria-labelledby={'gj-' + l.id}>
+              <span className={NOMOR} aria-hidden="true">
                 {i + 1}
               </span>
               <div className="g-main">
@@ -288,36 +301,38 @@ export default function Guide() {
                   </div>
                 )}
                 {l.prompt && (
-                  <div className="g-prompt">
-                    <div className="g-prompt-head">
+                  <div className="mt-2 flex flex-col gap-2.5 rounded-[14px] border border-line bg-(--grad-soft) p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
                       <div>
-                        <b>Prompt pembuka untuk AI builder</b>
-                        <span className="hint">Tempel prompt ini lebih dulu, lalu seluruh isi PRD di bawahnya.</span>
+                        <b className="block">Prompt pembuka untuk AI builder</b>
+                        <span className="hint mt-0.5 block">Tempel prompt ini lebih dulu, lalu seluruh isi PRD di bawahnya.</span>
                       </div>
                       <button type="button" className="btn quiet" onClick={salin}>
                         {Icon.copy}
                         Salin prompt
                       </button>
                     </div>
-                    <pre className="sample">{prompt}</pre>
+                    <pre className="sample bg-surface">{prompt}</pre>
                   </div>
                 )}
               </div>
             </section>
           ))}
 
-          <section className="sheet g-step g-faq" id="tanya-jawab" data-step="faq" aria-labelledby="gj-faq">
-            <span className="g-num" aria-hidden="true">
+          <section className={LANGKAH_KARTU} id="tanya-jawab" data-step="faq" aria-labelledby="gj-faq">
+            <span className={NOMOR} aria-hidden="true">
               ?
             </span>
             <div className="g-main">
               <span className="step">Tanya jawab</span>
               <h2 id="gj-faq">Yang sering ditanyakan</h2>
-              <div className="g-qa">
+              <div>
                 {FAQ.map(([q, a]) => (
-                  <details key={q}>
-                    <summary>{q}</summary>
-                    <p>{a}</p>
+                  <details key={q} className="group border-t border-line py-3.5 last:pb-0">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold after:grid after:size-6.5 after:flex-none after:place-items-center after:rounded-full after:border after:border-line after:font-bold after:text-accent after:content-['+'] group-open:after:content-['–'] [&::-webkit-details-marker]:hidden">
+                      {q}
+                    </summary>
+                    <p className="mt-2 mb-0 max-w-[70ch] text-muted">{a}</p>
                   </details>
                 ))}
               </div>
